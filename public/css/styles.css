@@ -1,0 +1,78 @@
+* {
+
+    transition-property: all;
+
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+    transition-duration: 300ms;
+
+}
+
+
+
+@keyframes spin {
+
+    from {
+
+        transform: rotate(0deg);
+
+    }
+
+
+
+    to {
+
+        transform: rotate(360deg);
+
+    }
+
+}
+
+
+
+.animate-spin {
+
+    content: " ";
+
+    width: 2rem;
+
+    height: 2rem;
+
+    margin: 4px 20px;
+
+    border-radius: 50%;
+
+    border: 2px solid #fff;
+
+    border-color: rgb(134, 0, 0) transparent rgb(134, 0, 0) transparent;
+
+    animation: spin 1s linear infinite;
+
+}
+
+
+
+.bg-auth{
+
+    background-image: url('../images/portadas/portada-auth.jpg');
+
+    background-repeat: no-repeat;
+
+    background-position: center center;
+
+    background-size: cover;
+
+    height: 100vh;
+
+    width: 100vw;
+
+}
+.img_ani{
+    width: 10%; position: fixed; z-index: 10000; right: 0px; bottom: 0;
+}
+
+@media only screen and (max-width: 600px) {
+    .img_ani{
+        width: 30%!important; position: fixed; z-index: 10000; right: 0px; bottom: 0;
+    }
+  }
