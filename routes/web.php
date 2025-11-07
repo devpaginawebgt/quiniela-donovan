@@ -7,7 +7,7 @@ use App\Http\Controllers\PartidoController;
 use App\Http\Controllers\PremioController;
 use App\Http\Controllers\ResultadoPartidoController;
 use App\Http\Controllers\SeleccionController;
-use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +37,10 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/ver-selecciones', 'index')->name('ver-selecciones');
         Route::get('/ver-grupos', 'verModuloGrupos')->name('ver-grupos');
         Route::get('/ver-calendario', 'verCalendario')->name('ver-calendario');
+
+        Route::get('/ver-grupo/{grupo_get}', 'equiposGrupo');
+        Route::post('/partidos-grupo', 'partidosGrupo');
+        Route::get('/partidos-jornada/{jornada}', 'partidosJornada');
     });
 
     // Estadios
@@ -52,10 +56,26 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/ver-tabla-resultados', 'verTablaResultados')->name('ver-tabla-resultados');
         
         Route::post('/guardar-predicciones-form', 'guardarPrediccionesForm')->name('guardar-predicciones-form');
+
+        Route::post('/guardar-predicciones/', 'guardarPredicciones');
+        Route::post('/obtener-predicciones/', 'obtenerPrediccionesGuardadas');
+        Route::get('/test/{user_id}', 'testPerformance');
+        Route::get('/obtener-tabla-participantes/{user_id}', 'obtenerParticipantes');
     });
+
+    // Premios
 
     Route::controller(PremioController::class)->group(function() {
         Route::get('/ver-tabla-premios', 'verTablaPremios')->name('ver-tabla-premios');
+    });
+    
+
+    // Rutas para super-admin
+
+    Route::controller(ResultadoPartidoController::class)->group(function() {
+
+        Route::get('/actualizar-puntos-usuarios', 'actualizarPuntosParticipantesALL');
+
     });
 
 });
@@ -70,11 +90,7 @@ Route::middleware(['guest'])->group(function() {
 
 });
 
-Route::controller(ResultadoPartidoController::class)->group(function() {
-
-    Route::get('/actualizar-puntos-usuarios', 'actualizarPuntosParticipantesALL');
-
-});
+// Los metodos post se cambiaron a put porque el servidor donde se alojara la aplicacion no permite post
 
 
 require __DIR__.'/auth.php';
