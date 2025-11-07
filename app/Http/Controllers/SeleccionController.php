@@ -74,7 +74,7 @@ class SeleccionController extends Controller
             INNER JOIN 
                 partidos par ON epar.partido_id = par.id
             WHERE 
-                e.grupo = {$grupo}
+                e.grupo = '{$grupo}'
             AND
                 par.jornada = {$jornada}"
         );
