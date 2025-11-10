@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Equipo\EquipoResource;
 use App\Http\Services\PartidoService;
 use App\Models\Equipo;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class SeleccionController extends Controller
+class EquipoController extends Controller
 {
+    use ApiResponse;
+
     private $partidoService;
 
     public function __construct(PartidoService $partidoService) 
@@ -25,6 +29,13 @@ class SeleccionController extends Controller
             'selecciones' => $selecciones
         ]);
 
+    }
+
+    public function getEquipos()
+    {
+        $equipos = EquipoResource::collection(Equipo::all());
+
+        return $this->successResponse($equipos);
     }
 
     public function verCalendario() {
