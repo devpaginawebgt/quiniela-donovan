@@ -6,7 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PartidoController;
 use App\Http\Controllers\PremioController;
 use App\Http\Controllers\ResultadoPartidoController;
-use App\Http\Controllers\SeleccionController;
+use App\Http\Controllers\EquipoController;
 use Illuminate\Http\Request;
 
 /*
@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function() {
 
     // Selecciones
 
-    Route::controller(SeleccionController::class)->group(function() {
+    Route::controller(EquipoController::class)->group(function() {
         Route::get('/ver-selecciones', 'index')->name('ver-selecciones');
         Route::get('/ver-grupos', 'verModuloGrupos')->name('ver-grupos');
         Route::get('/ver-calendario', 'verCalendario')->name('ver-calendario');

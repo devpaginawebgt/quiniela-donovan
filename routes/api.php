@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\ApiAuthController;
+use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\SeleccionController;
 use App\Http\Controllers\ResultadoPartidoController;
 use Illuminate\Support\Facades\Route;
@@ -20,5 +21,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(ApiAuthController::class)->group(function() {
     Route::get('login', 'login');
+});
+
+Route::controller(EquipoController::class)->group(function() {
+    Route::get('equipos', 'getEquipos');
 });
 
