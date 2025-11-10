@@ -22,7 +22,7 @@ class ApiAuthMiddleware
     {
         if ( !$request->expectsJson() ) {
             
-            return $this->errorResponse("The 'Accept' header must include 'application/json'", 406);
+            return $this->errorResponse("El header 'Accept' debe incluir 'application/json'", 406);
 
         }
 
