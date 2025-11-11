@@ -23,6 +23,14 @@ class UserService {
     {
         $paises = $this->getPaises();
         
+        return $paises->firstWhere('id', $id_pais);
+
+    }
+
+    public function getNombrePais($id_pais)
+    {
+        $paises = $this->getPaises();
+        
         $pais = $paises->firstWhere('id', $id_pais);
 
         return $pais['nombre'];
