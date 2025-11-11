@@ -148,7 +148,7 @@ const pintarTablaEquipos = (equipos) => {
 
         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap flex items-center justify-between">
 
-            <img src="/images/selecciones/${element.imagen}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
+            <img src="${element.imagen}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
 
             ${element.nombre}
 
@@ -238,7 +238,7 @@ const pintarPartidosJornada = (equipos, jornadaAPintar) => {
 
             <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
-                <img src="/images/selecciones/${element[0].imagen}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
+                <img src="${element[0].imagen}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
 
                 <p class="font-semibold">${element[0].nombre}</p>
 
@@ -254,7 +254,7 @@ const pintarPartidosJornada = (equipos, jornadaAPintar) => {
 
             <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
-                <img src="/images/selecciones/${element[1].imagen}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
+                <img src="${element[1].imagen}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
 
                 <p class="font-semibold">${element[1].nombre}</p>
 
@@ -327,7 +327,7 @@ const pintarPartidosJornadaGeneral = (equipos) => {
 
             <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
-                <img src="/images/selecciones/${element[0].imagen}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
+                <img src="${element[0].imagen}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
 
                 <p class="font-semibold">${element[0].nombre}</p>
 
@@ -343,7 +343,7 @@ const pintarPartidosJornadaGeneral = (equipos) => {
 
             <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
-                <img src="/images/selecciones/${element[1].imagen}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
+                <img src="${element[1].imagen}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
 
                 <p class="font-semibold">${element[1].nombre}</p>
 
@@ -428,7 +428,7 @@ const pintarPartidosJornadaQuiniela = (equipos) => {
 
                 <div class="flex flex-col justify-center items-center xl:flex-row w-1/3 md:w-auto ml-2">
 
-                    <img src="/images/selecciones/${element[0].imagen}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
+                    <img src="${element[0].imagen}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
 
                     <p class="font-semibold text-xs xs:text-md lg:text-xl m-4">${element[0].nombre}</p>
 
@@ -520,7 +520,7 @@ const pintarPartidosJornadaQuiniela = (equipos) => {
 
                     <p class="font-semibold text-xs xs:text-md lg:text-xl m-4">${element[1].nombre}</p>
 
-                    <img src="/images/selecciones/${element[1].imagen}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
+                    <img src="${element[1].imagen}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
 
                 </div>
 

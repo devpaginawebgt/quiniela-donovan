@@ -129,7 +129,7 @@
                                             <div
                                                 class="flex flex-col justify-center items-center xl:flex-row w-1/3 md:w-auto ml-2">
 
-                                                <img src="{{ asset("images/selecciones/$partido->imagen_equipo_1") }}"
+                                                <img src="{{ asset($partido->imagen_equipo_1) }}"
                                                     alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
 
                                                 <p class="font-semibold text-xs xs:text-md lg:text-xl m-4">
@@ -298,7 +298,7 @@
 
                                                     {{ $partido->nombre_equipo_2 }}</p>
 
-                                                <img src="{{ asset("images/selecciones/$partido->imagen_equipo_2") }}"
+                                                <img src="{{ asset($partido->imagen_equipo_2) }}"
                                                     alt="SELECCION"
                                                     class="h-10 w-14 mx-4 border rounded-md shadow-md">
 
