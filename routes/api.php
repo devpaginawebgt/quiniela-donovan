@@ -6,6 +6,7 @@ use App\Http\Controllers\EstadioController;
 use App\Http\Controllers\PartidoController;
 use App\Http\Controllers\SeleccionController;
 use App\Http\Controllers\ResultadoPartidoController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,13 @@ Route::controller(PartidoController::class)->group(function() {
 
 Route::controller(EstadioController::class)->group(function() {
     Route::get('estadios', 'getEstadios');
+});
+
+// Participantes
+
+Route::controller(UserController::class)->group(function() {
+    Route::get('participantes', 'getParticipantes');
+    Route::get('ranking', 'getRanking');
 });
 
 
