@@ -181,12 +181,6 @@ class ResultadoPartidoController extends Controller
 
     }
 
-    public function testPerformance($user_id){
-
-        return $user_id;
-
-    }
-
     public function obtenerParticipantes($user_id)
     {
 
@@ -202,25 +196,25 @@ class ResultadoPartidoController extends Controller
         
         $participantes = DB::select(
             "SELECT 
-                users.id,
-                users.name,
-                nombres,
-                apellidos,
-                puntos,
-                email,
-                telefono,
-                numero_documento,
-                estado
+                u.id,
+                u.name,
+                u.nombres,
+                u.apellidos,
+                u.puntos,
+                u.email,
+                u.telefono,
+                u.numero_documento,
+                c.estado
             FROM 
-                users 
+                users u
             INNER JOIN 
-                codigos on codigo_id=codigos.id 
+                codigos c on u.codigo_id = c.id 
             WHERE 
-                estado != 0 
+                c.estado != 0 
             AND 
-                users.pais_id = {$id_pais} 
+                u.pais_id = {$id_pais} 
             ORDER BY 
-                puntos DESC"
+                u.puntos DESC"
         );
         
         return json_encode($participantes);
