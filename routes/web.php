@@ -7,6 +7,7 @@ use App\Http\Controllers\PartidoController;
 use App\Http\Controllers\PremioController;
 use App\Http\Controllers\ResultadoPartidoController;
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 
 /*
@@ -59,7 +60,6 @@ Route::middleware(['auth'])->group(function() {
 
         Route::post('/guardar-predicciones/', 'guardarPredicciones');
         Route::post('/obtener-predicciones/', 'obtenerPrediccionesGuardadas');
-        Route::get('/test/{user_id}', 'testPerformance');
         Route::get('/obtener-tabla-participantes/{user_id}', 'obtenerParticipantes');
     });
 
@@ -84,7 +84,7 @@ Route::middleware(['guest'])->group(function() {
 
     // Participantes inscritos
 
-    Route::controller(PartidoController::class)->group(function() {
+    Route::controller(UserController::class)->group(function() {
         Route::get('/participantes', 'verParticipantes')->name('ver-participantes');
     });
 
