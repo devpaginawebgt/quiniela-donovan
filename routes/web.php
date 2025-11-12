@@ -82,6 +82,8 @@ Route::middleware(['auth'])->group(function() {
 
 Route::middleware(['guest'])->group(function() {
 
+    Route::redirect('/', '/login');
+
     // Participantes inscritos
 
     Route::controller(UserController::class)->group(function() {
