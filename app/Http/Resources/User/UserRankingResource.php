@@ -18,11 +18,6 @@ class UserRankingResource extends JsonResource
             'id' => $this->id,
             'nombres' => $this->nombres,
             'apellidos' => $this->apellidos,
-            'numeroDocumento' => $this->numero_documento,
-            'idPais' => $this->pais_id,
-            'pais' => $this->pais,
-            'telefono' => $this->telefono,
-            'email' => $this->email,
             'puntos' => $this->puntos,
             'fechaRegistro' => $this->name,
         ];
