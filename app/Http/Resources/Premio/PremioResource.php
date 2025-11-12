@@ -15,11 +15,13 @@ class PremioResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
+            'posicion' => $this->posicion,
+            'tituloPosicion' => $this->titulo_posicion,
+            'color' => $this->color,
             'nombre' => $this->nombre,
             'descripcion' => $this->descripcion,
             'imagen' => $this->imagen,
-            'posicion' => $this->posicion,
-            'paisId' => $this->pais_id,
         ];
     }
 }

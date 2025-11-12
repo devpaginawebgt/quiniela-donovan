@@ -12,10 +12,12 @@ class Premio extends Model
     public $timestamps = true;
 
     protected $fillable = [
+        'posicion',
+        'titulo_posicion',
+        'color',
         'nombre',
         'descripcion',
         'imagen',
-        'posicion',
         'pais_id',
     ];
 

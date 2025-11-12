@@ -14,24 +14,30 @@ class PremioSeeder extends Seeder
     {
         $premios = [
             [
+                'posicion' => 1,
+                'titulo_posicion' => 'Primeros 3 lugares',
+                'color' => '#FFBF00',
                 'nombre' => 'Televisión 55" 4K UHD',
                 'descripcion' => 'Televisor de alta definición con conectividad inteligente y control por voz.',
                 'imagen' => '/images/premios/tv.png',
-                'posicion' => 1,
                 'pais_id' => 1,
             ],
             [
+                'posicion' => 2,
+                'titulo_posicion' => 'Siguientes 3 lugares',
+                'color' => '#BEBEBE',
                 'nombre' => 'Teléfono Xiaomi 5G',
                 'descripcion' => 'Smartphone Xiaomi con conectividad 5G, pantalla AMOLED y cámara de alta resolución.',
                 'imagen' => '/images/premios/phone.png',
-                'posicion' => 2,
                 'pais_id' => 1,
             ],
             [
+                'posicion' => 3,
+                'titulo_posicion' => 'Siguientes 2 lugares',
+                'color' => '#A0522D',
                 'nombre' => 'Smartwatch deportivo',
                 'descripcion' => 'Reloj inteligente con monitor de ritmo cardíaco y seguimiento de actividad física.',
                 'imagen' => '/images/premios/smartwatch.png',
-                'posicion' => 3,
                 'pais_id' => 1,
             ],
         ];
