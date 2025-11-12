@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\Equipo\EquipoResource;
 use App\Http\Services\EquipoService;
+use App\Http\Services\GrupoService;
 use App\Http\Services\PartidoService;
 use App\Models\Equipo;
 use App\Traits\ApiResponse;
@@ -108,61 +109,12 @@ class EquipoController extends Controller
 
     // Respuestass de API
 
-    public function getGrupos(Request $request)
-    {
-        $grupos = $this->equipoService->getGrupos();
-
-        return $this->successResponse($grupos);
-    }
-
-
     public function getEquipos(Request $request)
     {
-        $grupo = $request->input('grupo');
-
-        if (isset($grupo) && !empty($grupo)) {
-
-            $grupos = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-
-            $grupo = mb_strtoupper($grupo);
-
-            if ( !in_array($grupo, $grupos) ) {
-
-                return $this->errorResponse('Grupo de equipos no encontrado', 422);
-
-            }
-
-        }
-
-        $equipos = $this->equipoService->getEquipos($grupo);
+        $equipos = $this->equipoService->getEquipos();
 
         $equipos = EquipoResource::collection($equipos);
 
         return $this->successResponse($equipos);
-    }
-
-    public function getPartidosGrupo(string $grupo)
-    {        
-        $grupo = mb_strtoupper($grupo);
-
-        $grupos = $this->equipoService->getGrupos();
-
-        if ( !$grupos->contains($grupo) ) {
-
-            return $this->errorResponse('No se encontró el grupo', 422);
-
-        }
-
-        $data = [];
-
-        $data['grupos'] = $this->equipoService->getGrupos();
-
-        $equipos = $this->equipoService->getEquipos($grupo);
-
-        $data['equipos'] = EquipoResource::collection($equipos);
-
-        $data['partidos'] = $this->partidoService->getPartidosGrupo($grupo);
-
-        return $this->successResponse($data);
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\ApiAuthController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\EstadioController;
+use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\PartidoController;
 use App\Http\Controllers\PremioController;
 use App\Http\Controllers\SeleccionController;
@@ -27,19 +28,24 @@ Route::controller(ApiAuthController::class)->group(function() {
     Route::post('login', 'login');
 });
 
-// Equipos y grupos
+// Equipos
 
 Route::controller(EquipoController::class)->group(function() {
     Route::get('equipos', 'getEquipos');
+});
+
+// Grupos
+
+Route::controller(GrupoController::class)->group(function() {
     Route::get('grupos', 'getGrupos');
-    Route::get('grupo/{grupo}', 'getPartidosGrupo');
+    Route::get('grupos/{grupo}/equipos', 'getEquiposGrupo');
 });
 
 // Partidos
 
 Route::controller(PartidoController::class)->group(function() {
     Route::get('jornadas', 'getJornadas');
-    Route::get('jornada/{jornada}', 'getPartidosJornada');
+    Route::get('jornadas/{jornada}/partidos', 'getPartidosJornada');
 });
 
 // Estadios

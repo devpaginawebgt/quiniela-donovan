@@ -18,7 +18,7 @@ class CreateEquiposTable extends Migration
             $table->string('nombre');
             $table->string('imagen');
             $table->string('descripcion',1000)->nullable();
-            $table->string('grupo')->nullable();
+            $table->integer('grupo');
             $table->integer('goles_favor')->default(0);
             $table->integer('goles_contra')->default(0);
             $table->integer('partidos_jugados')->default(0);

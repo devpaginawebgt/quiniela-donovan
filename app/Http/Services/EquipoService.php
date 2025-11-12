@@ -7,20 +7,12 @@ use Illuminate\Database\Eloquent\Builder;
 
 class EquipoService {
 
-    public function getGrupos()
+    public function getEquipos()
     {
-        return collect(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']);
-    }
-
-    public function getEquipos(string|null $grupo = null)
-    {
-        return Equipo::when($grupo, function(Builder $query) use($grupo) {
-            return $query->where('grupo', $grupo);
-        })
+        return Equipo::select('id', 'nombre', 'imagen', 'descripcion')
             ->orderBy('puntos', 'desc')
             ->orderBy('nombre', 'asc')
             ->get();
-        
     }
 
 }

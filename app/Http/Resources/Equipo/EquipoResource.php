@@ -19,14 +19,6 @@ class EquipoResource extends JsonResource
             'nombre' => $this->nombre,
             'imagen' => $this->imagen,
             'descripcion' => $this->descripcion,
-            'grupo' => $this->grupo,
-            'golesFavor' => $this->goles_favor,
-            'golesContra' => $this->goles_contra,
-            'partidosJugados' => $this->partidos_jugados,
-            'partidosGanados' => $this->partidos_ganados,
-            'partidosPerdidos' => $this->partidos_perdidos,
-            'partidosEmpatados' => $this->partidos_empatados,
-            'puntos' => $this->puntos,
         ];
     }
 }
