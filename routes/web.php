@@ -23,9 +23,11 @@ use Illuminate\Http\Request;
 
 /****** RUTAS GET PARA OBTENER VISTAS DE MODULOS */
 
-Route::redirect('/', '/login');
-
 Route::middleware(['auth'])->group(function() {
+
+    Route::get('/', function () {
+        return redirect()->route('dashboard');
+    });
 
     // Home
 
