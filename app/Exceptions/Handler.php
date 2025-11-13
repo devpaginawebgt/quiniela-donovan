@@ -2,12 +2,16 @@
 
 namespace App\Exceptions;
 
+use App\Traits\ApiResponse;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    use ApiResponse;
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -39,14 +43,28 @@ class Handler extends ExceptionHandler
             //
         });
 
-        $this->renderable(function (ValidationException $e, $request) {
+        $this->renderable(function (ValidationException $e, $request) 
+        {
+
             if ($request->expectsJson()) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => $e->validator->errors()->first(),
-                    'errors' => $e->errors(),
-                ], 422);
+
+                $error = $e->validator->errors()->first();
+
+                return $this->errorResponse($error, 422, $e->errors());
+
             }
+
         });
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ( $request->expectsJson() ) {
+
+            return $this->errorResponse('Acceso no autorizado. Inicie sesión.', 401);
+
+        }
+
+        return redirect()->guest(route('login'));
     }
 }

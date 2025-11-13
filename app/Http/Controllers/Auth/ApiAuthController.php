@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ApiLoginRequest;
-use App\Http\Resources\User\UserResource;
+use App\Http\Resources\User\UserAuthResource;
 use App\Http\Services\UserService;
-use App\Models\User;
 use App\Traits\ApiResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Http\Request;
 
 class ApiAuthController extends Controller
 {
@@ -24,7 +23,7 @@ class ApiAuthController extends Controller
     {
         $request->ensureIsNotRateLimited();
 
-        $user = User::where('email', $request->email)->first();
+        $user = $this->userService->getUserLogin($request);
 
         if ($user->status_user == 0) {
 
@@ -40,10 +39,26 @@ class ApiAuthController extends Controller
 
         }
 
-        $user->pais = $this->userService->getNombrePais($user->pais_id);
+        $token = $user->createToken('mobile-app');
 
-        $user = new UserResource($user);
+        $user->token = $token->plainTextToken;
+        
+        $user = new UserAuthResource($user);
 
         return $this->successResponse($user);
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return $this->successResponse(['mensaje' => 'Sesión cerrada correctamente.']);
+    }
+
+    public function logoutAll(Request $request)
+    {
+        $request->user()->tokens()->delete();
+
+        return $this->successResponse(['mensaje' => 'Se ha cerrado sesión en todos los dispositivos.']);
     }
 }

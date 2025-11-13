@@ -29,49 +29,58 @@ Route::controller(ApiAuthController::class)->group(function() {
     Route::post('login', 'login');
 });
 
-// Equipos
+// Rutas protegidas
 
-Route::controller(EquipoController::class)->group(function() {
-    Route::get('equipos', 'getEquipos');
+Route::middleware(['auth:sanctum'])->group(function() {
+
+    Route::controller(ApiAuthController::class)->group(function() {
+        Route::delete('logout', 'logout');
+        Route::delete('logout-all', 'logoutAll');
+    });
+
+    // Equipos
+
+    Route::controller(EquipoController::class)->group(function() {
+        Route::get('equipos', 'getEquipos');
+    });
+
+    // Grupos
+
+    Route::controller(GrupoController::class)->group(function() {
+        Route::get('grupos', 'getGrupos');
+        Route::get('grupos/{grupo}/equipos', 'getEquiposGrupo');
+    });
+
+    // Partidos
+
+    Route::controller(PartidoController::class)->group(function() {
+        Route::get('jornadas', 'getJornadas');
+        Route::get('jornadas/{jornada}/partidos', 'getPartidosJornada');
+    });
+
+    // Estadios
+
+    Route::controller(EstadioController::class)->group(function() {
+        Route::get('estadios', 'getEstadios');
+    });
+
+    // Users
+
+    Route::controller(UserController::class)->group(function() {
+        Route::get('users', 'getUsers');
+        Route::get('users/{id}', 'getUser');
+        Route::get('ranking', 'getRanking');
+    });
+
+    Route::controller(UserPushTokenController::class)->group(function() {
+        Route::post('users/{id}/push-tokens', 'store');
+    });
+
+    // Premios
+
+    Route::controller(PremioController::class)->group(function() {
+        Route::get('premios', 'getPremios');
+    });
+
 });
-
-// Grupos
-
-Route::controller(GrupoController::class)->group(function() {
-    Route::get('grupos', 'getGrupos');
-    Route::get('grupos/{grupo}/equipos', 'getEquiposGrupo');
-});
-
-// Partidos
-
-Route::controller(PartidoController::class)->group(function() {
-    Route::get('jornadas', 'getJornadas');
-    Route::get('jornadas/{jornada}/partidos', 'getPartidosJornada');
-});
-
-// Estadios
-
-Route::controller(EstadioController::class)->group(function() {
-    Route::get('estadios', 'getEstadios');
-});
-
-// Users
-
-Route::controller(UserController::class)->group(function() {
-    Route::get('users', 'getUsers');
-    Route::get('users/{id}', 'getUser');
-    Route::get('ranking', 'getRanking');
-});
-
-Route::controller(UserPushTokenController::class)->group(function() {
-    Route::post('users/{id}/push-tokens', 'store');
-});
-
-// Premios
-
-Route::controller(PremioController::class)->group(function() {
-    Route::get('premios', 'getPremios');
-});
-
-
 

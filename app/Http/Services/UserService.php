@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\Http\Requests\Auth\ApiLoginRequest;
 use App\Models\User;
 use App\Traits\ApiResponse;
 use Illuminate\Support\Facades\Hash;
@@ -61,6 +62,13 @@ class UserService {
     public function getUser(int $userId)
     {
         return User::find($userId);
+    }
+
+    public function getUserLogin(ApiLoginRequest $request)
+    {
+        return User::select('id', 'email', 'password', 'nombres', 'apellidos', 'status_user')
+            ->where('email', $request->email)
+            ->first();
     }
 
     public function getRanking($id_pais)
