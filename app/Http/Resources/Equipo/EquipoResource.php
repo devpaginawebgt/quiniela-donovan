@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Equipo;
 
+use App\Http\Services\HelperService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,7 +18,7 @@ class EquipoResource extends JsonResource
         return [
             'id' => $this->id,
             'nombre' => $this->nombre,
-            'imagen' => $this->imagen,
+            'imagen' => HelperService::ImagePath($this->imagen),
             'descripcion' => $this->descripcion,
         ];
     }

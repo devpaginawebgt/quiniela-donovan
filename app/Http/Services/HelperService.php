@@ -18,4 +18,11 @@ class HelperService
 
         return $result;
     }
+
+    public static function ImagePath(string $path): string
+    {
+        $baseUrl = env('APP_URL');
+
+        return $baseUrl . $path;
+    }
 }

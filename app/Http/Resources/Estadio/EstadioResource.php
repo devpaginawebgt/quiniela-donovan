@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Estadio;
 
+use App\Http\Services\HelperService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,7 +19,7 @@ class EstadioResource extends JsonResource
             'id' => $this->id,
             'nombre' => $this->nombre,
             'descripcion' => $this->descripcion,
-            'imagen' => $this->imagen,
+            'imagen' => HelperService::ImagePath($this->imagen),
         ];
     }
 }
