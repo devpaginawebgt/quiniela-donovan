@@ -63,7 +63,7 @@ Route::controller(UserController::class)->group(function() {
 });
 
 Route::controller(UserPushTokenController::class)->group(function() {
-    Route::post('users/push-tokens/create', 'store');
+    Route::post('users/{id}/push-tokens', 'store');
 });
 
 // Premios

@@ -24,7 +24,6 @@ class UserPushTokenRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', 'integer', 'exists:users,id'],
             'device_token' => ['required', 'string', 'min:1', 'max:1024'],
             'device_platform' => ['required', 'string', Rule::in(['android', 'ios'])],
             'is_active' => ['boolean'],

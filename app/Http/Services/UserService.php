@@ -58,6 +58,11 @@ class UserService {
 
     }
 
+    public function getUser(int $userId)
+    {
+        return User::find($userId);
+    }
+
     public function getRanking($id_pais)
     {
         $participantes = User::where('status_user', 1)
