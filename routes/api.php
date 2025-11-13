@@ -59,6 +59,7 @@ Route::controller(EstadioController::class)->group(function() {
 
 Route::controller(UserController::class)->group(function() {
     Route::get('users', 'getUsers');
+    Route::get('users/{id}', 'getUser');
     Route::get('ranking', 'getRanking');
 });
 

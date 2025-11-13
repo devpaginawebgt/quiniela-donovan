@@ -40,6 +40,30 @@ class UserController extends Controller
         return $this->successResponse($participantes);
 
     }
+    
+    public function getUser(int $userId)
+    {
+        $userId = (int)$userId;
+
+        if (empty($userId)) {
+
+            return $this->errorResponse('No se encontró el usuario', 422);
+
+        }
+
+        $user = $this->userService->getUser($userId);
+
+        if ( empty($user) ) {
+
+            return $this->errorResponse('No se encontró el usuario', 422);
+
+        }
+
+        $user = new UserResource($user);
+
+        return $this->successResponse($user);
+
+    }
 
     public function getRanking(Request $request)
     {
