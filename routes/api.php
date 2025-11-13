@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 // Auth
 
-Route::controller(ApiAuthController::class)->group(function() {
+Route::middleware('api.key')->controller(ApiAuthController::class)->group(function() {
     Route::post('login', 'login');
 });
 

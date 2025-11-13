@@ -40,7 +40,6 @@ class Kernel extends HttpKernel
 
         'api' => [
             'throttle:api',
-            // \App\Http\Middleware\ApiAuthMiddleware::class,
             \App\Http\Middleware\RequestToSnakeCase::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
@@ -55,6 +54,7 @@ class Kernel extends HttpKernel
      */
     
     protected $middlewareAliases = [
+        'api.key' => \App\Http\Middleware\ApiAuthMiddleware::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
