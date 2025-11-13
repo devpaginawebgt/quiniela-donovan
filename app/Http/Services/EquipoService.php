@@ -10,7 +10,6 @@ class EquipoService {
     public function getEquipos()
     {
         return Equipo::select('id', 'nombre', 'imagen', 'descripcion')
-            ->orderBy('puntos', 'desc')
             ->orderBy('nombre', 'asc')
             ->get();
     }
