@@ -18,7 +18,6 @@ class EquipoGrupoResource extends JsonResource
             'id' => $this->id,
             'name' => $this->nombre,
             'image' => $this->imagen,
-            'description' => $this->descripcion,
             'golesFavor' => $this->goles_favor,
             'golesContra' => $this->goles_contra,
             'partidosJugados' => $this->partidos_jugados,
