@@ -69,6 +69,7 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::controller(UserController::class)->group(function() {
         Route::get('users', 'getUsers');
         Route::get('users/{id}', 'getUser');
+        Route::get('users/{id}/token', 'validateToken');
         Route::get('ranking', 'getRanking');
     });
 

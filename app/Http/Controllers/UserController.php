@@ -65,6 +65,25 @@ class UserController extends Controller
 
     }
 
+    public function validateToken(Request $request, string $userId)
+    {
+        $userId = (int)$userId;
+
+        $user = $request->user();
+
+        $userIdRequest = $user->id;
+
+        if ($userId !== $userIdRequest) {
+
+            return $this->errorResponse('Token inválido');
+
+        }        
+
+        $user = new UserResource($user);
+
+        return $this->successResponse($user);
+    }
+
     public function getRanking(Request $request)
     {
         $id_pais = $request->input('pais') ?? 1;
