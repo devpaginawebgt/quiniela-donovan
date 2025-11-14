@@ -41,56 +41,23 @@ class UserController extends Controller
 
     }
     
-    public function getUser(int $userId)
+    public function getUser(Request $request)
     {
-        $userId = (int)$userId;
-
-        if (empty($userId)) {
-
-            return $this->errorResponse('No se encontró el usuario', 422);
-
-        }
-
-        $user = $this->userService->getUser($userId);
-
-        if ( empty($user) ) {
-
-            return $this->errorResponse('No se encontró el usuario', 422);
-
-        }
+        $user = $request->user();        
 
         $user = new UserResource($user);
 
         return $this->successResponse($user);
 
-    }
-
-    public function validateToken(Request $request, string $userId)
-    {
-        $userId = (int)$userId;
-
-        $user = $request->user();
-
-        $userIdRequest = $user->id;
-
-        if ($userId !== $userIdRequest) {
-
-            return $this->errorResponse('Token inválido');
-
-        }        
-
-        $user = new UserResource($user);
-
-        return $this->successResponse($user);
     }
 
     public function getRanking(Request $request)
     {
-        $id_pais = $request->input('pais') ?? 1;
+        $user = $request->user();
 
-        $paises = $this->userService->getPaises();
+        $id_pais = $user->pais_id;
 
-        $pais = $paises->firstWhere('id', $id_pais);
+        $pais = $this->userService->getPais($id_pais);
 
         if (empty($pais)) {
 

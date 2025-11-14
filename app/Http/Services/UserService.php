@@ -41,19 +41,6 @@ class UserService {
     {
 
         $participantes = User::where('status_user', 1)->get();
-        
-        $paises = $this->getPaises();
-
-        $participantes->each(function($participante) use($paises) {
-
-            $pais = $paises->firstWhere('id', $participante->pais_id);
-
-            $participante->pais = $pais['nombre'];
-
-        });
-
-        // $statuses = ['Bloqueado', 'Activo'];
-        // $participante->status = $statuses[$participante->status_user];
 
         return $participantes;
 
@@ -78,16 +65,6 @@ class UserService {
             ->orderBy('puntos', 'desc')
             ->orderBy('name', 'asc')
             ->get();
-        
-        $paises = $this->getPaises();
-
-        $participantes->each(function($participante) use($paises) {
-
-            $pais = $paises->firstWhere('id', $participante->pais_id);
-
-            $participante->pais = $pais['nombre'];
-            
-        });
 
         return $participantes;
 

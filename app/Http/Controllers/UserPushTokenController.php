@@ -28,27 +28,13 @@ class UserPushTokenController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserPushTokenRequest $request, string $userId)
+    public function store(UserPushTokenRequest $request)
     {
-        $userId = (int)$userId;
-
-        if (empty($userId)) {
-
-            return $this->errorResponse('No se encontró el usuario', 422);
-
-        }
-
-        $user = $this->userService->getUser($userId);
-
-        if ( empty($user) ) {
-
-            return $this->errorResponse('No se encontró el usuario', 422);
-
-        }
+        $user = $request->user();
 
         $data = $request->validated();
 
-        $data['user_id'] = $userId;
+        $data['user_id'] = $user->id;
 
         $token = UserPushToken::create($data);
 
