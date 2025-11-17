@@ -44,14 +44,12 @@ class GrupoController extends Controller
 
         }
 
-        $data = [];
-
         $equipos = $this->grupoService->getEquiposGrupo($get_grupo);
 
-        $data['equipos'] = EquipoGrupoResource::collection($equipos);
+        $equipos = EquipoGrupoResource::collection($equipos);
 
-        $data['jornadas'] = $this->partidoService->getPartidosGrupo($get_grupo);
+        $grupo['equipos'] = $equipos;
 
-        return $this->successResponse($data);
+        return $this->successResponse($grupo);
     }
 }
