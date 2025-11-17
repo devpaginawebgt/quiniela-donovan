@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             EstadioSeeder::class,
             PartidoSeeder::class,
             EquipoPartidoSeeder::class,
+            ResultadoPartidoSeeder::class,
             PremioSeeder::class,
         ]);
     }

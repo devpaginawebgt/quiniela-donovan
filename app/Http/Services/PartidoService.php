@@ -6,10 +6,9 @@ use App\Http\Resources\Partido\PartidoResource;
 use App\Models\Equipo;
 use App\Models\EquipoPartido;
 use App\Models\Partido;
-use App\Models\ResultadoPartido;
 use Carbon\Carbon;
-use DateTime;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class PartidoService {
@@ -49,6 +48,54 @@ class PartidoService {
             ->whereHas('partido', function(Builder $query) use($jornada) {
                 $query->where('jornada', $jornada);
             })
+            ->get();
+
+        return $partidos;
+
+    }
+
+    public function getPartidosJornadaPendientes(int $jornada)
+    {
+
+        $partidos = EquipoPartido::select('id', 'equipo_1', 'equipo_2', 'partido_id')
+            ->has('partido')
+            ->has('equipoUno')
+            ->has('equipoDos')
+            ->whereHas('partido', function(Builder $query) use($jornada) {
+                $query
+                    ->where('jornada', $jornada)
+                    ->whereNot('estado', 1);
+            })
+            ->with([
+                'partido:id,fase,jornada,fecha_partido,jugado,estado',
+                'equipoUno:id,nombre,imagen,grupo',
+                'equipoDos:id,nombre,imagen,grupo'
+            ])
+            ->get();
+
+        return $partidos;
+
+    }
+
+    public function getPartidosJornadaById(Collection $partido_ids)
+    {
+        
+        $partido_ids = $partido_ids->toArray();
+
+        $partidos = EquipoPartido::select('id', 'equipo_1', 'equipo_2', 'partido_id')
+            ->has('partido')
+            ->has('equipoUno')
+            ->has('equipoDos')
+            ->whereHas('partido', function(Builder $query) use($partido_ids) {
+                $query
+                    ->whereIn('id', $partido_ids)
+                    ->whereNot('estado', 1);
+            })
+            ->with([
+                'partido:id,fase,jornada,fecha_partido,jugado,estado',
+                'equipoUno:id,nombre,imagen,grupo',
+                'equipoDos:id,nombre,imagen,grupo'
+            ])
             ->get();
 
         return $partidos;
@@ -256,6 +303,7 @@ class PartidoService {
 
             $partidoJugado = Partido::find($resultado->partido_id);
             $partidoJugado->estado = 1;
+            $partidoJugado->jugado = 1;
             $partidoJugado->save();
         }
     }

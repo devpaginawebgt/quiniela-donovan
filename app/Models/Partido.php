@@ -20,8 +20,4 @@ class Partido extends Model
        'estado',
     ];
 
-    public function equipos($jornada)
-    {
-        return $this->belongsToMany(Equipo::class,'equipo_partidos');
-    }
 }

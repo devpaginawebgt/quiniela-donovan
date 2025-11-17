@@ -15,11 +15,11 @@ class CreatePreccionsTable extends Migration
     {
         Schema::create('preccions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('partido_id');
             $table->integer('goles_equipo_1')->default(0);
             $table->integer('goles_equipo_2')->default(0);
             $table->integer('status')->default(0);
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('partido_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')

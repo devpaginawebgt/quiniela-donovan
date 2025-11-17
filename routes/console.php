@@ -22,4 +22,6 @@ use Illuminate\Support\Facades\Schedule;
 
 // Delete expired Sanctum API Tokens
 
-Schedule::command('sanctum:prune-expired --hours=24')->daily(); 
+Schedule::command('sanctum:prune-expired --hours=24')->daily();
+
+Schedule::command('partidos:actualizar-pasados')->dailyAt('23:55');

@@ -2,36 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Prediccion\PrediccionRequest;
+use App\Http\Resources\Prediccion\PrediccionResource;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Services\PartidoService;
 use App\Http\Services\PrediccionService;
+use App\Traits\ApiResponse;
 
 class ResultadoPartidoController extends Controller
 {
+    use ApiResponse;
+
     // Inyección de servicios
 
-    private $partidoService;
-    private $prediccionService;
-
     public function __construct(
-        PartidoService $partidoService,
-        PrediccionService $prediccionService
-    ) 
-    {
-        $this->partidoService = $partidoService;
-        $this->prediccionService = $prediccionService;
-    }
-
-    // Respuestas del controlador
+        private readonly PartidoService $partidoService,
+        private readonly PrediccionService $prediccionService
+    ) {}
 
     public function verQuiniela($jornada = 1, $message = '0OK')
     {
         // Actualizar los estados de los partidos cuya hora ya pasó
 
-        $this->partidoService->actualizarEstadoPartidos();
+        $this->partidoService->actualizarPartidosPasados();
 
         // Actualizar los puntos de los equipos cuyo estado partido no es 1 (Actualizado)
 
@@ -54,6 +50,83 @@ class ResultadoPartidoController extends Controller
         ]);
 
     }
+
+    // Respuestas API
+
+    public function getPredicciones(Request $request, string $get_jornada)
+    {
+        // Validar que la jornada exista
+
+        $id_jornada = (int)$get_jornada;
+
+        if ( empty($id_jornada) ) {
+
+            return $this->errorResponse('No se encontró la jornada', 422);
+
+        }
+
+        // Validar que la jornada exista
+
+        $jornada = $this->partidoService->getJornada($id_jornada);
+
+        if ( empty($jornada) ) {
+
+            return $this->errorResponse('No se encontró la jornada', 422);
+
+        }
+
+        // Actualizar los estados de los partidos cuya hora ya pasó
+
+        $this->partidoService->actualizarPartidosPasados();
+        
+        // Actualizar los puntos de los equipos cuyo estado partido no es 1 (Actualizado)
+
+        $this->partidoService->actualizarPuntosEquipos();
+
+        // Actualizar puntos de usuario
+
+        $user_id = $request->user()->id;
+
+        $this->prediccionService->actualizarPuntosParticipantes($user_id);
+
+        // Obtener los partidos de jornada
+
+        $equipos_partidos = $this->partidoService->getPartidosJornadaPendientes($id_jornada);
+
+        if (empty($equipos_partidos)) {
+
+            return $this->successResponse([]);
+
+        }
+
+        $predicciones = $this->prediccionService->getPredicciones($equipos_partidos, $user_id);
+
+        $predicciones = PrediccionResource::collection($predicciones);
+
+        return $this->successResponse($predicciones);
+
+    }
+
+    public function savePredicciones(PrediccionRequest $request)
+    {
+
+        $predicciones = $request->predicciones;
+
+        $user_id = $request->user()->id;
+
+        $partido_ids = $this->prediccionService->savePredicciones($predicciones, $user_id);
+
+        $equipos_partidos = $this->partidoService->getPartidosJornadaById($partido_ids);
+
+        $predicciones = $this->prediccionService->getPredicciones($equipos_partidos, $user_id);
+
+        $predicciones = PrediccionResource::collection($predicciones);
+
+        return $this->successResponse($predicciones);
+
+    }
+
+    // Continua lógica de la web
 
     public function verTablaResultados() 
     {

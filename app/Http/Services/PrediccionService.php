@@ -2,11 +2,13 @@
 
 namespace App\Http\Services;
 
+use App\Http\Resources\Partido\PartidoResource;
 use App\Models\Equipo;
 use App\Models\Preccion;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 
 class PrediccionService {
 
@@ -79,7 +81,7 @@ class PrediccionService {
 
     public function prediccionesParticipante($jornada, $user_id)
     {
-
+    
         $partidosJornada = DB::select(
             "SELECT 
                 par.id as partido_id,
@@ -191,5 +193,93 @@ class PrediccionService {
         }
 
         return $partidosJornada;
+    }
+
+    public function getPredicciones(Collection $equipos_partidos, int $user_id)
+    {
+
+        $predicciones = collect([]);
+
+        $equipos_partidos->each(function($equipos_partido) use($predicciones, $user_id) {
+
+            $id_partido = $equipos_partido->partido->id;
+
+            // Buscamos si el usuario ya hizo una predicción
+
+            $prediccion = Preccion::select('id', 'partido_id', 'goles_equipo_1', 'goles_equipo_2')
+                ->where('partido_id', $id_partido)
+                ->where('user_id', $user_id)
+                ->first();
+
+            if ( empty($prediccion) ) {
+
+                // Si no existe la predicción colocamos valores por defecto
+
+                $equipos_partido->prediccion_equipo_1 = 0;
+
+                $equipos_partido->prediccion_equipo_2 = 0;
+
+                $predicciones->push($equipos_partido);
+
+                return;
+
+            }
+
+            $equipos_partido->prediccion_equipo_1 = $prediccion->goles_equipo_1;
+
+            $equipos_partido->prediccion_equipo_2 = $prediccion->goles_equipo_2;
+
+            $predicciones->push($equipos_partido);
+
+        });
+
+        return $predicciones;
+
+    }
+
+    public function savePredicciones(array $predicciones, int $user_id)
+    {
+
+        $predicciones = collect($predicciones);
+
+        $id_partidos = collect([]);
+
+        $predicciones->each(function($prediccion) use($user_id, $id_partidos) {
+
+            $prediccion_db = Preccion::select('id', 'partido_id', 'goles_equipo_1', 'goles_equipo_2')
+                ->where('partido_id', $prediccion['id_partido'])
+                ->where('user_id', $user_id)
+                ->first();
+
+            // dd($prediccion, $prediccion_db);
+
+            if ( empty($prediccion_db) ) {
+
+                // Si no existe la predicción, la creamos
+
+                $prediccion_creada = Preccion::create([
+                    'user_id' => $user_id,
+                    'partido_id' => $prediccion['id_partido'],
+                    'goles_equipo_1' => $prediccion['prediccion_equipo_uno'],
+                    'goles_equipo_2' => $prediccion['prediccion_equipo_dos'],
+                ]);
+
+                $id_partidos->push($prediccion['id_partido']);
+                
+                return;
+
+            }
+
+            $prediccion_db->goles_equipo_1 = $prediccion['prediccion_equipo_uno'];
+            $prediccion_db->goles_equipo_2 = $prediccion['prediccion_equipo_dos'];
+
+            if ($prediccion_db->isDirty()) $prediccion_db->save();
+
+            $id_partidos->push($prediccion['id_partido']);
+
+        });
+
+        return $id_partidos;
+
     }
 }
