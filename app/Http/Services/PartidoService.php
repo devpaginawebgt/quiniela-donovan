@@ -94,11 +94,12 @@ class PartidoService {
             ->get();
 
         $error = false;
+        
         $message = '';
 
-        $equipos_partidos->each(function($equipos_partido) use( &$error, &$message ) {
+        $partido_ids_validos = collect([]);
 
-            if ($error === true) return;
+        $equipos_partidos->each(function($equipos_partido) use( &$error, &$message, &$partido_ids_validos ) {
 
             $estado = $equipos_partido->partido->estado;
 
@@ -108,13 +109,17 @@ class PartidoService {
 
                 $message = 'No se puede guardar la predicción: el partido ha finalizado.';
 
+                return;
+
             }
 
             if ($estado === 2) {
 
                 $error = true;
 
-                $message = 'No se puede guardar la predicción: el partido está en juego.';
+                $message = 'No se puede guardar la predicción: ¡el partido está en juego!';
+
+                return;
 
             }
 
@@ -128,7 +133,31 @@ class PartidoService {
 
                 $message = 'No se puede guardar la predicción: la fecha del partido ya ha pasado.';
 
+                return;
+
             }
+
+            $fecha_limite = $fecha_partido->subMinutes(10);
+
+            if ($fecha_actual->greaterThan($fecha_limite)) {
+
+                $error = true;
+
+                $message = 'Advertencia: no es posible almacenar la predicción porque el partido está por comenzar (menos de 10 minutos).';
+
+                return;
+
+            }
+
+            $partido_ids_validos->push($equipos_partido->partido_id);
+
+        });
+
+        $equipos_partidos = $equipos_partidos->filter(function($equipos_partido) use($partido_ids_validos) {
+
+            $id_partido = $equipos_partido->partido_id;
+
+            return $partido_ids_validos->contains($id_partido);
 
         });
 

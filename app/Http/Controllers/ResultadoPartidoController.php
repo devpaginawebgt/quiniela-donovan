@@ -105,24 +105,42 @@ class ResultadoPartidoController extends Controller
         $predicciones = $request->predicciones;
 
         $partido_ids = array_map(function($prediccion) {
+
             return $prediccion['id_partido'];
+
         }, $predicciones);
+
+        // Obtener los partidos disponibles a predecir
 
         $resultado = $this->partidoService->getPartidosPredicciones($partido_ids);
 
-        if ($resultado['error'] === true) {
+        $equipos_partidos = $resultado['equipos_partidos'];
+
+        if ( $resultado['error'] === true && $equipos_partidos->isEmpty() ) {
 
             return $this->errorResponse($resultado['message'], 422);
 
         }
 
-        $equipos_partidos = $resultado['equipos_partidos'];
+        $predicciones = array_filter($predicciones, function($prediccion) use($equipos_partidos) {
+            
+            $partido = $equipos_partidos->firstWhere('partido_id', $prediccion['id_partido']);
+
+            return !empty($partido);
+
+        });
 
         // Guardar predicciones
 
         $this->prediccionService->savePredicciones($predicciones, $user_id);
 
         $predicciones = $this->prediccionService->getPredicciones($equipos_partidos, $user_id);
+
+        if ( $resultado['error'] === true ) {
+
+            return $this->errorResponse($resultado['message'], 422);
+
+        }
 
         $predicciones = PrediccionResource::collection($predicciones);
 
