@@ -134,13 +134,13 @@ class ResultadoPartidoController extends Controller
 
         $this->prediccionService->savePredicciones($predicciones, $user_id);
 
-        $predicciones = $this->prediccionService->getPredicciones($equipos_partidos, $user_id);
-
         if ( $resultado['error'] === true ) {
 
             return $this->errorResponse($resultado['message'], 422);
 
         }
+
+        $predicciones = $this->prediccionService->getPredicciones($equipos_partidos, $user_id);
 
         $predicciones = PrediccionResource::collection($predicciones);
 
