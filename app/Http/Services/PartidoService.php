@@ -143,7 +143,7 @@ class PartidoService {
 
                 $error = true;
 
-                $message = 'Advertencia: no es posible almacenar la predicción porque el partido está por comenzar (menos de 10 minutos).';
+                $message = 'No se puede guardar la predicción: el partido está por comenzar (menos de 10 minutos).';
 
                 return;
 
