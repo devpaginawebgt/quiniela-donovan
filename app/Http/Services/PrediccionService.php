@@ -215,9 +215,9 @@ class PrediccionService {
 
                 // Si no existe la predicción colocamos valores por defecto
 
-                $equipos_partido->prediccion_equipo_1 = 0;
+                $equipos_partido->prediccion_equipo_1 = null;
 
-                $equipos_partido->prediccion_equipo_2 = 0;
+                $equipos_partido->prediccion_equipo_2 = null;
 
                 $predicciones->push($equipos_partido);
 
