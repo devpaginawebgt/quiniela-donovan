@@ -195,7 +195,7 @@ class PrediccionService {
         return $partidosJornada;
     }
 
-    public function getPredicciones(Collection $equipos_partidos, int $user_id)
+    public function getPredicciones($equipos_partidos, int $user_id)
     {
 
         $predicciones = collect([]);
@@ -237,10 +237,8 @@ class PrediccionService {
 
     }
 
-    public function savePredicciones(array $predicciones, int $user_id)
+    public function savePredicciones($predicciones, int $user_id)
     {
-
-        $predicciones = collect($predicciones);
 
         $id_partidos = collect([]);
 

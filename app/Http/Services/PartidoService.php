@@ -78,8 +78,15 @@ class PartidoService {
 
     }
 
-    public function getPartidosPredicciones(array $partido_ids)
+    public function getPartidosPredicciones(Collection $predicciones)
     {
+
+        $partido_ids = $predicciones->map(function($prediccion) {
+
+            return $prediccion['id_partido'];
+
+        });
+
         $equipos_partidos = EquipoPartido::select('id', 'equipo_1', 'equipo_2', 'partido_id')
             ->has('equipoUno')
             ->has('equipoDos')
@@ -91,23 +98,25 @@ class PartidoService {
                 'equipoUno:id,nombre,imagen,grupo',
                 'equipoDos:id,nombre,imagen,grupo'
             ])
-            ->get();
+            ->get();        
 
-        $error = false;
-        
-        $message = '';
+        // Iteramos para hacer verificación de partidos y separamos errores
+
+        $errors = collect([]);
 
         $equipos_partidos_validos = collect([]);
 
-        $equipos_partidos->each(function($equipos_partido) use( &$error, &$message, &$equipos_partidos_validos ) {
+        $equipos_partidos->each(function($equipos_partido) use( &$predicciones, &$errors, &$equipos_partidos_validos ) {
+
+            $prediccion_original = $predicciones->firstWhere('id_partido', $equipos_partido->id);
 
             $estado = $equipos_partido->partido->estado;
 
             if ($estado === 1) {
 
-                $error = true;
+                $prediccion_original['message'] = 'No se puede guardar la predicción: el partido ha finalizado.';
 
-                $message = 'No se puede guardar la predicción: el partido ha finalizado.';
+                $errors->push($prediccion_original);                
 
                 return;
 
@@ -115,9 +124,9 @@ class PartidoService {
 
             if ($estado === 2) {
 
-                $error = true;
+                $prediccion_original['message'] = 'No se puede guardar la predicción: ¡el partido está en juego!';
 
-                $message = 'No se puede guardar la predicción: ¡el partido está en juego!';
+                $errors->push($prediccion_original);                
 
                 return;
 
@@ -129,9 +138,9 @@ class PartidoService {
 
             if ($fecha_actual->greaterThan($fecha_partido)) {
 
-                $error = true;
+                $prediccion_original['message'] = 'No se puede guardar la predicción: la fecha del partido ya ha pasado.';
 
-                $message = 'No se puede guardar la predicción: la fecha del partido ya ha pasado.';
+                $errors->push($prediccion_original);                
 
                 return;
 
@@ -141,9 +150,9 @@ class PartidoService {
 
             if ($fecha_actual->greaterThan($fecha_limite)) {
 
-                $error = true;
+                $prediccion_original['message'] = 'No se puede guardar la predicción: el partido está por comenzar (menos de 10 minutos).';
 
-                $message = 'No se puede guardar la predicción: el partido está por comenzar (menos de 10 minutos).';
+                $errors->push($prediccion_original);                                
 
                 return;
 
@@ -154,9 +163,8 @@ class PartidoService {
         });
 
         return [
-            'error' => $error,
-            'message' => $message,
-            'equipos_partidos' => $equipos_partidos
+            'errors' => $errors,
+            'equipos_partidos' => $equipos_partidos_validos
         ];
 
     }
