@@ -17,13 +17,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CodigoSeeder::class,
             UserSeeder::class,
-            EquipoSeeder::class,
-            EstadioSeeder::class,
-            PartidoSeeder::class,
-            EquipoPartidoSeeder::class,
-            ResultadoPartidoSeeder::class,
-            PremioSeeder::class,
-            PrediccionSeeder::class
+            // EquipoSeeder::class,
+            // EstadioSeeder::class,
+            // PartidoSeeder::class,
+            // EquipoPartidoSeeder::class,
+            // ResultadoPartidoSeeder::class,
+            // PremioSeeder::class,
+            // PrediccionSeeder::class
         ]);
     }
 }
