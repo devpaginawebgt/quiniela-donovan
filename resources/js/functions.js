@@ -28,13 +28,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
 
-        let equipos = await getEquiposGrupo('a');
+        let equipos = await getEquiposGrupo(1);
 
         pintarTablaEquipos(equipos);
 
 
 
-        pintarJornadas("a");
+        pintarJornadas(1);
 
     } catch (error) {
 

@@ -33,16 +33,14 @@
                             onchange="verPartidosJornadaQuiniela(this)">
 
                             <option value="1" {{$jornada==1 ? 'selected':''}}>1</option>
-
                             <option value="2" {{$jornada==2 ? 'selected':''}}>2</option>
-
                             <option value="3" {{$jornada==3 ? 'selected':''}}>3</option>
-                            
-                            <option value="4" {{ $jornada == 4 ? 'selected' : '' }}>Octavos de final</option>
-                            <option value="5" {{ $jornada == 5 ? 'selected' : '' }}>Cuartos de final</option>
-                            <option value="6" {{ $jornada == 6 ? 'selected' : '' }}>SemiFinal</option>
-                            <option value="7" {{ $jornada == 7 ? 'selected' : '' }}>Partido por tercer lugar</option>
-                            <option value="8" {{ $jornada == 8 ? 'selected' : '' }}>Final</option>
+                            <option value="4" {{ $jornada == 4 ? 'selected' : '' }}>Dieciseisavos de final</option>
+                            <option value="5" {{ $jornada == 5 ? 'selected' : '' }}>Octavos de final</option>
+                            <option value="6" {{ $jornada == 6 ? 'selected' : '' }}>Cuartos de final</option>
+                            <option value="7" {{ $jornada == 7 ? 'selected' : '' }}>SemiFinal</option>
+                            <option value="8" {{ $jornada == 8 ? 'selected' : '' }}>Partido por tercer lugar</option>
+                            <option value="9" {{ $jornada == 9 ? 'selected' : '' }}>Final</option>
 
                         </select>
 
@@ -109,7 +107,7 @@
                                 @csrf
 
                                 <button
-                                    type="button"
+                                    type="submit"
                                     class="text-white border focus:outline-none hover:bg-red-50 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-6 py-4 my-2 fixed bottom-5 right-5 shadow-xl"
                                     style="background-color: #177245"
                                 >

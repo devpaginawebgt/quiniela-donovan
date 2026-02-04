@@ -13,8 +13,11 @@ class EstadioController extends Controller
 
     public function verEstadios()
     {
+        $estadios = Estadio::all();
 
-        return view('modulos.sedes');
+        return view('modulos.sedes', [
+            'estadios' => $estadios
+        ]);
 
     }
 

@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Http\Services\TestingService;
+use App\Models\EquipoPartido;
 use App\Models\Partido;
+use App\Models\ResultadoPartido;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -16,315 +19,60 @@ class PartidoSeeder extends Seeder
      */
     public function run()
     {
-        $partidos = [
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  1,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->subDays(6)->subHours(2)->toDateTimeString(),
-                'estadio_id'    => 1
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  1, 
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->subDays(6)->subHours(1)->toDateTimeString(),
-                'estadio_id'    => 4
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  1,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->subDays(5)->subHours(1)->toDateTimeString(),
-                'estadio_id'    => 6
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  1,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->subDays(5)->toDateTimeString(),
-                'estadio_id'    => 2,
-            ],
 
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  1,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->subDays(4)->toDateTimeString(),
-                'estadio_id'    => 2,
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  1,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->subDays(4)->subHours(2)->toDateTimeString(),
-                'estadio_id'    => 2,
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  1,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->subDays(3)->subHours(2)->toDateTimeString(),
-                'estadio_id'    => 8
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  1,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->subDays(3)->subHours(1)->toDateTimeString(),
-                'estadio_id'    => 5
-            ],
+        // $jornada1 = TestingService::jornadaUno();
+        // $jornada2 = TestingService::jornadaDos();
+        // $jornada3 = TestingService::jornadaTres();
+        // $deciseisavos = TestingService::dieciseisavos();
+        // $octavos = TestingService::octavos();
+        // $cuartos = TestingService::cuartos();
+        // $semifinales = TestingService::semifinales();
+        // $tercer_lugar = TestingService::tercerLugar();
+        // $finales = TestingService::finales();
 
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  1,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->subDays(2)->subHours(2)->toDateTimeString(),
-                'estadio_id'    => 2
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  1,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->subDays(2)->subHours(1)->toDateTimeString(),
-                'estadio_id'    => 6
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  1,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->subDays(1)->subHours(1)->toDateTimeString(),
-                'estadio_id'    => 4
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  1,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->subHours(3)->toDateTimeString(),
-                'estadio_id'    => 1
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  1,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->subHours(1)->toDateTimeString(),
-                'estado'        => 2,
-                'estadio_id'    => 3
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  1,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->subMinutes(2)->toDateTimeString(),
-                'estado'        => 2,
-                'estadio_id'    => 5
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  1,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addMinutes(5)->toDateTimeString(),
-                'estadio_id'    => 8
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  1,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addHours(1)->toDateTimeString(),
-                'estadio_id'    => 7
-            ],
+        // $partidos = array_merge(
+        //     $jornada1,
+        //     $jornada2,
+        //     $jornada3,
+        //     $deciseisavos,
+        //     $octavos,
+        //     $cuartos,
+        //     $semifinales,
+        //     $tercer_lugar,
+        //     $finales
+        // );
 
-            // Segunda jornada
+        // foreach($partidos as $partido) {
 
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  2,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addHours(2)->toDateTimeString(),
-                'estadio_id'    => 1
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  2,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addHours(4)->toDateTimeString(),
-                'estadio_id'    => 4
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  2,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addHours(6)->addHours(rand(1,3))->toDateTimeString(),
-                'estadio_id'    => 6
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  2,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addHours(8)->addHours(rand(1,3))->toDateTimeString(),
-                'estadio_id'    => 2
-            ],
+        //     $equipo_1 = $partido['equipo_1'];
+        //     $equipo_2 = $partido['equipo_2'];
+            
+        //     unset($partido['equipo_1']);
+        //     unset($partido['equipo_2']);
 
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  2,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(1)->addHours(2)->toDateTimeString(),
-                'estadio_id'    => 1
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  2,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(1)->addHours(4)->toDateTimeString(),
-                'estadio_id'    => 5
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  2,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(1)->addHours(6)->toDateTimeString(),
-                'estadio_id'    => 8
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  2,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(1)->addHours(8)->toDateTimeString(),
-                'estadio_id'    => 7
-            ],
+        //     $goles_equipo_1 = $partido['goles_equipo_1'];
+        //     $goles_equipo_2 = $partido['goles_equipo_2'];
+        //     $equipo_ganador_id = $partido['equipo_ganador_id'];
 
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  2,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(2)->toDateTimeString(),
-                'estadio_id'    => 1
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  2,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(2)->addHours(2)->toDateTimeString(),
-                'estadio_id'    => 4
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  2,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(2)->addHours(4)->toDateTimeString(),
-                'estadio_id'    => 6
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  2,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(2)->addHours(6)->toDateTimeString(),
-                'estadio_id'    => 2
-            ],
+        //     unset($partido['goles_equipo_1']);
+        //     unset($partido['goles_equipo_2']);
+        //     unset($partido['equipo_ganador_id']);
 
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  2,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(3)->toDateTimeString(),
-                'estadio_id'    => 3
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  2,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(3)->addHours(2)->toDateTimeString(),
-                'estadio_id'    => 5
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  2,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(3)->addHours(4)->toDateTimeString(),
-                'estadio_id'    => 8
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  2,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(3)->addHours(6)->toDateTimeString(),
-                'estadio_id'    => 7
-            ],
+        //     $partido_db = Partido::create($partido);
 
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  3,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(4)->toDateTimeString(),
-                'estadio_id'    => 2
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  3,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(4)->addHours(2)->toDateTimeString(),
-                'estadio_id'    => 6
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  3,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(4)->addHours(4)->toDateTimeString(),
-                'estadio_id'    => 1
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  3,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(4)->addHours(6)->toDateTimeString(),
-                'estadio_id'    => 4
-            ],
+        //     $equipo_partido = EquipoPartido::create([
+        //         'partido_id' => $partido_db->id,
+        //         'equipo_1' => $equipo_1,
+        //         'equipo_2' => $equipo_2
+        //     ]);
 
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  3,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(5)->toDateTimeString(),
-                'estadio_id'    => 5
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  3,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(5)->addHours(2)->toDateTimeString(),
-                'estadio_id'    => 3
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  3,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(5)->addHours(4)->toDateTimeString(),
-                'estadio_id'    => 7
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  3,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(5)->addHours(6)->toDateTimeString(),
-                'estadio_id'    => 8
-            ],
+            // $resultado = ResultadoPartido::create([
+            //     'partido_id' => $partido_db->id,
+            //     'goles_equipo_1' => $goles_equipo_1,
+            //     'goles_equipo_2' => $goles_equipo_2,
+            //     'equipo_ganador_id' => $equipo_ganador_id,
+            // ]);
 
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  3,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(7)->toDateTimeString(),
-                'estadio_id'    => 1
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  3,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(7)->addHours(2)->toDateTimeString(),
-                'estadio_id'    => 4
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  3,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(7)->addHours(4)->toDateTimeString(),
-                'estadio_id'    => 6
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  3,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(7)->addHours(6)->toDateTimeString(),
-                'estadio_id'    => 2
-            ],
-
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  3,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(8)->toDateTimeString(),
-                'estadio_id'    => 3
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  3,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(8)->addHours(2)->toDateTimeString(),
-                'estadio_id'    => 5
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  3,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(8)->addHours(4)->toDateTimeString(),
-                'estadio_id'    => 8
-            ],
-            [
-                'fase'      =>  'GRUPOS',
-                'jornada'   =>  3,
-                'fecha_partido' => Carbon::create(2026, 6, 8, 9)->addDays(8)->addHours(6)->toDateTimeString(),
-                'estadio_id'    => 7
-            ],
-        ];
-
-        foreach($partidos as $partido) {
-
-            Partido::create($partido);
-
-        }
+        // }
     }
 }

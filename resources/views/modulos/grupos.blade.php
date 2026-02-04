@@ -16,14 +16,18 @@
                             <select id="grupos"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-lg font-semibold text-center cursor-pointer rounded-lg focus:ring-red-800 focus:border-red-800 block w-1/2 p-2.5"
                                 onchange="verEquiposGrupo(this)">
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
-                                <option value="D">D</option>
-                                <option value="E">E</option>
-                                <option value="F">F</option>
-                                <option value="G">G</option>
-                                <option value="H">H</option>
+                                <option value="1">A</option>
+                                <option value="2">B</option>
+                                <option value="3">C</option>
+                                <option value="4">D</option>
+                                <option value="5">E</option>
+                                <option value="6">F</option>
+                                <option value="7">G</option>
+                                <option value="8">H</option>
+                                <option value="9">I</option>
+                                <option value="10">J</option>
+                                <option value="11">K</option>
+                                <option value="12">L</option>
                             </select>
                             <svg class="animate-spin spinner-load" viewBox="0 0 24 24"></svg>
                         </div>

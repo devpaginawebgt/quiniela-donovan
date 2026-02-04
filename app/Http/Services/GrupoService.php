@@ -18,6 +18,10 @@ class GrupoService {
             [ 'value' => 6, 'name' => 'F' ],
             [ 'value' => 7, 'name' => 'G' ],
             [ 'value' => 8, 'name' => 'H' ],
+            [ 'value' => 9, 'name' => 'I' ],
+            [ 'value' => 10, 'name' => 'J' ],
+            [ 'value' => 11, 'name' => 'K' ],
+            [ 'value' => 12, 'name' => 'L' ],
         ]);
     }
 
