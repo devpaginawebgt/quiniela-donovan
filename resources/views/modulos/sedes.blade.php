@@ -10,7 +10,28 @@
             <div class="px-6 pb-6 bg-white border-b border-gray-200 ">
                 <h5 class="text-3xl text-center font-bold my-8">Estadios de la Copa Mundial</h5>
                 <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4 transition-all">
+
+                    @foreach($estadios as $estadio)
                     <div class="max-w-sm bg-white rounded-lg transform ease-in duration-150 hover:scale-105">
+                        <div class="flex">
+                            <img class="rounded-lg mx-auto hover:cursor-pointer btn-bandera border-2 border-gray-100"
+                                src="{{ asset($estadio->imagen) }}" alt="" id="{{ $estadio->id }}"
+                                onclick="slideToggle({{ $estadio->id }})" />
+                        </div>
+                        <div class="p-5 border border-gray-200 shadow-md rounded-lg">
+                            <h5 class="mb-2 text-center text-2xl font-bold tracking-tight text-gray-900">
+                                {{ $estadio->nombre }}
+                            </h5>
+                            <div class="container-{{ $estadio->id }} hidden">
+                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-center">
+                                    {{ $estadio->descripcion }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+
+                    {{-- <div class="max-w-sm bg-white rounded-lg transform ease-in duration-150 hover:scale-105">
                         <div class="flex">
                             <img class="rounded-lg mx-auto hover:cursor-pointer btn-bandera border-2 border-gray-100"
                                 src="{{ asset('images/estadios/aljanoub.jpg') }}" alt="" id="aljanoub"
@@ -142,7 +163,7 @@
                                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-center">Es la joya de la corona. Es la sede de torneos más grande de Qatar y está situado en la ciudad de la que toma su nombre. El estudio Foster+ Partners firma el diseño de esta maravilla inspirada en las luces y sombras de la linterna "fanar". Su forma y fachada emulan los intrincados motivos decorativos de los cuencos y otros recipientes característicos de la edad de oro del arte y la artesanía en el mundo árabe e islámico.</p>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 

@@ -22,7 +22,8 @@ class CreateResultadoPartidosTable extends Migration
             $table->timestamps();
 
             $table->foreign('partido_id')->references('id')->on('partidos')
-                ->onUpdate('cascade');
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->foreign('equipo_ganador_id')->references('id')->on('equipos')
                 ->onUpdate('cascade');
         });

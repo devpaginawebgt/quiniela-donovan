@@ -22,7 +22,8 @@ class CreateEquipoPartidosTable extends Migration
 
             $table->foreign('partido_id')->references('id')->on('partidos')
                 ->nullable()
-                ->onUpdate('cascade');
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
             $table->foreign('equipo_1')->references('id')->on('equipos')
                 ->nullable()

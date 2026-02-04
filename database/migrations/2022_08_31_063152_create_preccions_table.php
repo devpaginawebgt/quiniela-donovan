@@ -26,7 +26,8 @@ class CreatePreccionsTable extends Migration
                 ->onUpdate('cascade');
 
             $table->foreign('partido_id')->references('id')->on('partidos')
-                ->onUpdate('cascade');
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
