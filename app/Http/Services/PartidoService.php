@@ -20,11 +20,12 @@ class PartidoService {
             ['value' => 1, 'name' => '1'],
             ['value' => 2, 'name' => '2'],
             ['value' => 3, 'name' => '3'],
-            ['value' => 4, 'name' => 'Octavos de final'],
-            ['value' => 5, 'name' => 'Cuartos de final'],
-            ['value' => 6, 'name' => 'Semifinales'],
-            ['value' => 7, 'name' => 'Partido por tercer lugar'],
-            ['value' => 8, 'name' => 'Final'],
+            ['value' => 4, 'name' => 'Dieciseisavos de final'],
+            ['value' => 5, 'name' => 'Octavos de final'],
+            ['value' => 6, 'name' => 'Cuartos de final'],
+            ['value' => 7, 'name' => 'Semifinales'],
+            ['value' => 8, 'name' => 'Partido por tercer lugar'],
+            ['value' => 9, 'name' => 'Final'],
         ]);
     }
 
