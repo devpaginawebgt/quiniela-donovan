@@ -36,11 +36,25 @@ class UserPushTokenController extends Controller
 
         $data['user_id'] = $user->id;
 
-        $token = UserPushToken::create($data);
+        $db_token = UserPushToken::where('device_token', $data['device_token'])
+            ->latest()
+            ->first();
+        
+        if (empty($db_token)) {
 
-        $token = new UserPushTokenResource($token);
+            $token = UserPushToken::create($data);
 
-        return $this->successResponse($token);
+            // $token = new UserPushTokenResource($token);
+            // return $this->successResponse($token);
+
+            return empty($token)
+                ? $this->errorResponse('Ocurrió un error al generar el token.')
+                : $this->successResponse(['message' => 'Token válido.']);
+
+        }
+
+        return $this->successResponse(['message' => 'Token válido.']);
+
     }
 
     /**
