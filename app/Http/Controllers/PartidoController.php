@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Jornada\JornadaResource;
 use App\Http\Resources\Partido\PartidoResource;
 use App\Http\Services\EquipoService;
 use App\Http\Services\PartidoService;
@@ -23,13 +24,15 @@ class PartidoController extends Controller
 
         $jornadas = $this->partidoService->getJornadas();
 
+        $jornadas = JornadaResource::collection($jornadas);
+
         return $this->successResponse($jornadas);
 
     }
 
     public function getPartidosJornada(Request $request, string $get_jornada)
     {
-    
+        
         $get_jornada = (int)$get_jornada;
 
         if ( empty($get_jornada) ) {

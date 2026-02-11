@@ -5,6 +5,7 @@ namespace App\Http\Services;
 use App\Http\Resources\Partido\PartidoResource;
 use App\Models\Equipo;
 use App\Models\EquipoPartido;
+use App\Models\Jornada;
 use App\Models\Partido;
 use App\Models\Preccion;
 use Carbon\Carbon;
@@ -16,26 +17,12 @@ class PartidoService {
 
     public function getJornadas()
     {
-        return collect([
-            ['value' => 1, 'name' => '1'],
-            ['value' => 2, 'name' => '2'],
-            ['value' => 3, 'name' => '3'],
-            ['value' => 4, 'name' => 'Dieciseisavos de final'],
-            ['value' => 5, 'name' => 'Octavos de final'],
-            ['value' => 6, 'name' => 'Cuartos de final'],
-            ['value' => 7, 'name' => 'Semifinales'],
-            ['value' => 8, 'name' => 'Partido por tercer lugar'],
-            ['value' => 9, 'name' => 'Final'],
-        ]);
+        return Jornada::whereHas('partidos')->get();
     }
 
     public function getJornada(int $jornada)
     {
-
-        $jornadas = $this->getJornadas();
-
-        return $jornadas->firstWhere('value', $jornada);
-
+        return Jornada::find($jornada);
     }
 
     public function getPartidosJornada(int $jornada)
@@ -45,10 +32,10 @@ class PartidoService {
             ->has('equipoUno')
             ->has('equipoDos')
             ->whereHas('partido', function(Builder $query) use($jornada) {
-                $query->where('jornada', $jornada);
+                $query->where('jornada_id', $jornada);
             })
             ->with([
-                'partido:id,fase,jornada,fecha_partido,jugado,estado',
+                'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
                 'equipoUno:id,nombre,imagen,grupo',
                 'equipoDos:id,nombre,imagen,grupo'
             ])
@@ -66,11 +53,11 @@ class PartidoService {
             ->has('equipoDos')
             ->whereHas('partido', function(Builder $query) use($jornada) {
                 $query
-                    ->where('jornada', $jornada)
+                    ->where('jornada_id', $jornada)
                     ->whereNot('estado', 1);
             })
             ->with([
-                'partido:id,fase,jornada,fecha_partido,jugado,estado',
+                'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
                 'equipoUno:id,nombre,imagen,grupo',
                 'equipoDos:id,nombre,imagen,grupo'
             ])
@@ -96,7 +83,7 @@ class PartidoService {
                 $query->whereIn('id', $partido_ids);
             })
             ->with([
-                'partido:id,fase,jornada,fecha_partido,jugado,estado',
+                'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
                 'equipoUno:id,nombre,imagen,grupo',
                 'equipoDos:id,nombre,imagen,grupo'
             ])
@@ -208,7 +195,7 @@ class PartidoService {
                     ->whereNot('estado', 1);
             })
             ->with([
-                'partido:id,fase,jornada,fecha_partido,jugado,estado',
+                'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
                 'equipoUno:id,nombre,imagen,grupo',
                 'equipoDos:id,nombre,imagen,grupo'
             ])
@@ -230,7 +217,7 @@ class PartidoService {
 
             $partidosJornada = EquipoPartido::select('id', 'equipo_1', 'equipo_2', 'partido_id')
                 ->whereHas('partido', function(Builder $query) use($jornada) {
-                    $query->where('jornada', $jornada);
+                    $query->where('jornada_id', $jornada);
                 })
                 ->whereHas('equipoUno', function(Builder $query) use($grupo) {
                     $query->where('grupo', $grupo);
@@ -239,7 +226,7 @@ class PartidoService {
                     $query->where('grupo', $grupo);
                 })
                 ->with([
-                    'partido:id,fase,jornada,fecha_partido,jugado,estado',
+                    'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
                     'equipoUno:id,nombre,imagen,grupo',
                     'equipoDos:id,nombre,imagen,grupo'
                 ])
@@ -265,11 +252,11 @@ class PartidoService {
             ->has('resultado')
             ->whereHas('partido', function(Builder $query) use($jornada) {
                 $query
-                    ->where('jornada', $jornada)
+                    ->where('jornada_id', $jornada)
                     ->where('estado', 1);
             })
             ->with([
-                'partido:id,fase,jornada,fecha_partido,jugado,estado',
+                'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
                 'equipoUno:id,nombre,imagen,grupo',
                 'equipoDos:id,nombre,imagen,grupo',
                 'resultado:id,partido_id,goles_equipo_1,goles_equipo_2'

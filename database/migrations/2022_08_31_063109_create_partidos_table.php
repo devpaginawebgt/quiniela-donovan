@@ -16,14 +16,24 @@ class CreatePartidosTable extends Migration
         Schema::create('partidos', function (Blueprint $table) {
             $table->id();
             $table->string('fase')->nullable();
-            $table->integer('jornada');
+            $table->unsignedBigInteger('jornada_id');
             $table->dateTime('fecha_partido');
             $table->unsignedBigInteger('estadio_id');
             $table->integer('jugado')->default(0);
             $table->integer('estado')->default(0);
             $table->timestamps();
 
-            $table->foreign('estadio_id')->references('id')->on('estadios')->onUpdate('cascade');
+            $table->foreign('estadio_id')
+                ->references('id')
+                ->on('estadios')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+                
+            $table->foreign('jornada_id')
+                ->references('id')
+                ->on('jornadas')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
         });
     }
 

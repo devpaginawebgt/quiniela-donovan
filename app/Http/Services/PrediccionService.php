@@ -85,7 +85,7 @@ class PrediccionService {
         $partidosJornada = DB::select(
             "SELECT 
                 par.id as partido_id,
-                par.jornada,
+                par.jornada_id,
                 par.estado,
                 par.fecha_partido,
                 ep.equipo_1,
@@ -95,7 +95,7 @@ class PrediccionService {
             INNER JOIN 
                 equipo_partidos ep ON par.id = ep.partido_id
             WHERE 
-                par.jornada = $jornada 
+                par.jornada_id = $jornada 
             ORDER BY 
                 par.fecha_partido ASC"
         );

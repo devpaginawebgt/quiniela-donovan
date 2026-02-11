@@ -43,7 +43,7 @@ class PartidoResource extends JsonResource
             'fechaPartido' => $fecha_partido->format('Y-m-d H:i A'),
             'jugado' => $this->partido->jugado === 1,
             'idEstado' => $this->partido->estado,
-            'jornada' => $this->partido->jornada,
+            'jornada' => $this->partido->jornada_id,
             'estado' => $estado,
 
             'equipoUno' => new EquipoPartidoResource($this->equipoUno),

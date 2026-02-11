@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             EquipoSeeder::class,
             EstadioSeeder::class,
+            JornadaSeeder::class,
             PartidoSeeder::class,
             EquipoPartidoSeeder::class,
             ResultadoPartidoSeeder::class,
