@@ -161,17 +161,9 @@ class ResultadoPartidoController extends Controller
 
         // Obtener los partidos de jornada
 
-        $equipos_partidos = $this->partidoService->getPartidosFinalizados($id_jornada);
+        $resultados = $this->prediccionService->getResultados($id_jornada, $user_id);
 
-        if (empty($equipos_partidos)) {
-
-            return $this->successResponse([]);
-
-        }
-
-        $resultados = $this->prediccionService->getResultados($equipos_partidos, $user_id);
-
-        $resultados = ResultadoResource::collection($resultados);
+         $resultados = ResultadoResource::collection($resultados);
 
         return $this->successResponse($resultados);
 

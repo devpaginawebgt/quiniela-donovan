@@ -43,53 +43,6 @@ class PartidoService {
 
     }
 
-    public function getPartidosJornadaPendientes(int $jornada)
-    {
-
-        $partidos = EquipoPartido::select('id', 'equipo_1', 'equipo_2', 'partido_id')
-            ->has('equipoUno')
-            ->has('equipoDos')
-            ->whereHas('partido', function(Builder $query) use($jornada) {
-                $query
-                    ->where('jornada_id', $jornada)
-                    ->whereNot('estado', 1);
-            })
-            ->with([
-                'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
-                'equipoUno:id,nombre,imagen,grupo',
-                'equipoDos:id,nombre,imagen,grupo'
-            ])
-            ->get();
-
-        return $partidos;
-
-    }
-    
-
-    public function getPartidosById(Collection $partido_ids)
-    {
-        
-        $partido_ids = $partido_ids->toArray();
-
-        $partidos = EquipoPartido::select('id', 'equipo_1', 'equipo_2', 'partido_id')
-            ->has('equipoUno')
-            ->has('equipoDos')
-            ->whereHas('partido', function(Builder $query) use($partido_ids) {
-                $query
-                    ->whereIn('id', $partido_ids)
-                    ->whereNot('estado', 1);
-            })
-            ->with([
-                'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
-                'equipoUno:id,nombre,imagen,grupo',
-                'equipoDos:id,nombre,imagen,grupo'
-            ])
-            ->get();
-
-        return $partidos;
-
-    }
-
     public function getJornadasGrupo(string $grupo)
     {
         $jornadas_obtener = collect([1, 2, 3]);
@@ -125,31 +78,8 @@ class PartidoService {
 
         return $jornadas;
     }
-
-    public function getPartidosFinalizados(int $jornada)
-    {
-
-        $partidos = EquipoPartido::select('id', 'equipo_1', 'equipo_2', 'partido_id')
-            ->has('equipoUno')
-            ->has('equipoDos')
-            ->has('resultado')
-            ->whereHas('partido', function(Builder $query) use($jornada) {
-                $query
-                    ->where('jornada_id', $jornada)
-                    ->where('estado', 1);
-            })
-            ->with([
-                'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
-                'equipoUno:id,nombre,imagen,grupo',
-                'equipoDos:id,nombre,imagen,grupo',
-                'resultado:id,partido_id,goles_equipo_1,goles_equipo_2'
-            ])
-            ->get();
-
-        return $partidos;
-
-    }
-
+    
+    
     // Actualizar el estado de los partidos, si la hora ya ha pasado
 
     public function actualizarPartidosPasados()
