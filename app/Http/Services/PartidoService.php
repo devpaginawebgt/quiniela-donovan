@@ -2,12 +2,10 @@
 
 namespace App\Http\Services;
 
-use App\Http\Resources\Partido\PartidoResource;
 use App\Models\Equipo;
 use App\Models\EquipoPartido;
 use App\Models\Jornada;
 use App\Models\Partido;
-use App\Models\Preccion;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -66,120 +64,7 @@ class PartidoService {
         return $partidos;
 
     }
-
-    public function getPartidosPredicciones(Collection $predicciones, int $user_id)
-    {
-
-        $partido_ids = $predicciones->map(function($prediccion) {
-
-            return $prediccion['id_partido'];
-
-        });
-
-        $equipos_partidos = EquipoPartido::select('id', 'equipo_1', 'equipo_2', 'partido_id')
-            ->has('equipoUno')
-            ->has('equipoDos')
-            ->whereHas('partido', function(Builder $query) use($partido_ids) {
-                $query->whereIn('id', $partido_ids);
-            })
-            ->with([
-                'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
-                'equipoUno:id,nombre,imagen,grupo',
-                'equipoDos:id,nombre,imagen,grupo'
-            ])
-            ->get();        
-
-        // Iteramos para hacer verificación de partidos y separamos errores
-
-        $predicciones_rechazadas = collect([]);
-
-        $predicciones_permitidas = collect([]);
-
-        $equipos_partidos->each(function($equipos_partido) use( &$predicciones_rechazadas, &$predicciones_permitidas, &$user_id ) {
-
-            $estado = $equipos_partido->partido->estado;
-
-            // Obtenemos la predicción anteiror del usuario
-
-            $prediccion = Preccion::select('id', 'partido_id', 'goles_equipo_1', 'goles_equipo_2')
-                ->where('partido_id', $equipos_partido->id)
-                ->where('user_id', $user_id)
-                ->first();
-
-            if ( empty($prediccion) ) {
-
-                // Si no existe la predicción colocamos valores por defecto
-
-                $equipos_partido->prediccion_equipo_1 = null;
-
-                $equipos_partido->prediccion_equipo_2 = null;
-
-            } else {
-
-                $equipos_partido->prediccion_equipo_1 = $prediccion->goles_equipo_1;
-
-                $equipos_partido->prediccion_equipo_2 = $prediccion->goles_equipo_2;
-
-            }
-
-            if ($estado === 1) {
-
-                $equipos_partido->message = 'No se puede guardar la predicción: el partido ha finalizado.';
-
-                $predicciones_rechazadas->push($equipos_partido);
-
-                return;
-
-            }
-
-            if ($estado === 2) {
-
-                $equipos_partido->message = 'No se puede guardar la predicción: ¡el partido está en juego!';
-
-                $predicciones_rechazadas->push($equipos_partido);
-
-                return;
-
-            }
-
-            $fecha_partido = Carbon::parse($equipos_partido->partido->fecha_partido);
-
-            $fecha_actual = Carbon::now();
-
-            if ($fecha_actual->greaterThan($fecha_partido)) {
-
-                $equipos_partido->message = 'No se puede guardar la predicción: la fecha del partido ya ha pasado.';
-
-                $predicciones_rechazadas->push($equipos_partido);
-
-                return;
-
-            }
-
-            $fecha_limite = $fecha_partido->subMinutes(10);
-
-            if ($fecha_actual->greaterThan($fecha_limite)) {
-
-                $equipos_partido->message = 'No se puede guardar la predicción: el partido está por comenzar (menos de 10 minutos).';
-
-                $predicciones_rechazadas->push($equipos_partido);
-
-                return;
-
-            }
-
-            $equipos_partido->message = 'Tu pronóstico ha sido guardado con éxito.';
-
-            $predicciones_permitidas->push($equipos_partido);
-
-        });
-
-        return [
-            'rechazadas' => $predicciones_rechazadas,
-            'permitidas' => $predicciones_permitidas
-        ];
-
-    }
+    
 
     public function getPartidosById(Collection $partido_ids)
     {
@@ -207,13 +92,13 @@ class PartidoService {
 
     public function getJornadasGrupo(string $grupo)
     {
-        $jornadas = collect([1, 2, 3]);
+        $jornadas_obtener = collect([1, 2, 3]);
         
-        $partidosJornadas = collect([]);
+        $jornadas = collect([]);
 
-        $jornadas->each(function($jornada) use($grupo, $partidosJornadas) {
+        $jornadas_obtener->each(function($jornada) use($grupo, $jornadas) {
 
-            $jornada_ob = $this->getJornada($jornada);
+            $jornada_db = $this->getJornada($jornada);
 
             $partidosJornada = EquipoPartido::select('id', 'equipo_1', 'equipo_2', 'partido_id')
                 ->whereHas('partido', function(Builder $query) use($jornada) {
@@ -232,15 +117,13 @@ class PartidoService {
                 ])
                 ->get();
 
-            $partidosJornada = PartidoResource::collection($partidosJornada);
+            $jornada_db->partidos = $partidosJornada;
 
-            $jornada_ob['partidos'] = $partidosJornada;
-
-            $partidosJornadas->push($jornada_ob);
+            $jornadas->push($jornada_db);
 
         });
 
-        return $partidosJornadas;
+        return $jornadas;
     }
 
     public function getPartidosFinalizados(int $jornada)

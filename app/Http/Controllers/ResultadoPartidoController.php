@@ -77,15 +77,7 @@ class ResultadoPartidoController extends Controller
 
         // Obtener los partidos de jornada
 
-        $equipos_partidos = $this->partidoService->getPartidosJornadaPendientes($id_jornada);
-
-        if (empty($equipos_partidos)) {
-
-            return $this->successResponse([]);
-
-        }
-
-        $predicciones = $this->prediccionService->getPredicciones($equipos_partidos, $user_id);
+        $predicciones = $this->prediccionService->getPrediccionesJornada($id_jornada, $user_id);
 
         $predicciones = PrediccionResource::collection($predicciones);
 
@@ -103,15 +95,21 @@ class ResultadoPartidoController extends Controller
 
         // Validar predicciones
 
-        $predicciones = collect($request->predicciones);
+        $predicciones_nuevas = collect($request->predicciones);
+
+        $id_partidos = $predicciones_nuevas->map(function($prediccion) {
+            return $prediccion['id_partido'];
+        })->toArray();
 
         // Obtener los partidos disponibles a predecir
 
-        $info_predicciones = $this->partidoService->getPartidosPredicciones($predicciones, $user_id);
+        $predicciones_usuario = $this->prediccionService->getPrediccionesById($id_partidos, $user_id);
 
-        $predicciones_rechazadas = PrediccionSolicitudResource::collection($info_predicciones['rechazadas']);
+        $validacion_predicciones = $this->prediccionService->validatePrediccionesUsuario($predicciones_nuevas, $predicciones_usuario);
 
-        $predicciones_permitidas = $info_predicciones['permitidas'];
+        $predicciones_rechazadas = PrediccionSolicitudResource::collection($validacion_predicciones['rechazadas']);
+
+        $predicciones_permitidas = $validacion_predicciones['permitidas'];
 
         if ( $predicciones_permitidas->isEmpty() ) {
 
@@ -122,25 +120,13 @@ class ResultadoPartidoController extends Controller
 
         }
 
-        $predicciones = $predicciones->filter(function($prediccion) use($predicciones_permitidas) {
-            
-            $partido = $predicciones_permitidas->firstWhere('partido_id', $prediccion['id_partido']);
+        $predicciones_guardadas = $this->prediccionService->savePredicciones($predicciones_nuevas, $predicciones_permitidas, $user_id);
 
-            return !empty($partido);
-
-        });
-
-        // Guardar predicciones
-
-        $this->prediccionService->savePredicciones($predicciones, $user_id);
-
-        $predicciones_procesadas = $this->prediccionService->getPredicciones($predicciones_permitidas, $user_id);
-
-        $predicciones_procesadas = PrediccionSolicitudResource::collection($predicciones_procesadas);
+        $predicciones_guardadas = PrediccionSolicitudResource::collection($predicciones_guardadas);
 
         return $this->successResponse([
             'prediccionesRechazadas' => $predicciones_rechazadas,
-            'prediccionesProcesadas' => $predicciones_procesadas
+            'prediccionesProcesadas' => $predicciones_guardadas
         ]);
 
     }
@@ -222,6 +208,9 @@ class ResultadoPartidoController extends Controller
         return view('modulos.tabla-resultados');
 
     }
+
+
+    // Continúan funciones de web
     
     public function guardarPrediccionesForm(Request $request)
     {

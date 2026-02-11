@@ -4,11 +4,14 @@ namespace App\Http\Services;
 
 use App\Http\Resources\Partido\PartidoResource;
 use App\Models\Equipo;
+use App\Models\EquipoPartido;
 use App\Models\Preccion;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Query\JoinClause;
 
 class PrediccionService {
 
@@ -195,89 +198,217 @@ class PrediccionService {
         return $partidosJornada;
     }
 
-    public function getPredicciones($equipos_partidos, int $user_id)
+    public function getPrediccionesJornada(int $id_jornada, int $user_id)
     {
+        $predicciones_usuario = EquipoPartido::select([
+            'equipo_partidos.id', 
+            'equipo_partidos.equipo_1', 
+            'equipo_partidos.equipo_2', 
+            'equipo_partidos.partido_id',
+            'preccions.id AS preccion_id',
+            'preccions.goles_equipo_1 AS prediccion_equipo_1',
+            'preccions.goles_equipo_2 AS prediccion_equipo_2',
+        ])
+            ->has('equipoUno')
+            ->has('equipoDos')
+            ->whereHas('partido', function(Builder $query) use($id_jornada) {
+                $query
+                    ->where('jornada_id', $id_jornada)
+                    ->whereNot('estado', 1);
+            })
+            ->with([
+                'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
+                'equipoUno:id,nombre,imagen,grupo',
+                'equipoDos:id,nombre,imagen,grupo'
+            ])
+            ->leftJoin('preccions', function (JoinClause $join) use($user_id) {
+                $join->on('equipo_partidos.id', '=', 'preccions.partido_id')
+                    ->where('preccions.user_id', $user_id);
+            })
+            ->get();
 
-        $predicciones = collect([]);
-
-        $equipos_partidos->each(function($equipos_partido) use($predicciones, $user_id) {
-
-            $id_partido = $equipos_partido->partido->id;
-
-            // Buscamos si el usuario ya hizo una predicción
-
-            $prediccion = Preccion::select('id', 'partido_id', 'goles_equipo_1', 'goles_equipo_2')
-                ->where('partido_id', $id_partido)
-                ->where('user_id', $user_id)
-                ->first();
-
-            if ( empty($prediccion) ) {
-
-                // Si no existe la predicción colocamos valores por defecto
-
-                $equipos_partido->prediccion_equipo_1 = null;
-
-                $equipos_partido->prediccion_equipo_2 = null;
-
-                $predicciones->push($equipos_partido);
-
-                return;
-
-            }
-
-            $equipos_partido->prediccion_equipo_1 = $prediccion->goles_equipo_1;
-
-            $equipos_partido->prediccion_equipo_2 = $prediccion->goles_equipo_2;
-
-            $predicciones->push($equipos_partido);
-
-        });
-
-        return $predicciones;
+        return $predicciones_usuario;
 
     }
 
-    public function savePredicciones($predicciones, int $user_id)
+    public function getPrediccionesById(array $id_partidos, int $user_id)
     {
+        $predicciones_usuario = EquipoPartido::select([
+            'equipo_partidos.id', 
+            'equipo_partidos.equipo_1', 
+            'equipo_partidos.equipo_2', 
+            'equipo_partidos.partido_id',
+            'preccions.id AS preccion_id',
+            'preccions.goles_equipo_1 AS prediccion_equipo_1',
+            'preccions.goles_equipo_2 AS prediccion_equipo_2',
+        ])
+            ->has('equipoUno')
+            ->has('equipoDos')
+            ->whereHas('partido', function(Builder $query) use($id_partidos) {
+                $query->whereIn('id', $id_partidos);
+            })
+            ->with([
+                'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
+                'equipoUno:id,nombre,imagen,grupo',
+                'equipoDos:id,nombre,imagen,grupo'
+            ])
+            ->leftJoin('preccions', function (JoinClause $join) use($user_id) {
+                $join->on('equipo_partidos.id', '=', 'preccions.partido_id')
+                    ->where('preccions.user_id', $user_id);
+            })
+            ->get();
 
-        $id_partidos = collect([]);
+        return $predicciones_usuario;
 
-        $predicciones->each(function($prediccion) use($user_id, $id_partidos) {
+    }
 
-            $prediccion_db = Preccion::select('id', 'partido_id', 'goles_equipo_1', 'goles_equipo_2')
-                ->where('partido_id', $prediccion['id_partido'])
-                ->where('user_id', $user_id)
-                ->first();
+    public function validatePrediccionesUsuario($predicciones_nuevas, $predicciones_usuario) {
 
-            // dd($prediccion, $prediccion_db);
+        // Iteramos para hacer verificación de partidos y separamos errores
 
-            if ( empty($prediccion_db) ) {
+        $predicciones_rechazadas = collect([]);
 
-                // Si no existe la predicción, la creamos
+        $predicciones_permitidas = collect([]);
 
-                Preccion::create([
-                    'user_id' => $user_id,
-                    'partido_id' => $prediccion['id_partido'],
-                    'goles_equipo_1' => $prediccion['prediccion_equipo_uno'],
-                    'goles_equipo_2' => $prediccion['prediccion_equipo_dos'],
-                ]);
+        $predicciones_nuevas->each(function($prediccion_nueva) use( $predicciones_usuario, &$predicciones_rechazadas, &$predicciones_permitidas ) {
 
-                $id_partidos->push($prediccion['id_partido']);
-                
+            $prediccion_usuario = $predicciones_usuario->firstWhere('partido_id', $prediccion_nueva['id_partido']);
+
+            if ($prediccion_nueva['prediccion_equipo_uno'] === null) {
+
+                $prediccion_usuario->message = 'No se puede guardar la predicción: la predicción de marcador del primer equipo está vacía.';
+
+                $predicciones_rechazadas->push($prediccion_usuario);
+
                 return;
 
             }
 
-            $prediccion_db->goles_equipo_1 = $prediccion['prediccion_equipo_uno'];
-            $prediccion_db->goles_equipo_2 = $prediccion['prediccion_equipo_dos'];
+            if ($prediccion_nueva['prediccion_equipo_dos'] === null) {
 
-            if ($prediccion_db->isDirty()) $prediccion_db->save();
+                $prediccion_usuario->message = 'No se puede guardar la predicción: la predicción de marcador del segundo equipo está vacía.';
 
-            $id_partidos->push($prediccion['id_partido']);
+                $predicciones_rechazadas->push($prediccion_usuario);
+
+                return;
+
+            }
+
+            $estado = $prediccion_usuario->partido->estado;
+
+            if ($estado === 1) {
+
+                $prediccion_usuario->message = 'No se puede guardar la predicción: el partido ha finalizado.';
+
+                $predicciones_rechazadas->push($prediccion_usuario);
+
+                return;
+
+            }
+
+            if ($estado === 2) {
+
+                $prediccion_usuario->message = 'No se puede guardar la predicción: ¡el partido está en juego!';
+
+                $predicciones_rechazadas->push($prediccion_usuario);
+
+                return;
+
+            }
+
+            $fecha_partido = Carbon::parse($prediccion_usuario->partido->fecha_partido);
+
+            $fecha_actual = Carbon::now();
+
+            if ($fecha_actual->greaterThan($fecha_partido)) {
+
+                $prediccion_usuario->message = 'No se puede guardar la predicción: la fecha del partido ya ha pasado.';
+
+                $predicciones_rechazadas->push($prediccion_usuario);
+
+                return;
+
+            }
+
+            $fecha_limite = $fecha_partido->subMinutes(10);
+
+            if ($fecha_actual->greaterThan($fecha_limite)) {
+
+                $prediccion_usuario->message = 'No se puede guardar la predicción: el partido está por comenzar (menos de 10 minutos).';
+
+                $predicciones_rechazadas->push($prediccion_usuario);
+
+                return;
+
+            }
+
+            $predicciones_permitidas->push($prediccion_usuario);
 
         });
 
-        return $id_partidos;
+        return [
+            'rechazadas' => $predicciones_rechazadas,
+            'permitidas' => $predicciones_permitidas
+        ];
+
+    }
+
+    public function savePredicciones($predicciones_nuevas, $predicciones_usuario, $user_id)
+    {
+        $predicciones_nuevas->each(function($prediccion_nueva) use(&$predicciones_usuario, $user_id) {
+
+            $prediccion_usuario = $predicciones_usuario->firstWhere('partido_id', $prediccion_nueva['id_partido']);
+
+            // Si no existe la predicción, la creamos
+
+            if ( empty($prediccion_usuario->preccion_id) ) {
+
+                $prediccion_creada = Preccion::create([
+                    'user_id' => $user_id,
+                    'partido_id' => $prediccion_nueva['id_partido'],
+                    'goles_equipo_1' => $prediccion_nueva['prediccion_equipo_uno'],
+                    'goles_equipo_2' => $prediccion_nueva['prediccion_equipo_dos'],
+                ]);
+
+                // Actualizamos la predicción del usuario
+
+                $prediccion_usuario->preccion_id = $prediccion_creada->id;
+                $prediccion_usuario->prediccion_equipo_1 = $prediccion_creada->goles_equipo_1;
+                $prediccion_usuario->prediccion_equipo_2 = $prediccion_creada->goles_equipo_2;
+                $prediccion_usuario->message = 'Tu pronóstico ha sido guardado con éxito.';
+
+                return;
+
+            }
+
+            // Si ya existe una prediccion de este usuario, buscamos el regisro
+
+            $prediccion_db = Preccion::find($prediccion_usuario->preccion_id);
+            $prediccion_db->goles_equipo_1 = $prediccion_nueva['prediccion_equipo_uno'];
+            $prediccion_db->goles_equipo_2 = $prediccion_nueva['prediccion_equipo_dos'];
+
+            // Actualizamos el registro en caso se haya modificado
+
+            if ($prediccion_db->isDirty()) {
+
+                $prediccion_db->save();
+                $prediccion_usuario->prediccion_equipo_1 = $prediccion_db->goles_equipo_1;
+                $prediccion_usuario->prediccion_equipo_2 = $prediccion_db->goles_equipo_2;
+                $prediccion_usuario->message = 'Tu pronóstico ha sido actualizado con éxito.';
+
+                return;
+
+            }
+
+            // Si los marcadores son los mismos no se toma acción
+
+            $prediccion_usuario->message = 'Tu pronóstico ha mantenido el mismo marcador.';
+
+            return;
+
+        });
+
+        return $predicciones_usuario;
 
     }
 

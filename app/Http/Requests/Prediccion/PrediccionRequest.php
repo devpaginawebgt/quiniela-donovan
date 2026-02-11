@@ -33,14 +33,14 @@ class PrediccionRequest extends FormRequest
             ],
 
             'predicciones.*.prediccionEquipoUno' => [
-                'required',
+                'nullable',
                 'integer',
                 'min:0',
                 'max:25',
             ],
 
             'predicciones.*.prediccionEquipoDos' => [
-                'required',
+                'nullable',
                 'integer',
                 'min:0',
                 'max:25',
