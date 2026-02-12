@@ -10,18 +10,18 @@ class GrupoService {
     public function getGrupos()
     {
         return collect([
-            [ 'value' => 1, 'name' => 'A' ],
-            [ 'value' => 2, 'name' => 'B' ],
-            [ 'value' => 3, 'name' => 'C' ],
-            [ 'value' => 4, 'name' => 'D' ],
-            [ 'value' => 5, 'name' => 'E' ],
-            [ 'value' => 6, 'name' => 'F' ],
-            [ 'value' => 7, 'name' => 'G' ],
-            [ 'value' => 8, 'name' => 'H' ],
-            [ 'value' => 9, 'name' => 'I' ],
-            [ 'value' => 10, 'name' => 'J' ],
-            [ 'value' => 11, 'name' => 'K' ],
-            [ 'value' => 12, 'name' => 'L' ],
+            [ 'value' => 1, 'name' => 'A', 'is_current' => true ],
+            [ 'value' => 2, 'name' => 'B', 'is_current' => false ],
+            [ 'value' => 3, 'name' => 'C', 'is_current' => false ],
+            [ 'value' => 4, 'name' => 'D', 'is_current' => false ],
+            [ 'value' => 5, 'name' => 'E', 'is_current' => false ],
+            [ 'value' => 6, 'name' => 'F', 'is_current' => false ],
+            [ 'value' => 7, 'name' => 'G', 'is_current' => false ],
+            [ 'value' => 8, 'name' => 'H', 'is_current' => false ],
+            [ 'value' => 9, 'name' => 'I', 'is_current' => false ],
+            [ 'value' => 10, 'name' => 'J', 'is_current' => false ],
+            [ 'value' => 11, 'name' => 'K', 'is_current' => false ],
+            [ 'value' => 12, 'name' => 'L', 'is_current' => false ],
         ]);
     }
 

@@ -6,11 +6,10 @@ use App\Http\Resources\Jornada\JornadaResource;
 use App\Http\Resources\Partido\PartidoResource;
 use App\Http\Services\EquipoService;
 use App\Http\Services\PartidoService;
-use App\Models\User;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
-class PartidoController extends Controller
+class JornadaController extends Controller
 {
     use ApiResponse;
     
@@ -57,4 +56,9 @@ class PartidoController extends Controller
 
     }
 
+    public function jornadasWeb() {
+
+        return view('modulos.calendario');
+
+    }
 }

@@ -25,26 +25,6 @@ class ResultadoPartidoController extends Controller
         private readonly PrediccionService $prediccionService
     ) {}
 
-    public function verQuiniela($jornada = 1, $message = '0OK')
-    {
-        // Actualizar información general
-
-        $user_id = Auth::user()->id;
-
-        $this->actualizacionDataGeneral($user_id);
-
-        // Obtener información de las predicciones realizadas por el usuario
-        
-        $partidosJornada = $this->prediccionService->prediccionesParticipante($jornada, $user_id);
-
-        return view('modulos.quiniela', [
-            'partidosJornada' => $partidosJornada, 
-            'message' => $message ?? '', 
-            'jornada' => $jornada
-        ]);
-
-    }
-
     // Respuestas API
 
     public function getPredicciones(Request $request, string $get_jornada)
@@ -201,8 +181,25 @@ class ResultadoPartidoController extends Controller
 
     }
 
+    public function verQuiniela($jornada = 1, $message = '0OK')
+    {
+        // Actualizar información general
 
-    // Continúan funciones de web
+        $user_id = Auth::user()->id;
+
+        $this->actualizacionDataGeneral($user_id);
+
+        // Obtener información de las predicciones realizadas por el usuario
+        
+        $partidosJornada = $this->prediccionService->prediccionesParticipante($jornada, $user_id);
+
+        return view('modulos.quiniela', [
+            'partidosJornada' => $partidosJornada, 
+            'message' => $message ?? '', 
+            'jornada' => $jornada
+        ]);
+
+    }
     
     public function guardarPrediccionesForm(Request $request)
     {

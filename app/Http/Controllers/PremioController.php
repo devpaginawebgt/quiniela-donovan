@@ -19,26 +19,6 @@ class PremioController extends Controller
         private readonly PremioService $premioService,
     ) {}
 
-    public function verTablaPremios()
-    {
-        
-        $id_pais = Auth::user()->pais_id;
-
-        $premios = DB::select(
-            "SELECT 
-                * 
-            FROM 
-                premios 
-            WHERE 
-                pais_id = $id_pais"
-        );
-
-        return view('modulos.tabla-premios', [
-            'premios' => $premios
-        ]);
-
-    }
-
     // API Responses
 
     public function getPremios(Request $request)
@@ -63,6 +43,28 @@ class PremioController extends Controller
         $premios = PremioResource::collection($premios);
 
         return $this->successResponse($premios);
+
+    }
+
+    // Funciones para la web
+
+    public function verTablaPremios()
+    {
+        
+        $id_pais = Auth::user()->pais_id;
+
+        $premios = DB::select(
+            "SELECT 
+                * 
+            FROM 
+                premios 
+            WHERE 
+                pais_id = $id_pais"
+        );
+
+        return view('modulos.tabla-premios', [
+            'premios' => $premios
+        ]);
 
     }
 

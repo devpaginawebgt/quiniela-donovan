@@ -17,17 +17,6 @@ class UserController extends Controller
         private readonly UserService $userService,
     ) {}
 
-    public function verParticipantes()
-    {
-
-        $participantes = $this->userService->getUsers();
-
-        return view('modulos.participantes', [
-            'participantes' => $participantes
-        ]);
-
-    }
-
     // API responses
 
     public function getUsers()
@@ -74,6 +63,19 @@ class UserController extends Controller
             });
 
         return $this->successResponse($participantes);
+
+    }
+
+    // Funciones para la web
+
+    public function verParticipantes()
+    {
+
+        $participantes = $this->userService->getUsers();
+
+        return view('modulos.participantes', [
+            'participantes' => $participantes
+        ]);
 
     }
 }

@@ -4,9 +4,8 @@ use App\Http\Controllers\Auth\ApiAuthController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\EstadioController;
 use App\Http\Controllers\GrupoController;
-use App\Http\Controllers\PartidoController;
+use App\Http\Controllers\JornadaController;
 use App\Http\Controllers\PremioController;
-use App\Http\Controllers\SeleccionController;
 use App\Http\Controllers\ResultadoPartidoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPushTokenController;
@@ -41,22 +40,22 @@ Route::middleware(['auth:sanctum'])->group(function() {
     // Equipos
 
     Route::controller(EquipoController::class)->group(function() {
-        Route::get('equipos', 'getEquipos');
+        Route::get('equipos', 'index');
     });
 
     // Grupos
 
-    Route::controller(GrupoController::class)->group(function() {
-        Route::get('grupos', 'getGrupos');
-        Route::get('grupos/{grupo}/equipos', 'getEquiposGrupo');
-        Route::get('grupos/{grupo}/jornadas', 'getJornadasGrupo');
+    Route::controller(GrupoController::class)->prefix('grupos')->group(function() {
+        Route::get('', 'getGrupos');
+        Route::get('/{grupo}/equipos', 'getEquiposGrupo');
+        Route::get('/{grupo}/jornadas', 'getJornadasGrupo');
     });
 
     // Partidos
 
-    Route::controller(PartidoController::class)->group(function() {
-        Route::get('jornadas', 'getJornadas');
-        Route::get('jornadas/{jornada}/partidos', 'getPartidosJornada');
+    Route::controller(JornadaController::class)->prefix('jornadas')->group(function() {
+        Route::get('', 'getJornadas');
+        Route::get('/{jornada}/partidos', 'getPartidosJornada');
     });
 
     // Estadios
@@ -85,10 +84,10 @@ Route::middleware(['auth:sanctum'])->group(function() {
 
     // Premios
 
-    Route::controller(ResultadoPartidoController::class)->group(function() {
-        Route::post('predicciones', 'savePredicciones');
-        Route::get('predicciones/{jornada}', 'getPredicciones');
-        Route::get('predicciones/{jornada}/resultados', 'getResultados');
+    Route::controller(ResultadoPartidoController::class)->prefix('predicciones')->group(function() {
+        Route::post('', 'savePredicciones');
+        Route::get('/{jornada}', 'getPredicciones');
+        Route::get('/{jornada}/resultados', 'getResultados');
     });
 
 });

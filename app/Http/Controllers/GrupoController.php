@@ -78,4 +78,138 @@ class GrupoController extends Controller
 
         return $this->successResponse($jornadas);
     }
+
+    // Funciones para la web
+
+    public function indexWeb()
+    {
+
+        $this->partidoService->actualizarPuntosEquipos();
+
+        // Obtenemos los grupos disponibles
+
+        $grupos = $this->grupoService->getGrupos();
+
+        // Obtenemos el grupo a mostrar por defecto
+
+        $id_grupo_actual = (int) ($grupos->firstWhere('is_current', true))['value'];
+
+        // Obtenemos los equipos del grupo a mostrar por defecto
+
+        $equipos_grupo = $this->grupoService->getEquiposGrupo($id_grupo_actual);
+
+        // Obtenemos las jornadas del grupo a mostrar por defecto
+
+        $jornadas = $this->partidoService->getJornadasGrupo($id_grupo_actual);
+
+        $jornada_uno = $jornadas->firstWhere('id', 1);
+        $jornada_dos = $jornadas->firstWhere('id', 2);
+        $jornada_tres = $jornadas->firstWhere('id', 3);
+
+        return view('modulos.grupos', [
+            'grupos' => $grupos,
+            'jornada_uno' => $jornada_uno,
+            'jornada_dos' => $jornada_dos,
+            'jornada_tres' => $jornada_tres,
+        ]);
+
+    }
+
+    public function getEquiposWeb(Request $request, string $grupo_id)
+    {
+
+        $grupo_id = (int)$grupo_id;
+
+        if ( empty($grupo_id) ) {
+
+            return $this->errorResponse('No se encontró el grupo', 422);
+
+        }
+
+        $grupo = $this->grupoService->getGrupo($grupo_id);
+
+        if ( empty($grupo) ) {
+
+            return $this->errorResponse('No se encontró el grupo', 422);
+
+        }
+
+        $equipos = $this->grupoService->getEquiposGrupo($grupo_id);
+
+        $equipos = EquipoGrupoResource::collection($equipos);
+
+        $grupo['equipos'] = $equipos;
+
+        return $this->successResponse($grupo);
+
+        // $grupo = strtoupper($grupoJornada->grupo);
+
+        // $jornada = $grupoJornada->jornada;              
+
+        // $partidosGrupo = DB::select(
+        //     "SELECT 
+        //         * 
+        //     FROM 
+        //         equipo_partidos epar
+        //     INNER JOIN 
+        //         equipos e ON epar.equipo_1 = e.id OR epar.equipo_2 = e.id
+        //     INNER JOIN 
+        //         partidos par ON epar.partido_id = par.id
+        //     WHERE 
+        //         e.grupo = '{$grupo}'
+        //     AND
+        //         par.jornada = {$jornada}"
+        // );
+
+        // return json_encode($partidosGrupo);
+
+    }
+
+    public function getJornadasWeb(Request $request, string $grupo_id)
+    {
+
+        $grupo_id = (int)$grupo_id;
+
+        if ( empty($grupo_id) ) {
+
+            return $this->errorResponse('No se encontró el grupo', 422);
+
+        }
+
+        $grupo = $this->grupoService->getGrupo($grupo_id);
+
+        if ( empty($grupo) ) {
+
+            return $this->errorResponse('No se encontró el grupo', 422);
+
+        }
+
+        $jornadas = $this->partidoService->getJornadasGrupo($grupo_id);
+
+        $jornadas = JornadaGrupoResource::collection($jornadas);
+
+        return $this->successResponse($jornadas);
+
+        // $grupo = strtoupper($grupoJornada->grupo);
+
+        // $jornada = $grupoJornada->jornada;              
+
+        // $partidosGrupo = DB::select(
+        //     "SELECT 
+        //         * 
+        //     FROM 
+        //         equipo_partidos epar
+        //     INNER JOIN 
+        //         equipos e ON epar.equipo_1 = e.id OR epar.equipo_2 = e.id
+        //     INNER JOIN 
+        //         partidos par ON epar.partido_id = par.id
+        //     WHERE 
+        //         e.grupo = '{$grupo}'
+        //     AND
+        //         par.jornada = {$jornada}"
+        // );
+
+        // return json_encode($partidosGrupo);
+        
+    }
 }
