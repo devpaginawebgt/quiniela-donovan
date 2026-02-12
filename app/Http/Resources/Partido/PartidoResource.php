@@ -40,7 +40,7 @@ class PartidoResource extends JsonResource
 
         return [
             'id' => $this->partido->id,            
-            'fechaPartido' => $fecha_partido->format('Y-m-d H:i A'),
+            'fechaPartido' => $fecha_partido->format('Y-m-d H:i:s'),
             'jugado' => $this->partido->jugado === 1,
             'idEstado' => $this->partido->estado,
             'jornada' => $this->partido->jornada_id,
