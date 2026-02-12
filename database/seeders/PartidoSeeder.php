@@ -34,12 +34,12 @@ class PartidoSeeder extends Seeder
         //     $jornada1,
         //     $jornada2,
         //     $jornada3,
-        //     $deciseisavos,
-        //     $octavos,
-        //     $cuartos,
-        //     $semifinales,
-        //     $tercer_lugar,
-        //     $finales
+            // $deciseisavos,
+            // $octavos,
+            // $cuartos,
+            // $semifinales,
+            // $tercer_lugar,
+            // $finales
         // );
 
         // foreach($partidos as $partido) {
