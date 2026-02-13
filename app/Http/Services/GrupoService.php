@@ -10,14 +10,14 @@ class GrupoService {
     public function getGrupos()
     {
         return collect([
-            [ 'value' => 1, 'name' => 'A', 'is_current' => true ],
+            [ 'value' => 1, 'name' => 'A', 'is_current' => false ],
             [ 'value' => 2, 'name' => 'B', 'is_current' => false ],
             [ 'value' => 3, 'name' => 'C', 'is_current' => false ],
             [ 'value' => 4, 'name' => 'D', 'is_current' => false ],
             [ 'value' => 5, 'name' => 'E', 'is_current' => false ],
             [ 'value' => 6, 'name' => 'F', 'is_current' => false ],
             [ 'value' => 7, 'name' => 'G', 'is_current' => false ],
-            [ 'value' => 8, 'name' => 'H', 'is_current' => false ],
+            [ 'value' => 8, 'name' => 'H', 'is_current' => true ],
             [ 'value' => 9, 'name' => 'I', 'is_current' => false ],
             [ 'value' => 10, 'name' => 'J', 'is_current' => false ],
             [ 'value' => 11, 'name' => 'K', 'is_current' => false ],
