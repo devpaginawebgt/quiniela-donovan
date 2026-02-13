@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Http\Requests\Auth\ApiLoginRequest;
+use App\Models\Country;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -10,30 +11,12 @@ class UserService {
 
     public function getPaises()
     {
-        return collect([ 
-            [ 'id' => 1, 'nombre' => 'Guatemala' ], 
-            [ 'id' => 2, 'nombre' => 'El Salvador' ],
-            [ 'id' => 3, 'nombre' => 'Honduras' ],
-            [ 'id' => 4, 'nombre' => 'Nicaragua' ],
-            [ 'id' => 5, 'nombre' => 'Costa Rica'  ],
-        ]);
+        return Country::select('name', 'country_code', 'timezone', 'is_active')->get();
     }
 
     public function getPais(string|int $id_pais)
-    {
-        $paises = $this->getPaises();
-        
-        return $paises->firstWhere('id', $id_pais);
-
-    }
-
-    public function getNombrePais($id_pais) 
-    {
-        $paises = $this->getPaises();
-        
-        $pais = $paises->firstWhere('id', $id_pais);
-
-        return $pais['nombre'];
+    {   
+        return Country::find($id_pais);
     }
 
     public function getUsers()

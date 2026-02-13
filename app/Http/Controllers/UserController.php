@@ -44,15 +44,7 @@ class UserController extends Controller
     {
         $user = $request->user();
 
-        $id_pais = $user->pais_id;
-
-        $pais = $this->userService->getPais($id_pais);
-
-        if (empty($pais)) {
-
-            return $this->errorResponse('No se encontró el país', 422);
-
-        }
+        $id_pais = (int) $user->pais_id;
 
         $participantes = $this->userService->getRanking($id_pais);
 
