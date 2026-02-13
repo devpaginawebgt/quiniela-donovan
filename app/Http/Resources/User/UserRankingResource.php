@@ -34,14 +34,17 @@ class UserRankingResource extends JsonResource
                 break;
         }
 
+        $user_timezone = $request->user()->country->timezone;
+        $fecha_registro = $this->created_at->timezone($user_timezone);
+
         return [
-            'id' => $this->id,
-            'posicion' => $this->posicion,
-            'color' => $color,
-            'nombres' => $this->nombres,
-            'apellidos' => $this->apellidos,
-            'fechaRegistro' => $this->name,
-            'puntos' => $this->puntos,
+            'id'            => $this->id,
+            'nombres'       => $this->nombres,
+            'apellidos'     => $this->apellidos,
+            'puntos'        => $this->puntos,
+            'posicion'      => $this->posicion,
+            'color'         => $color,
+            'fechaRegistro' => $fecha_registro->format('Y-m-d H:i:s'),
         ];
     }
 }
