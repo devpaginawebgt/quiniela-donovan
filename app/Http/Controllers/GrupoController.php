@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Equipo\EquipoGrupoResource;
+use App\Http\Resources\Grupo\GrupoEquiposResource;
+use App\Http\Resources\Grupo\GrupoResource;
 use App\Http\Resources\Jornada\JornadaGrupoResource;
 use App\Http\Services\EquipoService;
 use App\Http\Services\GrupoService;
@@ -23,6 +25,8 @@ class GrupoController extends Controller
     public function getGrupos(Request $request)
     {
         $grupos = $this->grupoService->getGrupos();
+
+        $grupos = GrupoResource::collection($grupos);
 
         return $this->successResponse($grupos);
     }
@@ -47,9 +51,9 @@ class GrupoController extends Controller
 
         $equipos = $this->grupoService->getEquiposGrupo($get_grupo);
 
-        $equipos = EquipoGrupoResource::collection($equipos);
+        $grupo->equipos = $equipos;
 
-        $grupo['equipos'] = $equipos;
+        $grupo = new GrupoEquiposResource($grupo);
 
         return $this->successResponse($grupo);
     }
@@ -92,7 +96,7 @@ class GrupoController extends Controller
 
         // Obtenemos el grupo a mostrar por defecto
 
-        $id_grupo_actual = (int) ($grupos->firstWhere('is_current', true))['value'];
+        $id_grupo_actual = (int) ($grupos->firstWhere('is_current', true))->id;        
 
         // Obtenemos los equipos del grupo a mostrar por defecto
 

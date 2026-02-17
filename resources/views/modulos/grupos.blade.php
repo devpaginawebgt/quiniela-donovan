@@ -20,8 +20,8 @@
                             >
                                 @foreach($grupos as $grupo)
 
-                                    <option value="{{ $grupo['value'] }}" {{ $grupo['is_current'] === true ? 'selected' : ''; }}>
-                                        {{ $grupo['name'] }}
+                                    <option value="{{ $grupo->id }}" {{ $grupo->is_current === true ? 'selected' : ''; }}>
+                                        {{ $grupo->name }}
                                     </option>
 
                                 @endforeach
@@ -106,7 +106,7 @@
 
                                     @endphp
                                 
-                                    <li class="flex justify-around lg:py-2 pb-28 my-4 xl:my-2 border-b border-gray-300 items-center">
+                                    <li class="flex justify-around py-6 lg:py-4 border-b border-gray-300 items-center">
 
                                         <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
@@ -116,7 +116,7 @@
 
                                         </div>
 
-                                        <div class="w-full xl:w-1/3 my-4 mt-44 lg:my-0 absolute lg:relative">
+                                        <div class="w-full xl:w-1/3 absolute lg:relative">
 
                                             <p class="text-center">{{ $fecha_partido }}</p>
 
@@ -163,7 +163,7 @@
 
                                     @endphp
                                 
-                                    <li class="flex justify-around lg:py-2 pb-28 my-4 xl:my-2 border-b border-gray-300 items-center">
+                                    <li class="flex justify-around py-6 lg:py-4 border-b border-gray-300 items-center">
 
                                         <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
@@ -173,7 +173,7 @@
 
                                         </div>
 
-                                        <div class="w-full xl:w-1/3 my-4 mt-44 lg:my-0 absolute lg:relative">
+                                        <div class="w-full xl:w-1/3 absolute lg:relative">
 
                                             <p class="text-center">{{ $fecha_partido }}</p>
 
@@ -219,7 +219,7 @@
 
                                     @endphp
                                 
-                                    <li class="flex justify-around lg:py-2 pb-28 my-4 xl:my-2 border-b border-gray-300 items-center">
+                                    <li class="flex justify-around py-6 lg:py-4 border-b border-gray-300 items-center">
 
                                         <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
@@ -229,7 +229,7 @@
 
                                         </div>
 
-                                        <div class="w-full xl:w-1/3 my-4 mt-44 lg:my-0 absolute lg:relative">
+                                        <div class="w-full xl:w-1/3 absolute lg:relative">
 
                                             <p class="text-center">{{ $fecha_partido }}</p>
 

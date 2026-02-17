@@ -20,7 +20,7 @@
                 <h5 class="text-3xl text-center font-bold my-8">Ingresa tus pronosticos!</h5>
                 <div class="w-44 mx-auto mb-4">
 
-                    <form action="{{ route('ver-quiniela') }}" method="GET" id="verPartidosQuinielaSelect">
+                    <form action="{{ route('web.ver-quiniela') }}" method="GET" id="verPartidosQuinielaSelect">
 
                         <label for="grupos" class="block mb-2 text-xl font-bold text-center text-gray-800">Jornada:
 
@@ -84,7 +84,7 @@
 
                 </div>
 
-                <form action="{{ route('guardar-predicciones-form') }}" method="POST">
+                <form action="{{ route('web.guardar-predicciones-form') }}" method="POST">
 
                     <div class="flex flex-col">
 

@@ -13,8 +13,11 @@
                     <div class="w-36 mx-auto mb-4">
                         <label for="grupos"
                             class="block mb-2 text-sm font-medium text-gray-900">Jornada: </label>
-                        <select id="grupos"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" onchange="verPartidosJornada(this)">
+                        <select
+                            id="jornadas"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            {{-- onchange="verPartidosJornada(this)" --}}
+                        >
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>

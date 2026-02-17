@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             CodigoSeeder::class,
             CountrySeeder::class,
             UserSeeder::class,
+            GrupoSeeder::class,
             EquipoSeeder::class,
             EstadioSeeder::class,
             JornadaSeeder::class,

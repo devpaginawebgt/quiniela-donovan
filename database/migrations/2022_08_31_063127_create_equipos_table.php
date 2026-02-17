@@ -19,7 +19,7 @@ class CreateEquiposTable extends Migration
             $table->string('codigo_iso');
             $table->string('imagen');
             $table->text('descripcion')->nullable();
-            $table->integer('grupo')->index();
+            $table->unsignedBigInteger('grupo');
             $table->integer('goles_favor')->default(0);
             $table->integer('goles_contra')->default(0);
             $table->integer('partidos_jugados')->default(0);
@@ -28,6 +28,12 @@ class CreateEquiposTable extends Migration
             $table->integer('partidos_empatados')->default(0);
             $table->integer('puntos')->default(0);
             $table->timestamps();
+
+            $table->foreign('grupo')
+                ->references('id')
+                ->on('grupos')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
         });
     }
 
