@@ -13,11 +13,16 @@ class Partido extends Model
 
     protected $fillable = [
        'fase',
-       'jornada',
+       'jornada_id',
        'fecha_partido',
        'estadio_id',
        'jugado',
        'estado',
     ];
+
+    protected function casts(): array
+    {
+        return [ 'fecha_partido' => 'datetime' ];
+    }
 
 }

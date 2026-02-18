@@ -17,17 +17,6 @@ class UserController extends Controller
         private readonly UserService $userService,
     ) {}
 
-    public function verParticipantes()
-    {
-
-        $participantes = $this->userService->getUsers();
-
-        return view('modulos.participantes', [
-            'participantes' => $participantes
-        ]);
-
-    }
-
     // API responses
 
     public function getUsers()
@@ -45,7 +34,7 @@ class UserController extends Controller
     {
         $user = $request->user();        
 
-        $user = new UserResource($user);
+        $user = new UserRankingResource($user);
 
         return $this->successResponse($user);
 
@@ -55,25 +44,38 @@ class UserController extends Controller
     {
         $user = $request->user();
 
-        $id_pais = $user->pais_id;
-
-        $pais = $this->userService->getPais($id_pais);
-
-        if (empty($pais)) {
-
-            return $this->errorResponse('No se encontró el país', 422);
-
-        }
+        $id_pais = (int) $user->pais_id;
 
         $participantes = $this->userService->getRanking($id_pais);
 
-        $participantes = UserRankingResource::collection($participantes)
-            ->map(function($resource, $index) {
-                $resource->posicion = $index + 1;
-                return $resource;
-            });
+        $participantes = UserRankingResource::collection($participantes);
 
         return $this->successResponse($participantes);
+
+    }
+
+    public function getUserRank(Request $request)
+    {
+        $user = $request->user();
+
+        $user_rank = $this->userService->getUserRank($user);
+
+        $user_rank = new UserRankingResource($user_rank);
+
+        return $this->successResponse($user_rank);
+
+    }
+
+    // Funciones para la web
+
+    public function verParticipantes()
+    {
+
+        $participantes = $this->userService->getUsers();
+
+        return view('modulos.participantes', [
+            'participantes' => $participantes
+        ]);
 
     }
 }

@@ -30,9 +30,16 @@ class PrediccionResource extends JsonResource
                 break;
         }
 
+        // Cambiar zona horaria para usuario
+
+        $user_timezone = $request->user()->country->timezone;
+        
+        $fecha_partido = $this->partido->fecha_partido;
+        $fecha_partido->setTimezone($user_timezone);
+
         return [
             'id' => $this->partido->id,            
-            'fechaPartido' => $this->partido->fecha_partido,
+            'fechaPartido' => $fecha_partido->format('Y-m-d H:i:s'),
             'jugado' => $this->partido->jugado === 1,
             'idEstado' => $this->partido->estado,
             'estado' => $estado,

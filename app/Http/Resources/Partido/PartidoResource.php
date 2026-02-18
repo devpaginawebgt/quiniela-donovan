@@ -15,6 +15,8 @@ class PartidoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        // Agregar estado de partido
+
         $estado = 'Por jugar';
 
         switch($this->partido->estado) {
@@ -29,12 +31,19 @@ class PartidoResource extends JsonResource
                 break;
         }
 
+        // Cambiar zona horaria para usuario
+
+        $user_timezone = $request->user()->country->timezone;
+        
+        $fecha_partido = $this->partido->fecha_partido;
+        $fecha_partido->setTimezone($user_timezone);
+
         return [
             'id' => $this->partido->id,            
-            'fechaPartido' => $this->partido->fecha_partido,
+            'fechaPartido' => $fecha_partido->format('Y-m-d H:i:s'),
             'jugado' => $this->partido->jugado === 1,
             'idEstado' => $this->partido->estado,
-            'jornada' => $this->partido->jornada,
+            'jornada' => $this->partido->jornada_id,
             'estado' => $estado,
 
             'equipoUno' => new EquipoPartidoResource($this->equipoUno),

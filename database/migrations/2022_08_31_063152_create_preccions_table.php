@@ -19,7 +19,7 @@ class CreatePreccionsTable extends Migration
             $table->unsignedBigInteger('partido_id');
             $table->integer('goles_equipo_1')->default(0);
             $table->integer('goles_equipo_2')->default(0);
-            $table->integer('status')->default(0);
+            $table->integer('status')->index()->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')

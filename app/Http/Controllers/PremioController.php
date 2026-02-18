@@ -19,6 +19,25 @@ class PremioController extends Controller
         private readonly PremioService $premioService,
     ) {}
 
+    // API Responses
+
+    public function getPremios(Request $request)
+    {
+
+        $user = $request->user();
+
+        $id_pais = (int) $user->pais_id;
+
+        $premios = $this->premioService->getPremios($id_pais);
+
+        $premios = PremioResource::collection($premios);
+
+        return $this->successResponse($premios);
+
+    }
+
+    // Funciones para la web
+
     public function verTablaPremios()
     {
         
@@ -36,31 +55,6 @@ class PremioController extends Controller
         return view('modulos.tabla-premios', [
             'premios' => $premios
         ]);
-
-    }
-
-    // API Responses
-
-    public function getPremios(Request $request)
-    {
-
-        $id_pais = $request->input('pais') ?? 1;
-
-        $pais = $this->userService->getPais($id_pais);
-
-        if ( empty($pais) ) {
-
-            return $this->errorResponse('No se encontró el país', 422);
-
-        }
-
-        $id_pais = (int)$id_pais;
-
-        $premios = $this->premioService->getPremios($id_pais);
-
-        $premios = PremioResource::collection($premios);
-
-        return $this->successResponse($premios);
 
     }
 

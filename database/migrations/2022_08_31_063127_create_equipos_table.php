@@ -16,9 +16,10 @@ class CreateEquiposTable extends Migration
         Schema::create('equipos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->string('codigo_iso');
             $table->string('imagen');
-            $table->string('descripcion',1000)->nullable();
-            $table->integer('grupo');
+            $table->text('descripcion')->nullable();
+            $table->unsignedBigInteger('grupo');
             $table->integer('goles_favor')->default(0);
             $table->integer('goles_contra')->default(0);
             $table->integer('partidos_jugados')->default(0);
@@ -27,6 +28,12 @@ class CreateEquiposTable extends Migration
             $table->integer('partidos_empatados')->default(0);
             $table->integer('puntos')->default(0);
             $table->timestamps();
+
+            $table->foreign('grupo')
+                ->references('id')
+                ->on('grupos')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
         });
     }
 

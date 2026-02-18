@@ -6,8 +6,12 @@
     </x-slot>
 
     <div class="">
-        <div>
-            <img src="{{asset('images/portadas/inicio.webp')}}" alt="PORTADA-2022" class="">
+        <div class="flex justify-center">
+            <img
+                src="{{asset('images/portadas/inicio.webp')}}"
+                alt="PORTADA-2022"
+                class=""
+            >
         </div>
         <div class="max-w-full mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">

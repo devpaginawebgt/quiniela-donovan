@@ -3,35 +3,19 @@
 namespace App\Http\Services;
 
 use App\Models\Equipo;
+use App\Models\Grupo;
 use Illuminate\Database\Eloquent\Builder;
 
 class GrupoService {
 
     public function getGrupos()
     {
-        return collect([
-            [ 'value' => 1, 'name' => 'A' ],
-            [ 'value' => 2, 'name' => 'B' ],
-            [ 'value' => 3, 'name' => 'C' ],
-            [ 'value' => 4, 'name' => 'D' ],
-            [ 'value' => 5, 'name' => 'E' ],
-            [ 'value' => 6, 'name' => 'F' ],
-            [ 'value' => 7, 'name' => 'G' ],
-            [ 'value' => 8, 'name' => 'H' ],
-            [ 'value' => 9, 'name' => 'I' ],
-            [ 'value' => 10, 'name' => 'J' ],
-            [ 'value' => 11, 'name' => 'K' ],
-            [ 'value' => 12, 'name' => 'L' ],
-        ]);
+        return Grupo::all();
     }
 
-    public function getGrupo($grupo)
+    public function getGrupo($grupo_id)
     {
-
-        $grupos = $this->getGrupos();
-
-        return $grupos->firstWhere('value', $grupo);
-
+        return Grupo::find($grupo_id);
     }
 
     public function getEquiposGrupo(int $grupo)

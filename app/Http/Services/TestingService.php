@@ -379,7 +379,7 @@ class TestingService
             [
                 'id' => 1,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(0)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 1, 
@@ -391,7 +391,7 @@ class TestingService
             [
                 'id' => 2,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(0)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 3, 
@@ -403,7 +403,7 @@ class TestingService
             [
                 'id' => 3,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(0)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 5, 
@@ -415,7 +415,7 @@ class TestingService
             [
                 'id' => 4,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(0)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 7, 
@@ -428,7 +428,7 @@ class TestingService
             [
                 'id' => 5,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(1)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 9, 
@@ -440,7 +440,7 @@ class TestingService
             [
                 'id' => 6,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(1)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 11, 
@@ -452,7 +452,7 @@ class TestingService
             [
                 'id' => 7,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(1)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 13, 
@@ -464,7 +464,7 @@ class TestingService
             [
                 'id' => 8,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(1)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 15, 
@@ -477,7 +477,7 @@ class TestingService
             [
                 'id' => 9,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(2)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 17, 
@@ -489,7 +489,7 @@ class TestingService
             [
                 'id' => 10,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(2)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 19, 
@@ -501,7 +501,7 @@ class TestingService
             [
                 'id' => 11,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(2)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 21, 
@@ -513,7 +513,7 @@ class TestingService
             [
                 'id' => 12,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(2)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 23, 
@@ -526,7 +526,7 @@ class TestingService
             [
                 'id' => 13,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(3)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 25, 
@@ -538,7 +538,7 @@ class TestingService
             [
                 'id' => 14,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(3)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 27, 
@@ -550,7 +550,7 @@ class TestingService
             [
                 'id' => 15,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(3)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 29, 
@@ -562,7 +562,7 @@ class TestingService
             [
                 'id' => 16,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(3)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 31, 
@@ -575,7 +575,7 @@ class TestingService
             [
                 'id' => 17,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(4)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 33, 
@@ -587,7 +587,7 @@ class TestingService
             [
                 'id' => 18,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(4)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 35, 
@@ -599,7 +599,7 @@ class TestingService
             [
                 'id' => 19,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(4)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 37, 
@@ -611,7 +611,7 @@ class TestingService
             [
                 'id' => 20,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(4)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 39, 
@@ -624,7 +624,7 @@ class TestingService
             [
                 'id' => 21,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(5)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 41, 
@@ -636,7 +636,7 @@ class TestingService
             [
                 'id' => 22,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(5)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 43, 
@@ -648,7 +648,7 @@ class TestingService
             [
                 'id' => 23,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(5)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 45, 
@@ -660,7 +660,7 @@ class TestingService
             [
                 'id' => 24,
                 'fase' => 'GRUPOS',
-                'jornada' => 1,
+                'jornada_id' => 1,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(5)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 47, 
@@ -683,7 +683,7 @@ class TestingService
             [
                 'id' => 25,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(14)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 1, 
@@ -695,7 +695,7 @@ class TestingService
             [
                 'id' => 26,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(14)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 4, 
@@ -707,7 +707,7 @@ class TestingService
             [
                 'id' => 27,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(14)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 5, 
@@ -719,7 +719,7 @@ class TestingService
             [
                 'id' => 28,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(14)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 8, 
@@ -732,7 +732,7 @@ class TestingService
             [
                 'id' => 29,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(15)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 9, 
@@ -744,7 +744,7 @@ class TestingService
             [
                 'id' => 30,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(15)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 12, 
@@ -756,7 +756,7 @@ class TestingService
             [
                 'id' => 31,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(15)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 13, 
@@ -768,7 +768,7 @@ class TestingService
             [
                 'id' => 32,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(15)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 16, 
@@ -781,7 +781,7 @@ class TestingService
             [
                 'id' => 33,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(16)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 17, 
@@ -793,7 +793,7 @@ class TestingService
             [
                 'id' => 34,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(16)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 20, 
@@ -805,7 +805,7 @@ class TestingService
             [
                 'id' => 35,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(16)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 21, 
@@ -817,7 +817,7 @@ class TestingService
             [
                 'id' => 36,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(16)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 24, 
@@ -830,7 +830,7 @@ class TestingService
             [
                 'id' => 37,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(17)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 25, 
@@ -842,7 +842,7 @@ class TestingService
             [
                 'id' => 38,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(17)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 28, 
@@ -854,7 +854,7 @@ class TestingService
             [
                 'id' => 39,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(17)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 29, 
@@ -866,7 +866,7 @@ class TestingService
             [
                 'id' => 40,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(17)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 32, 
@@ -879,7 +879,7 @@ class TestingService
             [
                 'id' => 41,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(18)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 33, 
@@ -891,7 +891,7 @@ class TestingService
             [
                 'id' => 42,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(18)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 36, 
@@ -903,7 +903,7 @@ class TestingService
             [
                 'id' => 43,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(18)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 37, 
@@ -915,7 +915,7 @@ class TestingService
             [
                 'id' => 44,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(18)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 40, 
@@ -928,7 +928,7 @@ class TestingService
             [
                 'id' => 45,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(19)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 41, 
@@ -940,7 +940,7 @@ class TestingService
             [
                 'id' => 46,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(19)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 44, 
@@ -952,7 +952,7 @@ class TestingService
             [
                 'id' => 47,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(19)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 45, 
@@ -964,7 +964,7 @@ class TestingService
             [
                 'id' => 48,
                 'fase' => 'GRUPOS',
-                'jornada' => 2,
+                'jornada_id' => 2,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(19)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 48, 
@@ -987,7 +987,7 @@ class TestingService
             [
                 'id' => 49,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(28)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 4, 
@@ -999,7 +999,7 @@ class TestingService
             [
                 'id' => 50,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(28)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 2, 
@@ -1011,7 +1011,7 @@ class TestingService
             [
                 'id' => 51,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(28)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 8, 
@@ -1023,7 +1023,7 @@ class TestingService
             [
                 'id' => 52,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(28)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 6, 
@@ -1036,7 +1036,7 @@ class TestingService
             [
                 'id' => 53,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(29)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 12, 
@@ -1048,7 +1048,7 @@ class TestingService
             [
                 'id' => 54,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(29)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 10, 
@@ -1060,7 +1060,7 @@ class TestingService
             [
                 'id' => 55,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(29)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 16, 
@@ -1072,7 +1072,7 @@ class TestingService
             [
                 'id' => 56,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(29)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 14, 
@@ -1085,7 +1085,7 @@ class TestingService
             [
                 'id' => 57,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(30)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 20, 
@@ -1097,7 +1097,7 @@ class TestingService
             [
                 'id' => 58,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(30)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 18, 
@@ -1109,7 +1109,7 @@ class TestingService
             [
                 'id' => 59,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(30)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 24, 
@@ -1121,7 +1121,7 @@ class TestingService
             [
                 'id' => 60,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(30)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 22, 
@@ -1134,7 +1134,7 @@ class TestingService
             [
                 'id' => 61,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(31)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 28, 
@@ -1146,7 +1146,7 @@ class TestingService
             [
                 'id' => 62,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(31)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 26, 
@@ -1158,7 +1158,7 @@ class TestingService
             [
                 'id' => 63,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(31)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 32, 
@@ -1170,7 +1170,7 @@ class TestingService
             [
                 'id' => 64,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(31)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 30, 
@@ -1183,7 +1183,7 @@ class TestingService
             [
                 'id' => 65,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(32)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 36, 
@@ -1195,7 +1195,7 @@ class TestingService
             [
                 'id' => 66,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(32)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 34, 
@@ -1207,7 +1207,7 @@ class TestingService
             [
                 'id' => 67,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(32)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 40, 
@@ -1219,7 +1219,7 @@ class TestingService
             [
                 'id' => 68,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(32)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 38, 
@@ -1232,7 +1232,7 @@ class TestingService
             [
                 'id' => 69,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(33)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 44, 
@@ -1244,7 +1244,7 @@ class TestingService
             [
                 'id' => 70,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(33)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 42, 
@@ -1256,7 +1256,7 @@ class TestingService
             [
                 'id' => 71,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(33)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 48, 
@@ -1268,7 +1268,7 @@ class TestingService
             [
                 'id' => 72,
                 'fase' => 'GRUPOS',
-                'jornada' => 3,
+                'jornada_id' => 3,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(33)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 46, 
@@ -1289,7 +1289,7 @@ class TestingService
             [
                 'id' => 73,
                 'fase' => 'DIECISEISAVOS',
-                'jornada' => 4,
+                'jornada_id' => 4,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(36)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 35, 
@@ -1301,7 +1301,7 @@ class TestingService
             [
                 'id' => 74,
                 'fase' => 'DIECISEISAVOS',
-                'jornada' => 4,
+                'jornada_id' => 4,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(36)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 29, 
@@ -1313,7 +1313,7 @@ class TestingService
             [
                 'id' => 75,
                 'fase' => 'DIECISEISAVOS',
-                'jornada' => 4,
+                'jornada_id' => 4,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(36)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 25, 
@@ -1325,7 +1325,7 @@ class TestingService
             [
                 'id' => 76,
                 'fase' => 'DIECISEISAVOS',
-                'jornada' => 4,
+                'jornada_id' => 4,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(36)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 7, 
@@ -1338,7 +1338,7 @@ class TestingService
             [
                 'id' => 77,
                 'fase' => 'DIECISEISAVOS',
-                'jornada' => 4,
+                'jornada_id' => 4,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(37)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 21,
@@ -1350,7 +1350,7 @@ class TestingService
             [
                 'id' => 78,
                 'fase' => 'DIECISEISAVOS',
-                'jornada' => 4,
+                'jornada_id' => 4,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(37)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 13,
@@ -1362,7 +1362,7 @@ class TestingService
             [
                 'id' => 79,
                 'fase' => 'DIECISEISAVOS',
-                'jornada' => 4,
+                'jornada_id' => 4,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(37)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 41,
@@ -1374,7 +1374,7 @@ class TestingService
             [
                 'id' => 80,
                 'fase' => 'DIECISEISAVOS',
-                'jornada' => 4,
+                'jornada_id' => 4,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(37)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 33,
@@ -1387,7 +1387,7 @@ class TestingService
             [
                 'id' => 81,
                 'fase' => 'DIECISEISAVOS',
-                'jornada' => 4,
+                'jornada_id' => 4,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(38)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 37,
@@ -1399,7 +1399,7 @@ class TestingService
             [
                 'id' => 82,
                 'fase' => 'DIECISEISAVOS',
-                'jornada' => 4,
+                'jornada_id' => 4,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(38)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 17,
@@ -1411,7 +1411,7 @@ class TestingService
             [
                 'id' => 83,
                 'fase' => 'DIECISEISAVOS',
-                'jornada' => 4,
+                'jornada_id' => 4,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(38)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 45,
@@ -1423,7 +1423,7 @@ class TestingService
             [
                 'id' => 84,
                 'fase' => 'DIECISEISAVOS',
-                'jornada' => 4,
+                'jornada_id' => 4,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(38)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 31,
@@ -1436,7 +1436,7 @@ class TestingService
             [
                 'id' => 85,
                 'fase' => 'DIECISEISAVOS',
-                'jornada' => 4,
+                'jornada_id' => 4,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(39)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 1,
@@ -1448,7 +1448,7 @@ class TestingService
             [
                 'id' => 86,
                 'fase' => 'DIECISEISAVOS',
-                'jornada' => 4,
+                'jornada_id' => 4,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(39)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 23,
@@ -1460,7 +1460,7 @@ class TestingService
             [
                 'id' => 87,
                 'fase' => 'DIECISEISAVOS',
-                'jornada' => 4,
+                'jornada_id' => 4,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(39)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 19,
@@ -1472,7 +1472,7 @@ class TestingService
             [
                 'id' => 88,
                 'fase' => 'DIECISEISAVOS',
-                'jornada' => 4,
+                'jornada_id' => 4,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(39)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 5, 
@@ -1483,6 +1483,7 @@ class TestingService
             ],
         ];
     }
+
     public static function octavos()
     {
         $fecha_inicial = Carbon::create(2026, 3, 1, 0, 0, 0, 'UTC');
@@ -1492,7 +1493,7 @@ class TestingService
             [
                 'id' => 89, 
                 'fase' => 'OCTAVOS',
-                'jornada' => 5,
+                'jornada_id' => 5,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(42)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 35,
@@ -1504,7 +1505,7 @@ class TestingService
             [
                 'id' => 90,
                 'fase' => 'OCTAVOS',
-                'jornada' => 5,
+                'jornada_id' => 5,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(42)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 25,
@@ -1516,7 +1517,7 @@ class TestingService
             [
                 'id' => 91,
                 'fase' => 'OCTAVOS',
-                'jornada' => 5,
+                'jornada_id' => 5,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(42)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 21,
@@ -1528,7 +1529,7 @@ class TestingService
             [
                 'id' => 92,
                 'fase' => 'OCTAVOS',
-                'jornada' => 5,
+                'jornada_id' => 5,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(42)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 41,
@@ -1541,7 +1542,7 @@ class TestingService
             [
                 'id' => 93,
                 'fase' => 'OCTAVOS',
-                'jornada' => 5,
+                'jornada_id' => 5,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(43)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 37,
@@ -1553,7 +1554,7 @@ class TestingService
             [
                 'id' => 94,
                 'fase' => 'OCTAVOS',
-                'jornada' => 5,
+                'jornada_id' => 5,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(43)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 45,
@@ -1565,7 +1566,7 @@ class TestingService
             [
                 'id' => 95,
                 'fase' => 'OCTAVOS',
-                'jornada' => 5,
+                'jornada_id' => 5,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(43)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 1,
@@ -1577,7 +1578,7 @@ class TestingService
             [
                 'id' => 96,
                 'fase' => 'OCTAVOS',
-                'jornada' => 5,
+                'jornada_id' => 5,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(43)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 19,
@@ -1588,6 +1589,7 @@ class TestingService
             ],
         ];
     }
+
     public static function cuartos()
     {
         $fecha_inicial = Carbon::create(2026, 3, 1, 0, 0, 0, 'UTC');
@@ -1598,7 +1600,7 @@ class TestingService
             [
                 'id' => 97,
                 'fase' => 'CUARTOS',
-                'jornada' => 6,
+                'jornada_id' => 6,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(46)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 29,
@@ -1610,7 +1612,7 @@ class TestingService
             [
                 'id' => 98,
                 'fase' => 'CUARTOS',
-                'jornada' => 6,
+                'jornada_id' => 6,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(47)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 13,
@@ -1622,7 +1624,7 @@ class TestingService
             [
                 'id' => 99,
                 'fase' => 'CUARTOS',
-                'jornada' => 6,
+                'jornada_id' => 6,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(48)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 37,
@@ -1634,7 +1636,7 @@ class TestingService
             [
                 'id' => 100,
                 'fase' => 'CUARTOS',
-                'jornada' => 6,
+                'jornada_id' => 6,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(49)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
                 'equipo_1' => 23,
@@ -1645,6 +1647,7 @@ class TestingService
             ],
         ];
     }
+
     public static function semifinales()
     {
         $fecha_inicial = Carbon::create(2026, 3, 1, 0, 0, 0, 'UTC');
@@ -1654,7 +1657,7 @@ class TestingService
             [
                 'id' => 101,
                 'fase' => 'SEMIFINALES',
-                'jornada' => 7,
+                'jornada_id' => 7,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(52)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
 
@@ -1669,7 +1672,7 @@ class TestingService
             [
                 'id' => 102,
                 'fase' => 'SEMIFINALES',
-                'jornada' => 7,
+                'jornada_id' => 7,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(53)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
 
@@ -1683,6 +1686,7 @@ class TestingService
             ],
         ];
     }
+
     public static function tercerLugar()
     {
         $fecha_inicial = Carbon::create(2026, 3, 1, 0, 0, 0, 'UTC');
@@ -1691,7 +1695,7 @@ class TestingService
             [
                 'id' => 103,
                 'fase' => 'TERCER LUGAR',
-                'jornada' => 8,
+                'jornada_id' => 8,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(56)->addHours(8)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
 
@@ -1705,6 +1709,7 @@ class TestingService
             ],
         ];
     }
+    
     public static function finales()
     {
         $fecha_inicial = Carbon::create(2026, 3, 1, 0, 0, 0, 'UTC');
@@ -1713,7 +1718,7 @@ class TestingService
             [
                 'id' => 104,
                 'fase' => 'FINALES',
-                'jornada' => 9,
+                'jornada_id' => 9,
                 'fecha_partido' => $fecha_inicial->copy()->addDays(56)->addHours(16)->toDateTimeString(),
                 'estadio_id' => rand(1,16),
 

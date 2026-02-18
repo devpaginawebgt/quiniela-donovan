@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('web.inicio') }}">
                         <x-application-logo class="block h-10 w-auto fill-current text-gray-100" />
                     </a>
                 </div>
@@ -13,28 +13,28 @@
 
             <!-- Navigation Links -->
             <div class="hidden space-x-8 sm:-my-px mx-auto sm:flex">
-                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                <x-nav-link :href="route('web.inicio')" :active="request()->routeIs('web.inicio')">
                     {{ __('Inicio') }}
                 </x-nav-link>
-                <x-nav-link :href="route('ver-selecciones')" :active="request()->routeIs('ver-selecciones')">
+                <x-nav-link :href="route('web.selecciones.index')" :active="request()->routeIs('web.selecciones.index')">
                     {{ __('Selecciones') }}
                 </x-nav-link>
-                <x-nav-link :href="route('ver-grupos')" :active="request()->routeIs('ver-grupos')">
+                <x-nav-link :href="route('web.grupos.index')" :active="request()->routeIs('web.grupos.index')">
                     {{ __('Grupos') }}
                 </x-nav-link>
-                <x-nav-link :href="route('ver-calendario')" :active="request()->routeIs('ver-calendario')">
+                <x-nav-link :href="route('web.jornadas')" :active="request()->routeIs('web.jornadas')">
                     {{ __('Calendario') }}
                 </x-nav-link>
-                <x-nav-link :href="route('ver-sedes')" :active="request()->routeIs('ver-sedes')">
+                <x-nav-link :href="route('web.ver-sedes')" :active="request()->routeIs('web.ver-sedes')">
                     {{ __('Sedes') }}
                 </x-nav-link>
-                <x-nav-link :href="route('ver-quiniela')" :active="request()->routeIs('ver-quiniela')">
+                <x-nav-link :href="route('web.ver-quiniela')" :active="request()->routeIs('web.ver-quiniela')">
                     {{ __('Quiniela') }}
                 </x-nav-link>
-                <x-nav-link :href="route('ver-tabla-resultados')" :active="request()->routeIs('ver-tabla-resultados')">
+                <x-nav-link :href="route('web.ver-tabla-resultados')" :active="request()->routeIs('web.ver-tabla-resultados')">
                     {{ __('Tabla de resultados') }}
                 </x-nav-link>
-                <x-nav-link :href="route('ver-tabla-premios')" :active="request()->routeIs('ver-tabla-premios')">
+                <x-nav-link :href="route('web.ver-tabla-premios')" :active="request()->routeIs('web.ver-tabla-premios')">
                     {{ __('Tabla de premios') }}
                 </x-nav-link>
             </div>
@@ -56,10 +56,10 @@
 
                     <x-slot name="content">
                         <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
+                        <form method="POST" action="{{ route('web.logout') }}">
                             @csrf
 
-                            <x-dropdown-link :href="route('logout')"
+                            <x-dropdown-link :href="route('web.logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Cerrar Sesion') }}
@@ -84,28 +84,28 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('web.inicio')" :active="request()->routeIs('web.inicio')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('ver-selecciones')" :active="request()->routeIs('ver-selecciones')">
+            <x-responsive-nav-link :href="route('web.selecciones.index')" :active="request()->routeIs('web.selecciones.index')">
                 {{ __('Selecciones') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('ver-grupos')" :active="request()->routeIs('ver-grupos')">
+            <x-responsive-nav-link :href="route('web.grupos.index')" :active="request()->routeIs('web.grupos.index')">
                 {{ __('Grupos') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('ver-calendario')" :active="request()->routeIs('ver-calendario')">
+            <x-responsive-nav-link :href="route('web.jornadas')" :active="request()->routeIs('web.jornadas')">
                 {{ __('Calendario') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('ver-sedes')" :active="request()->routeIs('ver-sedes')">
+            <x-responsive-nav-link :href="route('web.ver-sedes')" :active="request()->routeIs('web.ver-sedes')">
                 {{ __('Sedes') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('ver-quiniela')" :active="request()->routeIs('ver-quiniela')">
+            <x-responsive-nav-link :href="route('web.ver-quiniela')" :active="request()->routeIs('web.ver-quiniela')">
                 {{ __('Quiniela') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('ver-tabla-resultados')" :active="request()->routeIs('ver-tabla-resultados')">
+            <x-responsive-nav-link :href="route('web.ver-tabla-resultados')" :active="request()->routeIs('web.ver-tabla-resultados')">
                 {{ __('Tabla de resultados') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('ver-tabla-premios')" :active="request()->routeIs('ver-tabla-premios')">
+            <x-responsive-nav-link :href="route('web.ver-tabla-premios')" :active="request()->routeIs('web.ver-tabla-premios')">
                 {{ __('Tabla de premios') }}
             </x-responsive-nav-link>
         </div>
@@ -118,10 +118,10 @@
 
             <div class="mt-3 space-y-1">
                 <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
+                <form method="POST" action="{{ route('web.logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
+                    <x-responsive-nav-link :href="route('web.logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Cerrar Sesion') }}

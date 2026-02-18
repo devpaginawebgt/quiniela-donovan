@@ -3,12 +3,12 @@
 use App\Http\Controllers\EstadioController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PartidoController;
 use App\Http\Controllers\PremioController;
 use App\Http\Controllers\ResultadoPartidoController;
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\GrupoController;
+use App\Http\Controllers\JornadaController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,26 +23,39 @@ use Illuminate\Http\Request;
 
 /****** RUTAS GET PARA OBTENER VISTAS DE MODULOS */
 
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth'])->as('web.')->group(function() {
 
+    // Redirección por defecto
+    
     Route::get('/', function () {
-        return redirect()->route('dashboard');
+        return redirect()->route('web.inicio');
     });
 
-    // Home
+    // Inicio
 
     Route::controller(HomeController::class)->group(function() {
-        Route::get('/dashboard', 'dashboard')->name('dashboard');
+        Route::get('inicio', 'index')->name('inicio');
     });
 
     // Selecciones
 
-    Route::controller(EquipoController::class)->group(function() {
-        Route::get('/ver-selecciones', 'index')->name('ver-selecciones');
-        Route::get('/ver-grupos', 'verModuloGrupos')->name('ver-grupos');
-        Route::get('/ver-calendario', 'verCalendario')->name('ver-calendario');
+    Route::controller(EquipoController::class)->prefix('selecciones')->as('selecciones.')->group(function() {
+        Route::get('', 'indexWeb')->name('index');
+    });
 
-        Route::get('/ver-grupo/{grupo_get}', 'equiposGrupo');
+    // Grupos
+
+    Route::controller(GrupoController::class)->prefix('grupos')->as('grupos.')->group(function() {
+        Route::get('', 'indexWeb')->name('index');
+        Route::get('/{grupo_id}/equipos', 'getEquiposWeb')->name('equipos');
+        Route::get('/{grupo_id}/jornadas', 'getJornadasWeb')->name('jornadas');
+    });
+
+    // Jornadas
+
+    Route::prefix('jornadas')->controller(JornadaController::class)->group(function() {
+        Route::get('', 'jornadasWeb')->name('jornadas');
+
         Route::post('/partidos-grupo', 'partidosGrupo');
         Route::get('/partidos-jornada/{jornada}', 'partidosJornada');
     });

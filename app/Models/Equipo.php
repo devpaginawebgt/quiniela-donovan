@@ -12,6 +12,7 @@ class Equipo extends Model
     protected $fillable = [
         'nombre',
         'imagen',
+        'codigo_iso',
         'descripcion',
         'grupo',
         'goles_favor',

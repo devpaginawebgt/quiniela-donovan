@@ -20,27 +20,25 @@
                 <h5 class="text-3xl text-center font-bold my-8">Ingresa tus pronosticos!</h5>
                 <div class="w-44 mx-auto mb-4">
 
-                    <form action="{{ route('ver-quiniela') }}" method="GET" id="verPartidosQuinielaSelect">
+                    <form action="{{ route('web.ver-quiniela') }}" method="GET" id="verPartidosQuinielaSelect">
 
                         <label for="grupos" class="block mb-2 text-xl font-bold text-center text-gray-800">Jornada:
 
                         </label>
 
-                        <select id="grupos"
-
+                        <select
+                            id="quiniela"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-lg text-center font-bold hover:border-red-300 hover:cursor-pointer rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            onchange="verPartidosJornadaQuiniela(this)"
+                        >
 
-                            onchange="verPartidosJornadaQuiniela(this)">
+                            @foreach($jornadas as $jornada)
 
-                            <option value="1" {{$jornada==1 ? 'selected':''}}>1</option>
-                            <option value="2" {{$jornada==2 ? 'selected':''}}>2</option>
-                            <option value="3" {{$jornada==3 ? 'selected':''}}>3</option>
-                            <option value="4" {{ $jornada == 4 ? 'selected' : '' }}>Dieciseisavos de final</option>
-                            <option value="5" {{ $jornada == 5 ? 'selected' : '' }}>Octavos de final</option>
-                            <option value="6" {{ $jornada == 6 ? 'selected' : '' }}>Cuartos de final</option>
-                            <option value="7" {{ $jornada == 7 ? 'selected' : '' }}>SemiFinal</option>
-                            <option value="8" {{ $jornada == 8 ? 'selected' : '' }}>Partido por tercer lugar</option>
-                            <option value="9" {{ $jornada == 9 ? 'selected' : '' }}>Final</option>
+                                <option value="{{ $jornada->id }}" {{ $jornada->id === $jornada_activa ? 'selected' : ''; }}>
+                                    {{ $jornada->name }}
+                                </option>
+
+                            @endforeach
 
                         </select>
 
@@ -84,7 +82,7 @@
 
                 </div>
 
-                <form action="{{ route('guardar-predicciones-form') }}" method="POST">
+                <form action="{{ route('web.guardar-predicciones-form') }}" method="POST">
 
                     <div class="flex flex-col">
 

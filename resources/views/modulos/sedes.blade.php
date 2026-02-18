@@ -12,23 +12,28 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4 transition-all">
 
                     @foreach($estadios as $estadio)
-                    <div class="max-w-sm bg-white rounded-lg transform ease-in duration-150 hover:scale-105">
-                        <div class="flex">
-                            <img class="rounded-lg mx-auto hover:cursor-pointer btn-bandera border-2 border-gray-100"
-                                src="{{ asset($estadio->imagen) }}" alt="" id="{{ $estadio->id }}"
-                                onclick="slideToggle({{ $estadio->id }})" />
-                        </div>
-                        <div class="p-5 border border-gray-200 shadow-md rounded-lg">
-                            <h5 class="mb-2 text-center text-2xl font-bold tracking-tight text-gray-900">
-                                {{ $estadio->nombre }}
-                            </h5>
-                            <div class="container-{{ $estadio->id }} hidden">
-                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-center">
-                                    {{ $estadio->descripcion }}
-                                </p>
+                        <div class="max-w-sm bg-white rounded-lg transform ease-in duration-150 hover:scale-105">
+                            <div class="flex">
+                                <img
+                                    class="rounded-lg hover:cursor-pointer btn-bandera border-2 border-gray-100 w-full max-w-96 object-cover"
+                                    style="aspect-ratio: 4/3"
+                                    src="{{ asset($estadio->imagen) }}"
+                                    alt=""
+                                    id="{{ $estadio->id }}"
+                                    onclick="slideToggle({{ $estadio->id }})"
+                                />
+                            </div>
+                            <div class="p-5 border border-gray-200 shadow-md rounded-lg">
+                                <h5 class="mb-2 text-center text-2xl font-bold tracking-tight text-gray-900">
+                                    {{ $estadio->nombre }}
+                                </h5>
+                                <div class="container-{{ $estadio->id }} hidden">
+                                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-center">
+                                        {{ $estadio->descripcion }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
 
                     {{-- <div class="max-w-sm bg-white rounded-lg transform ease-in duration-150 hover:scale-105">
