@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     }
 
-    const inputCalendario = document.getElementById('calendario');
+    const inputCalendario = document.getElementById('jornadas');
 
     if (inputCalendario) {
 
@@ -248,7 +248,7 @@ const pintarPartidosJornadaGeneral = (equipos) => {
 
             const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 
-            let row = `<li class="flex justify-around lg:py-2 pb-28 my-4 xl:my-2 border-b border-gray-300 items-center">
+            let row = `<li class="flex justify-around py-6 border-b border-gray-400 items-center">
 
             <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
@@ -288,7 +288,7 @@ const pintarPartidosJornadaGeneral = (equipos) => {
 
 
 
-    espacioJornada.innerHTML = partidosAPintar;
+    espacioJornada.innerHTML = partidosAPintar.join(' ');
 
 }
 
