@@ -12,12 +12,12 @@
             </div>
 
             <!-- Navigation Links -->
-            <div class="hidden space-x-8 sm:-my-px mx-auto sm:flex">
+            <div class="hidden sm:-my-px mx-auto sm:flex sm:items-center">
                 <x-nav-link :href="route('web.inicio')" :active="request()->routeIs('web.inicio')">
                     {{ __('Inicio') }}
                 </x-nav-link>
                 <x-nav-link :href="route('web.selecciones.index')" :active="request()->routeIs('web.selecciones.index')">
-                    {{ __('Selecciones') }}
+                    {{ __('Equipos') }}
                 </x-nav-link>
                 <x-nav-link :href="route('web.grupos.index')" :active="request()->routeIs('web.grupos.index')">
                     {{ __('Grupos') }}
@@ -43,7 +43,7 @@
             <div class="hidden sm:flex sm:items-center sm:ml-2">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="flex items-center text-xs font-medium text-gray-800 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                        <button class="flex items-center text-xs font-semibold text-[--complementary-light-color] hover:text-[--complementary-primary-color] hover:bg-[--secondary-color] focus:text-[--complementary-primary-color] focus:bg-[--secondary-color] transition p-2 rounded-lg duration-150 ease-in-out">
                             <div>{{ Auth::user()->nombres . " " . Auth::user()->apellidos }}</div>
 
                             <div class="ml-1">
@@ -88,7 +88,7 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('web.selecciones.index')" :active="request()->routeIs('web.selecciones.index')">
-                {{ __('Selecciones') }}
+                {{ __('Equipos') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('web.grupos.index')" :active="request()->routeIs('web.grupos.index')">
                 {{ __('Grupos') }}

@@ -28,12 +28,15 @@
         <link rel="stylesheet" href="{{asset('css/styles.css')}}">
         <script src="{{asset('js/app.js')}}"></script> --}}
     </head>
-    <body class="font-sans antialiased text-[--light-color]">
-        <div class="min-h-screen bg-gray-100">
+    <body
+        class="font-sans antialiased bg-[--complementary-primary-color] bg-auth bg-fixed text-[--light-color] overflow-x-hidden"
+        style="background-image: url({{ asset('images/fondo-azul.png') }});"
+    >
+        <div class="min-h-screen">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
-            <header class="shadow" style="background-color: #177245">
+            <header class="shadow bg-[--complementary-primary-color]">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>

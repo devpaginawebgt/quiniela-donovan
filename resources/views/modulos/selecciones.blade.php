@@ -1,25 +1,33 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-white leading-tight">
-            {{ __('México | Estados Unidos | Canadá 2026') }}
+            {{ __('Mundial 2026 México | Estados Unidos | Canadá') }}
         </h2>
     </x-slot>
 
-    <div class="max-w-screen-2xl my-6 mx-auto sm:px-6 lg:px-8" id="selecciones-container">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="px-6 pb-6 bg-white border-b border-gray-200 ">
+    <div class="max-w-screen-2xl mb-6 mx-auto sm:px-6 lg:px-8" id="selecciones-container">
+        <div class= overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="px-6 pb-6 border-b">
                 <h5 class="text-3xl text-center font-bold my-8">Selecciones clasificadas</h5>
-                <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-x-2 gap-y-6 transition-all">
+                <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 items-start gap-x-4 gap-y-6 transition-all">
                     @foreach ($equipos as $equipo)
-                    <div class="max-w-sm bg-white transform ease-in duration-150 hover:scale-105">
+                    <div class="max-w-sm bg-[--complementary-primary-color] text-white border border-white transform ease-in duration-150 hover:scale-105 rounded-lg p-4">
                         <div class="flex">
-                            <img class="rounded-lg mx-auto hover:cursor-pointer btn-bandera border-2 border-gray-100 w-56 h-32"
+                            <img class="rounded-lg mx-auto hover:cursor-pointer btn-bandera border-2 border-gray-100 w-56 h-32 cursor-pointer"
                                 src="{{ asset( $equipo->imagen ) }}" alt="{{$equipo->nombre}}" id="{{str_replace(' ', '', $equipo->id)}}" onclick="slideToggle(this.id)"/>
                         </div>
-                        <div class="p-2">
-                            <h5 class="mb-2 text-center text-2xl font-bold tracking-tight text-gray-900">{{$equipo->nombre}}</h5>
+                        <div class="pt-2">
+                            <div
+                                class="mb-2 text-center text-2xl font-bold tracking-tight cursor-pointer flex gap-4 justify-center items-center"
+                                id="{{str_replace(' ', '', $equipo->id)}}"
+                                onclick="slideToggle(this.id)"
+                            >
+                                {{ $equipo->nombre }}
+                                <span><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 16 16"><path fill="currentColor" d="M3.2 5.74a.75.75 0 0 1 1.06-.04L8 9.227L11.74 5.7a.75.75 0 1 1 1.02 1.1l-4.25 4a.75.75 0 0 1-1.02 0l-4.25-4a.75.75 0 0 1-.04-1.06"/></svg>
+                                </span>
+                            </div>
                             <div class="container-{{str_replace(' ', '', $equipo->id)}} hidden rounded-lg shadow-lg p-3">
-                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-center">{{$equipo->descripcion}}</p>
+                                <p class="mb-3 font-normal text-center">{{$equipo->descripcion}}</p>
                             </div>
                         </div>
                     </div>
