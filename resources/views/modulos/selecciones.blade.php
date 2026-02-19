@@ -11,10 +11,10 @@
                 <h5 class="text-3xl text-center font-bold my-8">Selecciones clasificadas</h5>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center items-start gap-8 transition-all">
                     @foreach ($equipos as $equipo)
-                    <div class="w-full max-w-sm bg-[--complementary-primary-color] text-white border border-white transform ease-in duration-150 hover:scale-105 rounded-lg px-2 py-6 mx-auto">
+                    <div class="w-full max-w-sm bg-[--complementary-primary-color] text-white transform ease-in duration-150 hover:scale-105 rounded-lg px-2 py-6 mx-auto shadow-lg">
                         <div class="flex">
                             <img
-                                class="rounded-lg mx-auto hover:cursor-pointer btn-bandera border-2 border-gray-100 w-32 h-20 cursor-pointer"
+                                class="rounded-lg mx-auto hover:cursor-pointer btn-bandera w-32 h-20 cursor-pointer"
                                 src="{{ asset( $equipo->imagen ) }}"
                                 alt="{{$equipo->nombre}}"
                                 id="{{str_replace(' ', '', $equipo->id)}}"
@@ -28,10 +28,11 @@
                                 onclick="slideToggle(this.id)"
                             >
                                 {{ $equipo->nombre }}
-                                <span><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 16 16"><path fill="currentColor" d="M3.2 5.74a.75.75 0 0 1 1.06-.04L8 9.227L11.74 5.7a.75.75 0 1 1 1.02 1.1l-4.25 4a.75.75 0 0 1-1.02 0l-4.25-4a.75.75 0 0 1-.04-1.06"/></svg>
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 16 16"><path fill="currentColor" d="M3.2 5.74a.75.75 0 0 1 1.06-.04L8 9.227L11.74 5.7a.75.75 0 1 1 1.02 1.1l-4.25 4a.75.75 0 0 1-1.02 0l-4.25-4a.75.75 0 0 1-.04-1.06"/></svg>
                                 </span>
                             </div>
-                            <div class="container-{{str_replace(' ', '', $equipo->id)}} hidden rounded-lg shadow-lg p-3">
+                            <div class="container-{{str_replace(' ', '', $equipo->id)}} hidden rounded-lg p-3">
                                 <p class="mb-3 font-normal text-center">{{$equipo->descripcion}}</p>
                             </div>
                         </div>
