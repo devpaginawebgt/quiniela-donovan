@@ -12,17 +12,27 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
 
-    // Login|
+    // Login
 
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
+    Route::get('ingresa', [AuthenticatedSessionController::class, 'create'])->name('ingresa');
 
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    Route::post('login', [AuthenticatedSessionController::class, 'store'])->name('login');
 
     // Register
 
-    Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::prefix('registro')->controller(RegisteredUserController::class)->as('register')->group(function() {
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+        Route::get('dependiente', 'create')->name('.dependiente');
+    
+        Route::get('doctor', 'createDoctor')->name('.doctor');
+
+        Route::get('/', function () {
+            return redirect()->route('register.dependiente');
+        });
+     
+    });
+        
+    Route::post('register', [RegisteredUserController::class, 'store'])->name('register');
 
     // Reset contraseña
     

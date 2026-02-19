@@ -12,7 +12,7 @@ class Codigo extends Model
     protected $fillable = [
         'codigo',
         'estado',
-        'id_dependiente',
-        'nombre_dependiente'
+        // 'id_dependiente',
+        // 'nombre_dependiente'
     ];
 }

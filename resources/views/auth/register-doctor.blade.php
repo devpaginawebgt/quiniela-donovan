@@ -127,8 +127,8 @@
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full h-10 px-4"
                     required
                 >
-                    <option value="1">Guatemala</option>
-                    <option value="2">Honduras</option>
+                    <option value="1" {{$op = $paisCliente == 'GT' ? 'selected' : '' }}>Guatemala</option>
+                    <option value="2" {{$op = $paisCliente == 'HN' ? 'selected' : '' }}>Honduras</option>
                 </select>
             </div>
 
@@ -151,45 +151,46 @@
 
             <div>
                 <x-label
-                    for="cadena"
-                    :value="__('Cadena')"
+                    for="region"
+                    :value="__('Región')"
                 />
 
-                <select
-                    name="cadena"
-                    id="cadena"
-                    class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full h-10 px-4"
+                <x-input
+                    id="region"
+                    class="block mt-1 w-full"
+                    type="text"
+                    name="region"
+                    :value="old('region')"
                     required
-                >
-                    <option value="1">Cadena 1</option>
-                    <option value="2">Cadena 2</option>
-                </select>
+                    maxlength="100"
+                />
             </div>
 
-             <div>
+            <div>
                 <x-label
-                    for="sucursal"
-                    :value="__('Sucursal')"
+                    for="capital"
+                    :value="__('Capital')"
                 />
 
-                <select
-                    name="sucursal"
-                    id="sucursal"
-                    class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full h-10 px-4"
+                <x-input
+                    id="capital"
+                    class="block mt-1 w-full"
+                    type="text"
+                    name="capital"
+                    :value="old('capital')"
                     required
-                >
-                    <option value="1">Sucursal 1</option>
-                    <option value="2">Sucursal 2</option>
-                </select>
+                    maxlength="100"
+                />
             </div>
 
             <div class="col-span-2 flex flex-col items-start gap-4 mt-2">
                 <a
-                    class="w-full bg-[--secondary-color] text-[--dark-color] font-semibold rounded-md text-sm px-4 py-2 hover:brightness-[1.10] focus:ring-4 focus:ring-[--light-color] text-center"
+                    class="w-full bg-[--secondary-color] text-[--dark-color] font-semibold rounded-md text-sm px-4 py-2 hover:brightness-[1.10] focus:ring-4 focus:ring-[--light-color]  text-center"
                     href="{{ route('ingresa') }}"
                 >
                     {{ __('Registrarme') }}
                 </a>
+
                 {{-- <x-button class="w-full">
                     {{ __('Registrarme') }}
                 </x-button> --}}

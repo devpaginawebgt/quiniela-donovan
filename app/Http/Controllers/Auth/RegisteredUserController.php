@@ -11,9 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
-use DateTime;
-
-date_default_timezone_set('America/Guatemala');
 class RegisteredUserController extends Controller
 {
     /**
@@ -24,6 +21,11 @@ class RegisteredUserController extends Controller
     public function create()
     {
         return view('auth.register');
+    }
+
+    public function createDoctor()
+    {
+        return view('auth.register-doctor');
     }
 
     /**

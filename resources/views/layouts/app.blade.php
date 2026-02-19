@@ -28,7 +28,7 @@
         <link rel="stylesheet" href="{{asset('css/styles.css')}}">
         <script src="{{asset('js/app.js')}}"></script> --}}
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased text-[--light-color]">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 

@@ -17,8 +17,8 @@ class CreateCodigosTable extends Migration
             $table->id();
             $table->string('codigo')->unique();
             $table->integer('estado')->default(0);
-            $table->integer('id_dependiente')->default(0);
-            $table->string('nombre_dependiente');
+            // $table->integer('id_dependiente')->default(0);
+            // $table->string('nombre_dependiente');
             $table->timestamps();
         });
     }

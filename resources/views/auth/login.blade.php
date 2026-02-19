@@ -12,45 +12,33 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('login') }}">
+        <form
+            method="POST"
+            action="{{ route('login') }}"
+            class="formulario-auth"
+        >
             @csrf
 
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
+            <input type="hidden" name="pass" value="{{ $pass }}">
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+            <div class="mt-2 mb-4">
+                <x-label for="documento" :value="__('Número de Documento')" />
+
+                <x-input
+                    id="documento"
+                    class="block mt-1 w-full"
+                    type="text"
+                    name="numero_documento"
+                    :value="old('numero_documento')"
+                    required
+                    autofocus
+                    maxlength="13"
+                />
             </div>
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Contraseña')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-            </div>
-
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-50">{{ __('Mantener sesion iniciada') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-100 hover:text-green-500" href="{{ route('password.request') }}">
-                        {{ __('Olvide mi contraseña') }}
-                    </a>
-                @endif
-
-                <x-button class="ml-3">
-                    {{ __('Ingresar') }}
-                </x-button>
-            </div>
+            <x-button class="w-full text-center text-lg">
+                {{ __('Ingresar') }}
+            </x-button>
         </form>
     </x-auth-card>
 </x-guest-layout>

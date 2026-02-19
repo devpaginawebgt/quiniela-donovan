@@ -15,8 +15,8 @@ class CodigoFactory extends Factory
     {
         return [
             'codigo' => strtoupper($this->faker->bothify('????###')),
-            'id_dependiente' => $this->faker->randomNumber(3,false),
-            'nombre_dependiente' => $this->faker->name()
+            // 'id_dependiente' => $this->faker->randomNumber(3,false),
+            // 'nombre_dependiente' => $this->faker->name()
         ];
     }
 }
