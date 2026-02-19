@@ -343,7 +343,6 @@ class ResultadoPartidoController extends Controller
         $participantes = DB::select(
             "SELECT 
                 u.id,
-                u.name,
                 u.nombres,
                 u.apellidos,
                 u.puntos,
