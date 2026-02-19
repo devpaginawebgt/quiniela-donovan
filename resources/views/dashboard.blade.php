@@ -8,7 +8,7 @@
     <div class="">
         <div class="flex justify-center">
             <img
-                src="{{asset('images/portadas/inicio.webp')}}"
+                src="{{asset('images/portadas/portada_2.jpg')}}"
                 alt="PORTADA-2022"
                 style="max-width: 100rem"
             >
@@ -24,7 +24,7 @@
                     </p>
                 </div>
                 <div class="flex w-full py-8" style="justify-content: center;align-items: center;">
-                    <img src="{{asset('images/grupos.jpg')}}" alt="PORTADA-2022" style="width: 70%;height: auto;" class="">
+                    <img src="{{asset('images/grupos.jpg')}}" alt="PORTADA-2022" style="width: 60%;height: auto;" class="">
                     <img src="{{asset('images/adorno_1.jpg')}}" alt="PORTADA-2022" style="width: 20%;height: 1%;margin-left: 15px;" class="">
                 </div>
             </div>

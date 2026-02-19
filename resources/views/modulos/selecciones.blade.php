@@ -9,12 +9,17 @@
         <div class= overflow-hidden shadow-sm sm:rounded-lg">
             <div class="px-6 pb-6 border-b">
                 <h5 class="text-3xl text-center font-bold my-8">Selecciones clasificadas</h5>
-                <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 items-start gap-x-4 gap-y-6 transition-all">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center items-start gap-8 transition-all">
                     @foreach ($equipos as $equipo)
-                    <div class="max-w-sm bg-[--complementary-primary-color] text-white border border-white transform ease-in duration-150 hover:scale-105 rounded-lg p-4">
+                    <div class="w-full max-w-sm bg-[--complementary-primary-color] text-white border border-white transform ease-in duration-150 hover:scale-105 rounded-lg px-2 py-6 mx-auto">
                         <div class="flex">
-                            <img class="rounded-lg mx-auto hover:cursor-pointer btn-bandera border-2 border-gray-100 w-56 h-32 cursor-pointer"
-                                src="{{ asset( $equipo->imagen ) }}" alt="{{$equipo->nombre}}" id="{{str_replace(' ', '', $equipo->id)}}" onclick="slideToggle(this.id)"/>
+                            <img
+                                class="rounded-lg mx-auto hover:cursor-pointer btn-bandera border-2 border-gray-100 w-32 h-20 cursor-pointer"
+                                src="{{ asset( $equipo->imagen ) }}"
+                                alt="{{$equipo->nombre}}"
+                                id="{{str_replace(' ', '', $equipo->id)}}"
+                                onclick="slideToggle(this.id)"
+                            />
                         </div>
                         <div class="pt-2">
                             <div

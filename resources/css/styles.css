@@ -94,3 +94,14 @@ html {
 .formulario-auth input, .formulario-auth select {
     color: var(--dark-color)
 }
+
+
+.hide-input-arrows::-webkit-outer-spin-button,
+.hide-input-arrows::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.hide-input-arrows {
+    -moz-appearance: textfield; /* Firefox */
+    appearance: none;
+}
