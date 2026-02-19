@@ -48,7 +48,7 @@
                                 @if (!empty($equipos_grupo))
                                     @foreach($equipos_grupo as $equipo)
                                         <tr class="bg-[--complementary-primary-color] border-b border-zinc-400 text-[--light-color]">
-                                            <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap flex items-center justify-between">
+                                            <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap flex items-center justify-between w-full">
                                                 <img
                                                     src="{{ $equipo->imagen }}"
                                                     alt="SELECCION"

@@ -106,31 +106,6 @@ class PartidoSeeder extends Seeder
                 'fecha_partido' => Carbon::create(2026, 6, 12, 15, 0, 0, 'America/New_York')
                     ->setTimezone('UTC')
                     ->toDateTimeString(), // 19:00 UTC
-                'estadio_id' => 1,
-                'equipo_1' => 5, // Canadá
-                'equipo_2' => 6, // Italia placeholder
-            ],
-            [
-                'fase' => 'GRUPOS',
-                'jornada_id' => 1,
-                'fecha_partido' => Carbon::create(2026, 6, 13, 15, 0, 0, 'America/New_York')
-                    ->setTimezone('UTC')
-                    ->toDateTimeString(), // 19:00 UTC
-                'estadio_id' => 1,
-                'equipo_1' => 7, // Catar
-                'equipo_2' => 8, // Suiza
-            ],
-
-            /* ======================
-            GRUPO B - JORNADA 1
-            ====================== */
-
-            [
-                'fase' => 'GRUPOS',
-                'jornada_id' => 1,
-                'fecha_partido' => Carbon::create(2026, 6, 12, 15, 0, 0, 'America/New_York')
-                    ->setTimezone('UTC')
-                    ->toDateTimeString(), // 19:00 UTC
                 'estadio_id' => 1, // Toronto Stadium
                 'equipo_1' => 5, // Canadá
                 'equipo_2' => 6, // Italia placeholder

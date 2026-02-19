@@ -76,8 +76,8 @@ const pintarEquiposGrupo = (equipos) => {
         const gc = equipo.stats.find(stat => stat.name === 'GC');
 
         return `
-            <tr class="bg-white border-b">
-                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap flex items-center justify-between">
+            <tr class="bg-[--complementary-primary-color] border-b border-zinc-400 text-[--light-color]">
+                <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap flex items-center justify-between w-full">
                     <img src="${equipo.image}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
                     ${equipo.name}
                 </th>
@@ -108,7 +108,7 @@ const pintarPartidosGrupo = (jornada) => {
         const fechaPartido = new Date(partido.fechaPartido).toLocaleDateString('es-GT', opcionesFecha);
         const horaPartido = new Date(partido.fechaPartido).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
 
-        return `<li class="flex justify-around py-6 lg:py-4 border-b border-gray-300 items-center">
+        return `<li class="flex justify-around py-6 lg:py-4 border-b border-zinc-400 items-center mb-4">
 
             <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
@@ -180,18 +180,26 @@ document.addEventListener('DOMContentLoaded', async () => {
         // })
 
     }
+    
+    const tablaParticipantes = document.getElementById('participantes-table');
 
-    try {
+    if (tablaParticipantes) {
 
-        let participantes = await obtenerUsuariosParticipantes();
+        try {
+    
+            let participantes = await obtenerUsuariosParticipantes();
+    
+            pintarParticipantes(participantes);   
+    
+        } catch (error) {
+    
+            console.error(error);
+    
+        }
 
-        pintarParticipantes(participantes);   
-
-    } catch (error) {
-
-        console.error(error);
 
     }
+
 
     toggleLoader()
 
