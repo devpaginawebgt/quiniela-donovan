@@ -73,11 +73,11 @@
 
                             </th>
 
-                            <th scope="col" class="py-3 px-6">
+                            {{-- <th scope="col" class="py-3 px-6">
 
                                 Fecha de registro
 
-                            </th>
+                            </th> --}}
 
                         </tr>
 

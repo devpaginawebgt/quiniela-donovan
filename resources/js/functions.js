@@ -623,13 +623,14 @@ const pintarParticipantes = (usuariosParticipantes) => {
 
         </td>
 
-        <td class="py-4 px-6">
-
-            ${new Date(element.created_at).toLocaleDateString('es-GT', opcionesFecha)}
-
-        </td>
 
         </tr>`;
+
+        // <td class="py-4 px-6">
+
+        //     ${new Date(element.created_at).toLocaleDateString('es-GT', opcionesFecha)}
+
+        // </td>
 
 
 
