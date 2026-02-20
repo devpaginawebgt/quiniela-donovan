@@ -20,8 +20,8 @@
               <img 
                 src="{{ rtrim(config('app.url'), '/') . '/images/logos/logo-white.png' }}"
                 alt="Logo"
-                width="260"
-                style="display:block; max-width:180px; height:auto;"
+                width="320"
+                style="display:block; max-width:320px; height:auto;"
               >
             </td>
           </tr>
@@ -79,7 +79,7 @@
                 style="text-decoration:none;">
 
                 <img 
-                    src="{{ rtrim(config('app.url'), '/') . '/images/decoracion/play_store.svg' }}"
+                    src="{{ rtrim(config('app.url'), '/') . '/images/decoracion/play_store.png' }}"
                     alt="Descargar en Google Play"
                     width="180"
                     style="display:block; width:200px; max-width:100%; height:auto; margin:0 auto;"
