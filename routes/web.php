@@ -46,9 +46,9 @@ Route::middleware(['auth'])->as('web.')->group(function() {
     // Grupos
 
     Route::controller(GrupoController::class)->prefix('grupos')->as('grupos.')->group(function() {
-        Route::get('', 'indexWeb')->name('index');
         Route::get('/{grupo_id}/equipos', 'getEquiposWeb')->name('equipos');
         Route::get('/{grupo_id}/jornadas', 'getJornadasWeb')->name('jornadas');
+        Route::get('', 'indexWeb')->name('index');
     });
 
     // Jornadas

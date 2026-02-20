@@ -217,17 +217,27 @@ class ResultadoPartidoController extends Controller
     public function guardarPrediccionesForm(Request $request)
     {
         try {
+
             $count_error = 0;
             $message = "";
             $fecha_actual = new DateTime('now');
 
             foreach ($request->partidos as $partido_id) {
+
+                $prediccion_equipo_1 = $request['prediccion_equipo1_' . $partido_id];
+                $prediccion_equipo_2 = $request['prediccion_equipo2_' . $partido_id];
+
+                if ($prediccion_equipo_1 === null || $prediccion_equipo_2 === null) {
+                    continue;
+                }
+
                 $fecha_db = DB::select("select fecha_partido,estado FROM partidos WHERE id=" . $partido_id);
                 $fecha_partido = new DateTime($fecha_db[0]->fecha_partido);
                 $diff = $fecha_actual->diff($fecha_partido);
                 $diferencia_minutos = (($diff->days * 1440 + $diff->h * 60) + $diff->i);
                 
                 if($diff->format('%R') == "+"){
+
                     if ($diferencia_minutos < 5) {
                         $count_error++;
                     } else {
@@ -254,7 +264,7 @@ class ResultadoPartidoController extends Controller
             }
         } catch (\Throwable $th) {
             $message = $th;
-        }
+        }        
 
         return redirect("ver-quiniela/$request->jornada/$message");
     }

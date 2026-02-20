@@ -440,8 +440,8 @@ class PrediccionService {
                     user_id = $user_id"
             );
 
-            $partido->pdg_equipo_1 = $prediccions[0]->goles_equipo_1 ?? 0;
-            $partido->pdg_equipo_2 = $prediccions[0]->goles_equipo_2 ?? 0;
+            $partido->pdg_equipo_1 = $prediccions[0]->goles_equipo_1 ?? '';
+            $partido->pdg_equipo_2 = $prediccions[0]->goles_equipo_2 ?? '';
 
             $partido->nombre_equipo_1 = $equipo_1->nombre;
             $partido->imagen_equipo_1 = $equipo_1->imagen;
