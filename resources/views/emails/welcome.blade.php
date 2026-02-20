@@ -82,7 +82,7 @@
                     src="{{ rtrim(config('app.url'), '/') . '/images/decoracion/play_store.png' }}"
                     alt="Descargar en Google Play"
                     width="180"
-                    style="display:block; width:200px; max-width:100%; height:auto; margin:0 auto;"
+                    style="display:block; width:160px; max-width:100%; height:auto; margin:16px auto 0 auto;"
                 >
 
                 </a>
