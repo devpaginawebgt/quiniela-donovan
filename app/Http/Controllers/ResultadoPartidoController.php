@@ -358,6 +358,8 @@ class ResultadoPartidoController extends Controller
                 c.estado != 0 
             AND 
                 u.pais_id = {$id_pais} 
+            AND
+                u.puntos > 0
             ORDER BY 
                 u.puntos DESC"
         );

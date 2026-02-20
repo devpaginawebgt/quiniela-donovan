@@ -32,7 +32,7 @@
                     {{ __('Quiniela') }}
                 </x-nav-link>
                 <x-nav-link :href="route('web.ver-tabla-resultados')" :active="request()->routeIs('web.ver-tabla-resultados')">
-                    {{ __('Tabla de resultados') }}
+                    {{ __('Ranking') }}
                 </x-nav-link>
                 <x-nav-link :href="route('web.ver-tabla-premios')" :active="request()->routeIs('web.ver-tabla-premios')">
                     {{ __('Tabla de premios') }}

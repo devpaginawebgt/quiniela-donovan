@@ -4,7 +4,7 @@
 
         <h2 class="font-semibold text-xl text-white leading-tight">
 
-            {{ __('México | Estados Unidos | Canadá 2026') }}
+            {{ __('Mundial 2026 México | Estados Unidos | Canadá') }}
 
         </h2>
 
@@ -14,11 +14,11 @@
 
     <div class="max-w-screen-2xl my-6 mx-auto sm:px-6 lg:px-8" id="selecciones-container">
 
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg xl:px-10 px-2 pb-11">
+        <div class="overflow-hidden shadow-sm sm:rounded-lg xl:px-10 px-2 pb-11">
 
-            <div class="px-6 pb-6 bg-white border-b border-gray-200 flex items-center justify-center">
+            <div class="px-6 pb-6 flex items-center justify-center">
 
-                <h5 class="text-3xl text-center font-bold my-8">Tabla general de participantes.</h5>
+                <h5 class="text-3xl text-center font-bold mt-4 mb-4">Ranking de participantes</h5>
 
                 <svg class="animate-spin spinner-load" viewBox="0 0 24 24"></svg>
 
@@ -28,21 +28,15 @@
 
             <div class="overflow-x-auto relative shadow-md sm:rounded-lg mx-auto">
 
-                <table class="w-full text-sm text-left text-gray-500">
+                <table class="w-full text-sm text-left bg-[--complementary-primary-color]" id="ranking-table">
 
-                    <thead class="text-xs text-gray-100 uppercase " style="background-color: #000">
+                    <thead class="text-xs uppercase bg-[--dark-color]">
 
                         <tr>
 
                             <th scope="col" class="py-3 px-6">
 
                                 Posicion
-
-                            </th>
-
-                            <th scope="col" class="py-3 px-6">
-
-                                Fecha de registro
 
                             </th>
 
@@ -72,9 +66,16 @@
                                 Teléfono
 
                             </th>
+                            
                             <th scope="col" class="py-3 px-6">
 
                                 Puntos
+
+                            </th>
+
+                            <th scope="col" class="py-3 px-6">
+
+                                Fecha de registro
 
                             </th>
 
@@ -84,7 +85,11 @@
 
                     <tbody id="body-participantes-quiniela">
 
-                        
+                        <tr>
+                            <td colspan="8" class="py-4 text-center">
+                                No hay participantes para mostrar
+                            </td>
+                        </tr>
 
                     </tbody>
 
