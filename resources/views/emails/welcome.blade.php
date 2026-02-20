@@ -20,7 +20,7 @@
               <img 
                 src="{{ rtrim(config('app.url'), '/') . '/images/logos/logo-white.png' }}"
                 alt="Logo"
-                width="180"
+                width="260"
                 style="display:block; max-width:180px; height:auto;"
               >
             </td>
@@ -62,7 +62,7 @@
                 src="{{ rtrim(config('app.url'), '/') . '/images/decoracion/qr-code-donovan.png' }}"
                 alt="Código QR"
                 width="200"
-                style="display:block; width:200px; max-width:100%; height:auto; padding:5px;"
+                style="display:block; width:180px; max-width:100%; height:auto; padding:5px;"
               >              
             </td>
           </tr>
@@ -79,10 +79,10 @@
                 style="text-decoration:none;">
 
                 <img 
-                    src="{{ rtrim(config('app.url'), '/') . '/images/decoracion/play_store.png' }}"
+                    src="{{ rtrim(config('app.url'), '/') . '/images/decoracion/play_store.svg' }}"
                     alt="Descargar en Google Play"
                     width="180"
-                    style="display:block; width:180px; max-width:100%; height:auto; margin:0 auto;"
+                    style="display:block; width:200px; max-width:100%; height:auto; margin:0 auto;"
                 >
 
                 </a>
