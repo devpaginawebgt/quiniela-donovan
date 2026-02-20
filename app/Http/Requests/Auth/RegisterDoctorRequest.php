@@ -22,7 +22,16 @@ class RegisterDoctorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            // 'codigo_id'        => ['required', 'string', 'exists:codigos,name'],
+            'nombres'          => ['required', 'string', 'max:60'],
+            'apellidos'        => ['required', 'string', 'max:60'],
+            'numero_documento' => ['required', 'string', 'max:13', 'unique:users,numero_documento'],
+            'telefono'         => ['required', 'string', 'max:20'],
+            'email'            => ['required', 'email', 'max:255', 'unique:users'],
+            'direccion'        => ['required', 'string', 'max:255'],
+            'pais_id'          => ['required', 'integer', 'exists:countries,id'],
+            'region'           => ['required', 'string', 'min:2', 'max:100'],
+            'capital'          => ['required', 'string', 'min:2', 'max:100'],
         ];
     }
 }

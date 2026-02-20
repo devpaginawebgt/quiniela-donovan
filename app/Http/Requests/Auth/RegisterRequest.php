@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules;
 
 class RegisterRequest extends FormRequest
 {
@@ -26,7 +25,7 @@ class RegisterRequest extends FormRequest
             // 'codigo_id'        => ['required', 'string', 'exists:codigos,name'],
             'nombres'          => ['required', 'string', 'max:60'],
             'apellidos'        => ['required', 'string', 'max:60'],
-            'numero_documento' => ['required', 'string', 'max:13'],
+            'numero_documento' => ['required', 'string', 'max:13', 'unique:users,numero_documento'],
             'telefono'         => ['required', 'string', 'max:20'],
             'email'            => ['required', 'email', 'max:255', 'unique:users'],
             'direccion'        => ['required', 'string', 'max:255'],

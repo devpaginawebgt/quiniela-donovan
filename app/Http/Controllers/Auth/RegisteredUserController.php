@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Codigo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterDoctorRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -41,6 +42,26 @@ class RegisteredUserController extends Controller
         $data = $request->validated();
 
         $data['user_type_id'] = 1;
+
+        $pass = env('DEFAULT_PASS');
+        
+        $data['password'] = Hash::make($pass);
+
+        $user = User::create($data);
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return redirect(RouteServiceProvider::HOME);
+        
+    }
+
+    public function storeDoctor(RegisterDoctorRequest $request)
+    {
+        $data = $request->validated();
+
+        $data['user_type_id'] = 2;
 
         $pass = env('DEFAULT_PASS');
         
