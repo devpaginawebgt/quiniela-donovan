@@ -6,6 +6,7 @@ use App\Http\Resources\Partido\PartidoResource;
 use App\Models\Equipo;
 use App\Models\EquipoPartido;
 use App\Models\Preccion;
+use App\Models\ResultadoPartido;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -425,86 +426,65 @@ class PrediccionService {
         foreach ($partidosJornada as $partido) {
 
             $equipo_1 = Equipo::find($partido->equipo_1);
-
             $equipo_2 = Equipo::find($partido->equipo_2);
-
-            $prediccions = DB::select(
-                "SELECT 
-                    preccions.goles_equipo_1,
-                    preccions.goles_equipo_2 
-                FROM 
-                    preccions
-                WHERE 
-                    partido_id = $partido->partido_id 
-                AND 
-                    user_id = $user_id"
-            );
-
-            $partido->pdg_equipo_1 = $prediccions[0]->goles_equipo_1 ?? '';
-            $partido->pdg_equipo_2 = $prediccions[0]->goles_equipo_2 ?? '';
 
             $partido->nombre_equipo_1 = $equipo_1->nombre;
             $partido->imagen_equipo_1 = $equipo_1->imagen;
 
             $partido->nombre_equipo_2 = $equipo_2->nombre;
             $partido->imagen_equipo_2 = $equipo_2->imagen;
+
+            // Información de predicción
+
+            $prediccion = Preccion::where('partido_id', $partido->partido_id)
+                ->where('user_id', $user_id)
+                ->first();
+
+            $partido->pdg_equipo_1 = $prediccion->goles_equipo_1 ?? '';
+            $partido->pdg_equipo_2 = $prediccion->goles_equipo_2 ?? '';
+
+            // Información de resultado
+
+            $resultado = ResultadoPartido::where('partido_id', $partido->partido_id)
+                ->first();
+
+            $partido->goles_equipo_1 = $resultado->goles_equipo_1 ?? '';
+            $partido->goles_equipo_2 = $resultado->goles_equipo_2 ?? '';
             
             $partido->fecha_partido = Carbon::create($partido->fecha_partido)
                 ->locale('es')
-                ->isoFormat('dddd D \d\e MMMM \d\e\l Y,  h:mm:ss A');
+                ->isoFormat('dddd D \d\e MMMM \d\e\l Y, hh:mm A');            
 
-            $prediccion = DB::select(
-                "SELECT 
-                    pre.id,
-                    pre.goles_equipo_1 as p_equipo_1, 
-                    pre.goles_equipo_2 as p_equipo_2, 
-                    pre.partido_id,
-                    res.goles_equipo_1,
-                    res.goles_equipo_2
-                FROM 
-                    preccions pre
-                INNER JOIN 
-                    resultado_partidos res ON pre.partido_id = res.partido_id
-                WHERE 
-                    pre.user_id = {$user_id} 
-                AND 
-                    pre.partido_id = {$partido->partido_id}"
-            );
-
-            $partido->goles_equipo_1 = $prediccion[0]->goles_equipo_1 ?? '';
-            
-            $partido->goles_equipo_2 = $prediccion[0]->goles_equipo_2 ?? '';
-
-            if ($partido->estado == 1 && isset($prediccion[0])) {
-                if ($prediccion[0]->p_equipo_1 == $prediccion[0]->goles_equipo_1 && $prediccion[0]->p_equipo_2 == $prediccion[0]->goles_equipo_2) {
+            if ($partido->estado == 1 && isset($prediccion)) {
+                if ($partido->pdg_equipo_1 == $partido->goles_equipo_1 && $partido->pdg_equipo_2 == $partido->goles_equipo_2) {
 
                     $partido->puntos = 5;
 
-                } elseif (($prediccion[0]->p_equipo_1 > $prediccion[0]->p_equipo_2 && $prediccion[0]->goles_equipo_1 > $prediccion[0]->goles_equipo_2) &&
+                } elseif (($partido->pdg_equipo_1 > $partido->pdg_equipo_2 && $partido->goles_equipo_1 > $partido->goles_equipo_2) &&
 
-                    ($prediccion[0]->p_equipo_1 == $prediccion[0]->goles_equipo_1 || $prediccion[0]->p_equipo_2 == $prediccion[0]->goles_equipo_2)
+                    ($partido->pdg_equipo_1 == $partido->goles_equipo_1 || $partido->pdg_equipo_2 == $partido->goles_equipo_2)
 
                 ) {
 
                     $partido->puntos = 4;
 
-                } elseif (($prediccion[0]->p_equipo_2 > $prediccion[0]->p_equipo_1 && $prediccion[0]->goles_equipo_2 > $prediccion[0]->goles_equipo_1) &&
-                    ($prediccion[0]->p_equipo_1 == $prediccion[0]->goles_equipo_1 || $prediccion[0]->p_equipo_2 == $prediccion[0]->goles_equipo_2)
+                } elseif (($partido->pdg_equipo_2 > $partido->pdg_equipo_1 && $partido->goles_equipo_2 > $partido->goles_equipo_1) &&
+                    ($partido->pdg_equipo_1 == $partido->goles_equipo_1 || $partido->pdg_equipo_2 == $partido->goles_equipo_2)
                 ) {
 
                     $partido->puntos = 4;
 
-                } elseif (($prediccion[0]->p_equipo_1 > $prediccion[0]->p_equipo_2 && $prediccion[0]->goles_equipo_1 > $prediccion[0]->goles_equipo_2) ||
-                    ($prediccion[0]->p_equipo_2 > $prediccion[0]->p_equipo_1 && $prediccion[0]->goles_equipo_2 > $prediccion[0]->goles_equipo_1)
+                } elseif (($partido->pdg_equipo_1 > $partido->pdg_equipo_2 && $partido->goles_equipo_1 > $partido->goles_equipo_2) ||
+                    ($partido->pdg_equipo_2 > $partido->pdg_equipo_1 && $partido->goles_equipo_2 > $partido->goles_equipo_1)
                 ) {
 
                     $partido->puntos = 2;
 
-                } elseif ($prediccion[0]->p_equipo_2 == $prediccion[0]->p_equipo_1 && $prediccion[0]->goles_equipo_2 == $prediccion[0]->goles_equipo_1) {
+                } elseif ($partido->pdg_equipo_2 == $partido->pdg_equipo_1 && $partido->goles_equipo_2 == $partido->goles_equipo_1) {
 
                     $partido->puntos = 2;
 
-                } elseif ($prediccion[0]->p_equipo_1 == $prediccion[0]->goles_equipo_1 || $prediccion[0]->p_equipo_2 == $prediccion[0]->goles_equipo_2) {
+                } elseif ($partido->pdg_equipo_1 == $partido->goles_equipo_1 || $partido->pdg_equipo_2 == $partido->goles_equipo_2) {
 
                     $partido->puntos = 1;
                 } else {
