@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use App\Models\Codigo;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
@@ -36,43 +36,23 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-        $codigo = Codigo::where('codigo', $request->codigo)->where('estado', 0)->first();
+        $data = $request->validated();
 
-        if(isset($codigo->id)){
-            $request->validate([
-                'nombres' => 'required|string|max:255',
-                'apellidos' => 'required|string|max:255',
-                'numero_documento' => 'required|string|max:14',
-                'telefono' => 'required|string|max:20',
-                'email' => 'required|string|email|max:255|unique:users',
-                'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            ]);
-    
-            $user = User::create([
-                'name' => now(),
-                'nombres' => $request->nombres,
-                'apellidos' => $request->apellidos,
-                'numero_documento' => $request->numero_documento,
-                'telefono' => $request->telefono,
-                'email' => $request->email,
-                'codigo_id' => $codigo->id,
-                'pais_id'   => $request->pais_id,
-                'password' => Hash::make($request->password),
-            ]);
-    
-            event(new Registered($user));
-    
-            Auth::login($user);
-    
-            $codigo->estado = 1;
-            $codigo->save();
+        $data['user_type_id'] = 1;
 
-            return redirect(RouteServiceProvider::HOME);
-        }
-        else{
-            return view('auth.register',['message_error' => 'El codigo ingresado no es valido o ya fue utilizado, solicite un nuevo codigo e intentelo nuevamente.']);
-        }
+        $pass = env('DEFAULT_PASS');
+        
+        $data['password'] = Hash::make($pass);
+
+        $user = User::create($data);
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return redirect(RouteServiceProvider::HOME);
+        
     }
 }

@@ -15,7 +15,10 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('codigo_id');
+
+            // Campos requeridos
+
+            $table->unsignedBigInteger('codigo_id')->nullable();
             $table->string('nombres');
             $table->string('apellidos');
             $table->string('numero_documento');
@@ -24,11 +27,42 @@ class CreateUsersTable extends Migration
             $table->integer('puntos')->index()->default(0);
             $table->unsignedBigInteger('pais_id');
             $table->string('direccion');
+
+            // Campos variables
+            
+            $table->string('region')->nullable();
+            $table->string('capital')->nullable();
+
+            $table->unsignedBigInteger('company_id')->nullable();
+            $table->unsignedBigInteger('branch_id')->nullable();
+
+            // Otros campos 
+
+            $table->unsignedBigInteger('user_type_id');
             $table->integer('status_user')->index()->default(1);
+
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('company_id')
+                ->references('id')
+                ->on('companies')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+
+            $table->foreign('branch_id')
+                ->references('id')
+                ->on('branches')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+
+            $table->foreign('user_type_id')
+                ->references('id')
+                ->on('user_types')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('codigo_id')
                 ->references('id')

@@ -22,8 +22,8 @@
 
         <form
             method="POST"
-            action="{{ route('register') }}"
-            class="grid grid-cols-2 gap-4 formulario-auth"
+            action="{{ route('register.dependiente') }}"
+            class="grid grid-cols-2 gap-4 formulario-auth mb-1"
         >
             @csrf
 
@@ -156,7 +156,7 @@
                 />
 
                 <select
-                    name="cadena"
+                    name="company_id"
                     id="cadena"
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full h-10 px-4"
                     required
@@ -173,7 +173,7 @@
                 />
 
                 <select
-                    name="sucursal"
+                    name="branch_id"
                     id="sucursal"
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full h-10 px-4"
                     required
@@ -184,15 +184,15 @@
             </div>
 
             <div class="col-span-2 flex flex-col items-start gap-4 mt-2">
-                <a
+                {{-- <a
                     class="w-full bg-[--secondary-color] text-[--dark-color] font-semibold rounded-md text-sm px-4 py-2 hover:brightness-[1.10] focus:ring-4 focus:ring-[--light-color] text-center"
                     href="{{ route('ingresa') }}"
                 >
                     {{ __('Registrarme') }}
-                </a>
-                {{-- <x-button class="w-full">
+                </a> --}}
+                <x-button class="w-full">
                     {{ __('Registrarme') }}
-                </x-button> --}}
+                </x-button>
 
                 <a class="text-sm text-[--complementary-light-color] hover:text-[--light-color]" href="{{ route('ingresa') }}">
                     {{ __('Ya estoy registrado') }}

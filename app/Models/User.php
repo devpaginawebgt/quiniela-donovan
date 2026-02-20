@@ -32,6 +32,14 @@ class User extends Authenticatable
         'pais_id',
         'puntos',
         'status_user',
+
+        'user_type_id',
+        'region',
+        'capital',
+        'company_id',
+        'branch_id',
+        
+        'password',
         'email_verified_at',
     ];
 
@@ -53,7 +61,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(UserType::class, 'user_type_id');
+    }
 
     public function codigo() : BelongsTo
     {

@@ -3,7 +3,7 @@
     style="background-image: url({{ asset('images/fondo-azul.png') }});"
 >
 
-    <div class="w-full sm:max-w-xl mt-28 md:mt-6 px-6 py-4 h-auto bg-[--complementary-primary-color] bg-opacity-80 shadow-md sm:rounded-lg overflow-y-auto">
+    <div class="w-full sm:max-w-xl p-6 h-auto bg-[--complementary-primary-color] bg-opacity-80 shadow-md sm:rounded-lg overflow-y-auto">
         <div>
             <img
                 src="/images/logos/logo-white.png"

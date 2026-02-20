@@ -31,7 +31,7 @@ class CountrySeeder extends Seeder
             'name'         => 'Panamá',
             'country_code' => '507',
             'timezone'     => 'GMT-5',
-            'is_active'       => true
+            'is_active'       => false
         ]);
 
         Country::create([

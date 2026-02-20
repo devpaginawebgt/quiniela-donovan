@@ -26,13 +26,15 @@ Route::middleware('guest')->group(function () {
     
         Route::get('doctor', 'createDoctor')->name('.doctor');
 
+        Route::post('dependiente', [RegisteredUserController::class, 'store'])->name('.dependiente');
+
+        Route::post('doctor', [RegisteredUserController::class, 'storeDoctor'])->name('.doctor');
+
         Route::get('/', function () {
             return redirect()->route('register.dependiente');
         });
      
     });
-        
-    Route::post('register', [RegisteredUserController::class, 'store'])->name('register');
 
     // Reset contraseña
     

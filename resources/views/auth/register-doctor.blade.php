@@ -22,8 +22,8 @@
 
         <form
             method="POST"
-            action="{{ route('register') }}"
-            class="grid grid-cols-2 gap-4 formulario-auth"
+            action="{{ route('register.doctor') }}"
+            class="grid grid-cols-2 gap-4 formulario-auth mb-1"
         >
             @csrf
 
@@ -184,16 +184,16 @@
             </div>
 
             <div class="col-span-2 flex flex-col items-start gap-4 mt-2">
-                <a
+                {{-- <a
                     class="w-full bg-[--secondary-color] text-[--dark-color] font-semibold rounded-md text-sm px-4 py-2 hover:brightness-[1.10] focus:ring-4 focus:ring-[--light-color]  text-center"
                     href="{{ route('ingresa') }}"
                 >
                     {{ __('Registrarme') }}
-                </a>
+                </a> --}}
 
-                {{-- <x-button class="w-full">
+                <x-button class="w-full">
                     {{ __('Registrarme') }}
-                </x-button> --}}
+                </x-button>
 
                 <a class="text-sm text-[--complementary-light-color] hover:text-[--light-color]" href="{{ route('ingresa') }}">
                     {{ __('Ya estoy registrado') }}

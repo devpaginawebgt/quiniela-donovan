@@ -15,7 +15,7 @@
         <form
             method="POST"
             action="{{ route('login') }}"
-            class="formulario-auth"
+            class="formulario-auth mb-2"
         >
             @csrf
 
