@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Grupo;
 
-use App\Http\Resources\Equipo\EquipoResource;
+use App\Http\Resources\Equipo\EquipoGrupoResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,7 +19,7 @@ class GrupoEquiposResource extends JsonResource
             'name' => $this->name,
             'value' => $this->id,
             'is_current' => $this->is_current,
-            'equipos' => EquipoResource::collection($this->equipos)
+            'equipos' => EquipoGrupoResource::collection($this->equipos)
         ];
     }
 }
