@@ -36,7 +36,7 @@ class UserService {
     public function getUserLogin(ApiLoginRequest $request)
     {
         return User::where('numero_documento', $request->numero_documento)
-            ->select('id', 'email', 'password', 'nombres', 'apellidos', 'pais_id', 'status_user', 'created_at')
+            ->select('id', 'email', 'password', 'nombres', 'apellidos', 'pais_id', 'puntos', 'status_user', 'created_at')
             ->first();
     }
 
