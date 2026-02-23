@@ -18,9 +18,7 @@
             class="formulario-auth mb-2"
         >
             @csrf
-
-            <input type="hidden" name="pass" value="{{ $pass }}">
-
+            
             <div class="mt-2 mb-4">
                 <x-label for="documento" :value="__('Número de Documento')" />
 
