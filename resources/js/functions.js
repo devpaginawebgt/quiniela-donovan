@@ -324,156 +324,154 @@ window.verPartidosJornada = verPartidosJornada;
 
 /**************QUINIELA SELECT */
 
+// const pintarPartidosJornadaQuiniela = (equipos) => {
 
+//     let espacioQuiniela = document.querySelector(`#partidos-jornada-quiniela`);
 
-const pintarPartidosJornadaQuiniela = (equipos) => {
+//     let partidos = [];
 
-    let espacioQuiniela = document.querySelector(`#partidos-jornada-quiniela`);
+//     let partidosAPintar = [];
 
-    let partidos = [];
+//     const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 
-    let partidosAPintar = [];
 
-    const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 
+//     for (let index = 0; index < equipos.length; index++) {
 
+//         partidos.push(equipos.slice(index, index + 2));
 
-    for (let index = 0; index < equipos.length; index++) {
+//         index++;
 
-        partidos.push(equipos.slice(index, index + 2));
+//     }
 
-        index++;
 
-    }
 
+//     partidos.forEach(element => {
 
+//         if (element[0].partido_id == element[1].partido_id) {
 
-    partidos.forEach(element => {
+//             let row = `<li class="flex justify-around lg:py-2 pb-28 my-4 xl:my-2 border-b border-gray-400 items-center ${element[0].estado == 0 ? 'partido-modulo-pronosticos' : '' } partido-${element[0].partido_id}">
 
-        if (element[0].partido_id == element[1].partido_id) {
+//             <input type="number" value="${element[0].partido_id}" hidden class="hidden partido-jornada-quiniela" disabled>
 
-            let row = `<li class="flex justify-around lg:py-2 pb-28 my-4 xl:my-2 border-b border-gray-400 items-center ${element[0].estado == 0 ? 'partido-modulo-pronosticos' : '' } partido-${element[0].partido_id}">
+//             <div class="w-1/2 xl:w-1/3 flex items-center justify-between px-1">
 
-            <input type="number" value="${element[0].partido_id}" hidden class="hidden partido-jornada-quiniela" disabled>
+//                 <div class="flex flex-col justify-center items-center xl:flex-row w-1/3 md:w-auto ml-2">
 
-            <div class="w-1/2 xl:w-1/3 flex items-center justify-between px-1">
+//                     <img src="${element[0].imagen}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
 
-                <div class="flex flex-col justify-center items-center xl:flex-row w-1/3 md:w-auto ml-2">
+//                     <p class="font-semibold text-xs xs:text-md lg:text-xl m-4">${element[0].nombre}</p>
 
-                    <img src="${element[0].imagen}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
+//                 </div>
 
-                    <p class="font-semibold text-xs xs:text-md lg:text-xl m-4">${element[0].nombre}</p>
+//                 <div class="flex flex-col justify-center items-center w-auto">
 
-                </div>
+//                     <div>
 
-                <div class="flex flex-col justify-center items-center w-auto">
+//                         <button class="" onclick="increaseBookmar(this)"><i><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-up-circle-fill text-rose-600 hover:text-rose-900" viewBox="0 0 16 16">
 
-                    <div>
+//                             <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
 
-                        <button class="" onclick="increaseBookmar(this)"><i><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-up-circle-fill text-rose-600 hover:text-rose-900" viewBox="0 0 16 16">
+//                           </svg></i>
 
-                            <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+//                         </button>
 
-                          </svg></i>
+//                     </div>
 
-                        </button>
+//                     <div class="my-2">
 
-                    </div>
+//                         <input type="number" name="" min="0" max="10" value="0" class="marcador-equipo-1 marcador-equipo bg-gray-50 border border-gray-100 text-gray-900 text-center lg:text-right text-lg rounded-md focus:ring-blue-500 focus:border-blue-500 block w-8 md:w-14 p-2">
 
-                    <div class="my-2">
+//                     </div>
 
-                        <input type="number" name="" min="0" max="10" value="0" class="marcador-equipo-1 marcador-equipo bg-gray-50 border border-gray-100 text-gray-900 text-center lg:text-right text-lg rounded-md focus:ring-blue-500 focus:border-blue-500 block w-8 md:w-14 p-2">
+//                     <div>
 
-                    </div>
+//                         <button class="" onclick="decreaseBookmar(this)"><i>
 
-                    <div>
+//                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-down-circle-fill text-rose-600 hover:text-rose-900" viewBox="0 0 16 16">
 
-                        <button class="" onclick="decreaseBookmar(this)"><i>
+//                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-down-circle-fill text-rose-600 hover:text-rose-900" viewBox="0 0 16 16">
+//                             </svg></i> 
 
-                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+//                         </button>
 
-                            </svg></i> 
+//                     </div>
 
-                        </button>
+//                 </div>
 
-                    </div>
+//             </div>
 
-                </div>
+//             <div class="w-full xl:w-1/3 flex flex-col justify-center items-center mt-56 lg:my-0 absolute lg:relative">
 
-            </div>
+//                 ${partidoJugado(element[0].fecha_partido,element[0].estado)}
 
-            <div class="w-full xl:w-1/3 flex flex-col justify-center items-center mt-56 lg:my-0 absolute lg:relative">
+//             </div>
 
-                ${partidoJugado(element[0].fecha_partido,element[0].estado)}
+//             <div class="w-1/2 xl:w-1/3 flex items-center justify-between px-1">
 
-            </div>
+//                 <div class="flex flex-col justify-center items-center w-auto">
 
-            <div class="w-1/2 xl:w-1/3 flex items-center justify-between px-1">
+//                     <div>
 
-                <div class="flex flex-col justify-center items-center w-auto">
+//                         <button class="" onclick="increaseBookmar(this)"><i><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-up-circle-fill text-rose-600 hover:text-rose-900" viewBox="0 0 16 16">
 
-                    <div>
+//                             <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
 
-                        <button class="" onclick="increaseBookmar(this)"><i><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-up-circle-fill text-rose-600 hover:text-rose-900" viewBox="0 0 16 16">
+//                           </svg></i>
 
-                            <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+//                         </button>
 
-                          </svg></i>
+//                     </div>
 
-                        </button>
+//                     <div class="my-2">
 
-                    </div>
+//                         <input type="number" name="" min="0" max="10" value="0" class="marcador-equipo-2 marcador-equipo bg-gray-50 border border-gray-100 text-gray-900 text-center lg:text-right text-lg rounded-md focus:ring-blue-500 focus:border-blue-500 block w-8 md:w-14 p-2">
 
-                    <div class="my-2">
+//                     </div>
 
-                        <input type="number" name="" min="0" max="10" value="0" class="marcador-equipo-2 marcador-equipo bg-gray-50 border border-gray-100 text-gray-900 text-center lg:text-right text-lg rounded-md focus:ring-blue-500 focus:border-blue-500 block w-8 md:w-14 p-2">
+//                     <div>
 
-                    </div>
+//                         <button class="" onclick="decreaseBookmar(this)"><i>
 
-                    <div>
+//                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-down-circle-fill text-rose-600 hover:text-rose-900" viewBox="0 0 16 16">
 
-                        <button class="" onclick="decreaseBookmar(this)"><i>
+//                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-down-circle-fill text-rose-600 hover:text-rose-900" viewBox="0 0 16 16">
+//                             </svg></i>
 
-                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+//                         </button>
 
-                            </svg></i>
+//                     </div>
 
-                        </button>
+//                 </div>
 
-                    </div>
+//                 <div class="flex flex-col-reverse justify-center items-center xl:flex-row w-1/3 md:w-auto mr-2">
 
-                </div>
+//                     <p class="font-semibold text-xs xs:text-md lg:text-xl m-4">${element[1].nombre}</p>
 
-                <div class="flex flex-col-reverse justify-center items-center xl:flex-row w-1/3 md:w-auto mr-2">
+//                     <img src="${element[1].imagen}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
 
-                    <p class="font-semibold text-xs xs:text-md lg:text-xl m-4">${element[1].nombre}</p>
+//                 </div>
 
-                    <img src="${element[1].imagen}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
+//             </div>
 
-                </div>
+//         </li>`;
 
-            </div>
+//             partidosAPintar.push(row);
 
-        </li>`;
+//         } else {
 
-            partidosAPintar.push(row);
 
-        } else {
+//         }
 
+//     });
 
-        }
 
-    });
 
+//     espacioQuiniela.innerHTML = partidosAPintar;
 
-
-    espacioQuiniela.innerHTML = partidosAPintar;
-
-}
+// }
 
 
 

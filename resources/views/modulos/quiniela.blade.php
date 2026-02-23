@@ -118,12 +118,20 @@
 
                             <ul id="partidos-jornada-quiniela" class="grid grid-cols-1 md:grid-cols-2 2xl:gap-12 max-w-[72rem] mx-auto gap-4 lg:gap-8 items-center">
 
-                                @foreach ($partidosJornada as $partido)
+                                @foreach ($partidosJornada as $registro)
 
                                 <li class="bg-[--complementary-primary-color] p-8 rounded-3xl flex flex-col relative">
 
                                     @php          
-                                        $pronosticado = !empty($partido->pdg_equipo_1) && !empty($partido->pdg_equipo_2);
+                                        $partido    = $registro->partido;
+                                        $equipoUno  = $registro->equipoUno;
+                                        $equipoDos  = $registro->equipoDos;
+                                        $prediccion = $registro->prediccion;
+                                        $resultado  = $registro->resultado;
+
+                                        $pronosticado = !empty($prediccion);
+                                        $prediccion_equipo_uno = empty($prediccion) ? '' : $prediccion->goles_equipo_1;
+                                        $prediccion_equipo_dos = empty($prediccion) ? '' : $prediccion->goles_equipo_2;                                        
                                     @endphp
 
                                     @if($pronosticado)
@@ -175,14 +183,14 @@
                                             <div class="flex flex-col justify-center items-center gap-4">
 
                                                 <img
-                                                    src="{{ asset($partido->imagen_equipo_1) }}"
+                                                    src="{{ asset($equipoUno->imagen) }}"
                                                     alt="SELECCION"
                                                     class="w-20 h-14 object-cover rounded-xl shadow-md"
                                                 >
 
                                                 <p class="font-semibold text-xs xs:text-md lg:text-base">
 
-                                                    {{ $partido->nombre_equipo_1 }}</p>
+                                                    {{ $equipoUno->nombre }}</p>
 
                                             </div>
 
@@ -199,12 +207,12 @@
                                             <div class="flex flex-col justify-center items-center gap-4">
 
                                                 <img
-                                                    src="{{ asset($partido->imagen_equipo_2) }}"
+                                                    src="{{ asset($equipoDos->imagen) }}"
                                                     alt="SELECCION"
                                                     class="w-20 h-14 object-cover rounded-xl shadow-md"
                                                 >
 
-                                                <p class="font-semibold text-xs xs:text-md lg:text-base">{{ $partido->nombre_equipo_2 }}</p>                                                
+                                                <p class="font-semibold text-xs xs:text-md lg:text-base">{{ $equipoDos->nombre }}</p>                                                
 
                                             </div>
 
@@ -222,9 +230,9 @@
                                                 <p class="text-center mb-2">Resultado del partido:</p>
     
                                                 <div class="resultadoPartido flex justify-center gap-8 items-center text-3xl font-bold">
-                                                    <p> {{ $partido->goles_equipo_1 }} </p> 
+                                                    <p> {{ $resultado->goles_equipo_1 }} </p> 
                                                     - 
-                                                    <p> {{ $partido->goles_equipo_2 }} </p>
+                                                    <p> {{ $resultado->goles_equipo_2 }} </p>
                                                 </div>
                                             </div>
                                         @endif
@@ -239,7 +247,7 @@
                                                 @if ($partido->estado === 0)
         
                                                     <input type="number" name="partidos[]"
-                                                        value="{{ $partido->partido_id }}" hidden
+                                                        value="{{ $registro->partido_id }}" hidden
                                                         class="hidden partido-jornada-quiniela">
         
                                                     <div class="flex justify-center items-center w-auto gap-4">
@@ -254,10 +262,10 @@
         
                                                             <input
                                                                 type="number"
-                                                                name="prediccion_equipo1_{{ $partido->partido_id }}"
+                                                                name="prediccion_equipo1_{{ $registro->partido_id }}"
                                                                 min="0"
                                                                 max="25"
-                                                                value="{{ $partido->pdg_equipo_1 }}"
+                                                                value="{{ $prediccion_equipo_uno }}"
                                                                 class="marcador-equipo-1 marcador-equipo border border-[--light-color] text-[--light-color] bg-transparent text-center rounded-md hide-input-arrows px-0 py-1"
                                                             >
         
@@ -273,13 +281,13 @@
                                                 @elseif ($partido->estado === 2)
                                                     <div class="flex flex-col justify-items-center">
                                                         <span class="text-2xl text-[--light-color]">
-                                                            {{ $partido->pdg_equipo_1 }}
+                                                            {{ $prediccion_equipo_uno }}
                                                         </span>
                                                     </div>
                                                 @elseif ($partido->estado === 1)
                                                     <div class="flex flex-col justify-items-center">
                                                         <span class="text-xl text-[--complementary-light-color]">
-                                                            {{ $partido->pdg_equipo_1 }}
+                                                            {{ $prediccion_equipo_uno }}
                                                         </span>
                                                     </div>
                                                 @endif
@@ -310,10 +318,10 @@
                                                         <div>
         
                                                             <input type="number"
-                                                                name="prediccion_equipo2_{{ $partido->partido_id }}"
+                                                                name="prediccion_equipo2_{{ $registro->partido_id }}"
                                                                 min="0" 
                                                                 max="10"
-                                                                value="{{ $partido->pdg_equipo_2 }}"
+                                                                value="{{ $prediccion_equipo_dos }}"
                                                                 class="marcador-equipo-1 marcador-equipo border border-[--light-color] text-[--light-color] bg-transparent text-center rounded-md hide-input-arrows px-0 py-1">
         
                                                         </div>
@@ -328,13 +336,13 @@
                                                 @elseif ($partido->estado === 2)
                                                     <div class="flex flex-col justify-items-center">
                                                         <span class="text-2xl text-[--light-color]">
-                                                            {{ $partido->pdg_equipo_2 }}
+                                                            {{ $prediccion_equipo_dos }}
                                                         </span>
                                                     </div>
                                                 @elseif ($partido->estado === 1)
                                                     <div class="flex flex-col justify-items-center">
                                                         <span class="text-xl text-[--complementary-light-color]">
-                                                            {{ $partido->pdg_equipo_2 }}
+                                                            {{ $prediccion_equipo_dos }}
                                                         </span>
                                                     </div>
                                                 @endif
@@ -344,8 +352,8 @@
                                         </div>                                      
 
                                         @if ($partido->estado === 1)
-                                            <div class="puntosGenerados font-semibold text-center mt-4 text-xl">Ganaste:
-                                                {{ $partido->puntos ?? '0' }} puntos.
+                                            <div class="puntosGenerados font-semibold text-center mt-4 text-xl">
+                                                Ganaste: {{ $partido->puntos ?? '0' }} puntos.
                                             </div>
                                         @endif
                                     </div>
@@ -353,7 +361,7 @@
 
 
 
-                                    {{-- @if($partido->estado === 2)
+                                    {{-- @if($registro->estado === 2)
                                         <div class="text-xl w-full flex items-center justify-center mt-8 text-[--complementary-light-color]">
                                             @php
                                                 $random_id = rand(0, 2);

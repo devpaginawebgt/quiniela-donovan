@@ -203,7 +203,7 @@ class ResultadoPartidoController extends Controller
 
         // Obtener información de las predicciones realizadas por el usuario
         
-        $partidosJornada = $this->prediccionService->prediccionesParticipante($jornada_filtrada, $user_id);
+        $partidosJornada = $this->prediccionService->getResultadosWeb($jornada_filtrada, $user_id);
 
         return view('modulos.quiniela', [
             'jornadas' => $jornadas,
