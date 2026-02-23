@@ -451,9 +451,9 @@ class PrediccionService {
             $partido->goles_equipo_1 = $resultado->goles_equipo_1 ?? '';
             $partido->goles_equipo_2 = $resultado->goles_equipo_2 ?? '';
             
-            $partido->fecha_partido = Carbon::create($partido->fecha_partido)
-                ->locale('es')
-                ->isoFormat('dddd D \d\e MMMM \d\e\l Y, hh:mm A');            
+            $partido->fecha_partido = Carbon::create($partido->fecha_partido);
+            //     ->locale('es')
+            //     ->isoFormat('dddd D \d\e MMMM \d\e\l Y, hh:mm A');
 
             if ($partido->estado == 1 && isset($prediccion)) {
                 if ($partido->pdg_equipo_1 == $partido->goles_equipo_1 && $partido->pdg_equipo_2 == $partido->goles_equipo_2) {

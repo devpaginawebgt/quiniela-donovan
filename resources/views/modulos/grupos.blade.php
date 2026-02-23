@@ -106,7 +106,7 @@
                                             ->locale('es');
 
                                         $fecha_partido = $fecha_local->isoFormat('dddd, D [de] MMMM [de] YYYY');
-                                        $hora_partido  = $fecha_local->translatedFormat('H:i A');
+                                        $hora_partido  = $fecha_local->translatedFormat('h:i a');
                                     @endphp
                                 
                                     <li class="flex justify-around py-6 lg:py-4 border-b border-zinc-400 items-center mb-4">
