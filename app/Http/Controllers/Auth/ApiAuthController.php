@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ApiLoginRequest;
+use App\Http\Resources\User\UserRankingResource;
 use App\Http\Resources\User\UserResource;
 use App\Http\Services\UserService;
 use App\Traits\ApiResponse;
@@ -41,11 +42,13 @@ class ApiAuthController extends Controller
 
         $token = $user->createToken('mobile-app')->plainTextToken;
         
-        $user = new UserResource($user);
+        $user_rank = $this->userService->getUserRank($user);
+
+        $user_rank = new UserRankingResource($user_rank);
 
         return $this->successResponse([
             'token' => $token,
-            'user' => $user,
+            'user' => $user_rank,
         ]);
     }
 

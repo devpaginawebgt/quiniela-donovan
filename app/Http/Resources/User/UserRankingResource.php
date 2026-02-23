@@ -34,7 +34,7 @@ class UserRankingResource extends JsonResource
                 break;
         }
 
-        $user_timezone = $request->user()->country->timezone;
+        $user_timezone = $this->country->timezone;
         $fecha_registro = $this->created_at->timezone($user_timezone);
 
         return [
