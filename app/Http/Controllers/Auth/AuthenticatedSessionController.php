@@ -86,7 +86,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function ensureIsNotRateLimited(LoginRequest $request)
     {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey($request), 5)) {
+        if (! RateLimiter::tooManyAttempts($this->throttleKey($request), 10)) {
             return;
         }
 
