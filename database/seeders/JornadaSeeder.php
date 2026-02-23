@@ -16,7 +16,7 @@ class JornadaSeeder extends Seeder
         $jornadas = [
             [
                 'name' => '1',
-                'is_current' => false 
+                'is_current' => true
             ],
             [
                 'name' => '2',
@@ -24,7 +24,7 @@ class JornadaSeeder extends Seeder
             ],
             [
                 'name' => '3',
-                'is_current' => true  
+                'is_current' => false
             ],
             [
                 'name' => 'Dieciseisavos de final',
