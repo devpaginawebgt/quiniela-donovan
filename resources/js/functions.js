@@ -249,7 +249,11 @@ const pintarPartidosJornadaGeneral = (equipos) => {
 
         if (element[0].partido_id == element[1].partido_id) {
 
-            const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+            console.log(element)
+
+            const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const fechaPartido = new Date(element[0].fecha_partido).toLocaleDateString('es-GT', opcionesFecha);
+            const horaPartido = new Date(element[0].fecha_partido).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
 
             let row = `<li class="flex justify-around py-6 border-b border-gray-400 items-center">
 
@@ -263,9 +267,9 @@ const pintarPartidosJornadaGeneral = (equipos) => {
 
             <div class="w-full xl:w-1/3 my-4 mt-44 lg:my-0 absolute lg:relative">
 
-                <p class="text-center">${new Date(element[0].fecha_partido).toLocaleDateString('es-ES', opcionesFecha)}</p>
+                <p class="text-center">${fechaPartido}</p>
 
-                <p class="text-center">${new Date(element[0].fecha_partido).toLocaleTimeString("es-GT", { hour12: true })}</p>
+                <p class="text-center">${horaPartido}</p>
 
             </div>
 
