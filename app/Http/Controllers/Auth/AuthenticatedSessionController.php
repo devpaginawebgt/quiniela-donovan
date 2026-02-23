@@ -62,7 +62,7 @@ class AuthenticatedSessionController extends Controller
             RateLimiter::hit($this->throttleKey($request));
 
             throw ValidationException::withMessages([
-                'email' => 'No se ha encontrado el número de documento',
+                'email' => 'El número de documento ingresado no está registrado en el sistema.',
             ]);
         }
 
