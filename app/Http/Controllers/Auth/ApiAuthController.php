@@ -65,7 +65,7 @@ class ApiAuthController extends Controller
             $minutes = ceil($seconds / 60);
     
             throw ValidationException::withMessages([
-                'email' => trans('auth.throttle', [
+                'numero_documento' => trans('auth.throttle', [
                     'seconds' => $seconds,
                     'minutes' => $minutes,
                 ]),

@@ -62,7 +62,7 @@ class AuthenticatedSessionController extends Controller
             RateLimiter::hit($this->throttleKey($request));
 
             throw ValidationException::withMessages([
-                'email' => 'El número de documento ingresado no está registrado en el sistema.',
+                'numero_documento' => 'El número de documento ingresado no está registrado en el sistema.',
             ]);
         }
 
@@ -70,7 +70,7 @@ class AuthenticatedSessionController extends Controller
 
         if (! Auth::attempt($credentials)) {
             throw ValidationException::withMessages([
-                'email' => 'Ha ocurrido un error al iniciar la sesión, contacta a Soporte',
+                'numero_documento' => 'Ha ocurrido un error al iniciar la sesión, contacta a Soporte',
             ]);
         }
 
@@ -95,7 +95,7 @@ class AuthenticatedSessionController extends Controller
         $seconds = RateLimiter::availableIn($this->throttleKey($request));
 
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
+            'numero_documento' => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),
