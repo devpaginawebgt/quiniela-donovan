@@ -25,7 +25,7 @@ class RegisterDoctorRequest extends FormRequest
             // 'codigo_id'        => ['required', 'string', 'exists:codigos,name'],
             'nombres'          => ['required', 'string', 'max:60'],
             'apellidos'        => ['required', 'string', 'max:60'],
-            'numero_documento' => ['required', 'string', 'max:13', 'unique:users,numero_documento'],
+            'numero_documento' => ['required', 'integer', 'digits:13', 'unique:users,numero_documento'],
             'telefono'         => ['required', 'string', 'max:20'],
             'email'            => ['required', 'email', 'max:255', 'unique:users'],
             'direccion'        => ['required', 'string', 'max:255'],
@@ -50,8 +50,9 @@ class RegisterDoctorRequest extends FormRequest
 
             // NUMERO DOCUMENTO
             'numero_documento.required' => 'Por favor, ingrese su Número de Documento.',
-            'numero_documento.string'   => 'El Número de Documento debe contener texto.',
-            'numero_documento.max'      => 'El Número de Documento no debe superar los 13 caracteres.',
+            'numero_documento.integer'  => 'El campo número de documento solo debe contener números.',
+            'numero_documento.digits'   => 'El número de documento debe contener 13 dígitos.',
+            // 'numero_documento.max'      => 'El Número de Documento no debe superar los 13 caracteres.',
             'numero_documento.unique'   => 'Ya existe un usuario registrado con este Número de Documento.',
 
             // TELEFONO

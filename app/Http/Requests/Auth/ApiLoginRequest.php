@@ -27,8 +27,9 @@ class ApiLoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'string', 'email', 'exists:users,email'],
-            'password' => ['required', 'string'],
+            'numero_documento' => ['required', 'integer', 'digits:13'],
+            // 'email' => ['required', 'string', 'email', 'exists:users,email'],
+            // 'password' => ['required', 'string'],
         ];
     }
 
@@ -36,13 +37,16 @@ class ApiLoginRequest extends FormRequest
     {
         
         return [
-            'email.required' => 'Por favor llene el campo correo electrónico.',
-            'email.string' => 'El correo electrónico debe contener texto.',
-            'email.email' => 'Por favor ingrese un correo electrónico válido.',
-            'email.exists' => 'No encontramos un usuario con esta dirección de correo electrónico.',
+            'numero_documento.required' => 'Por favor ingrese su número de documento.',
+            'numero_documento.integer'  => 'Ingresa un número de documento válido (solo números).',
+            'numero_documento.digits'   => 'Ingresa un número de documento válido (debe contener 13 dígitos).',
+            // 'email.required' => 'Por favor llene el campo correo electrónico.',
+            // 'email.string' => 'El correo electrónico debe contener texto.',
+            // 'email.email' => 'Por favor ingrese un correo electrónico válido.',
+            // 'email.exists' => 'No encontramos un usuario con esta dirección de correo electrónico.',
 
-            'password.required' => 'Por favor llene el campo contraseña.',
-            'password.string' => 'La contraseña debe contener texto.',
+            // 'password.required' => 'Por favor llene el campo contraseña.',
+            // 'password.string' => 'La contraseña debe contener texto.',
         ];
         
     }

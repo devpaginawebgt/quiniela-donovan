@@ -23,7 +23,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'numero_documento' => ['required', 'integer', 'max:9999999999999'],
+            'numero_documento' => ['required', 'integer', 'digits:13'],
             // 'email' => ['required', 'string', 'email', 'exists:users,email'],
             // 'password' => ['required', 'string'],
         ];
@@ -35,7 +35,7 @@ class LoginRequest extends FormRequest
         return [
             'numero_documento.required' => 'Por favor ingrese su número de documento.',
             'numero_documento.integer'  => 'Ingresa un número de documento válido (solo números).',
-            'numero_documento.max'      => 'Ingresa un número de documento válido (no más de 13 caracteres).',
+            'numero_documento.digits'   => 'Ingresa un número de documento válido (debe contener 13 dígitos).',
 
             // 'email.required' => 'Por favor llene el campo correo electrónico.',
             // 'email.string' => 'El correo electrónico debe contener texto.',
