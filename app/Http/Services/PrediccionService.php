@@ -456,23 +456,11 @@ class PrediccionService {
             //     ->isoFormat('dddd D \d\e MMMM \d\e\l Y, hh:mm A');
 
             if ($partido->estado == 1 && isset($prediccion)) {
+
+
                 if ($partido->pdg_equipo_1 == $partido->goles_equipo_1 && $partido->pdg_equipo_2 == $partido->goles_equipo_2) {
 
-                    $partido->puntos = 5;
-
-                } elseif (($partido->pdg_equipo_1 > $partido->pdg_equipo_2 && $partido->goles_equipo_1 > $partido->goles_equipo_2) &&
-
-                    ($partido->pdg_equipo_1 == $partido->goles_equipo_1 || $partido->pdg_equipo_2 == $partido->goles_equipo_2)
-
-                ) {
-
-                    $partido->puntos = 4;
-
-                } elseif (($partido->pdg_equipo_2 > $partido->pdg_equipo_1 && $partido->goles_equipo_2 > $partido->goles_equipo_1) &&
-                    ($partido->pdg_equipo_1 == $partido->goles_equipo_1 || $partido->pdg_equipo_2 == $partido->goles_equipo_2)
-                ) {
-
-                    $partido->puntos = 4;
+                    $partido->puntos = 3;
 
                 } elseif (($partido->pdg_equipo_1 > $partido->pdg_equipo_2 && $partido->goles_equipo_1 > $partido->goles_equipo_2) ||
                     ($partido->pdg_equipo_2 > $partido->pdg_equipo_1 && $partido->goles_equipo_2 > $partido->goles_equipo_1)
@@ -487,9 +475,47 @@ class PrediccionService {
                 } elseif ($partido->pdg_equipo_1 == $partido->goles_equipo_1 || $partido->pdg_equipo_2 == $partido->goles_equipo_2) {
 
                     $partido->puntos = 1;
+                    
                 } else {
                     $partido->puntos = 0;
                 }
+
+                // if ($partido->pdg_equipo_1 == $partido->goles_equipo_1 && $partido->pdg_equipo_2 == $partido->goles_equipo_2) {
+
+                //     $partido->puntos = 5;
+
+                // } elseif (($partido->pdg_equipo_1 > $partido->pdg_equipo_2 && $partido->goles_equipo_1 > $partido->goles_equipo_2) &&
+
+                //     ($partido->pdg_equipo_1 == $partido->goles_equipo_1 || $partido->pdg_equipo_2 == $partido->goles_equipo_2)
+
+                // ) {
+
+                //     $partido->puntos = 4;
+
+                // } elseif (($partido->pdg_equipo_2 > $partido->pdg_equipo_1 && $partido->goles_equipo_2 > $partido->goles_equipo_1) &&
+                //     ($partido->pdg_equipo_1 == $partido->goles_equipo_1 || $partido->pdg_equipo_2 == $partido->goles_equipo_2)
+                // ) {
+
+                //     $partido->puntos = 4;
+
+                // } elseif (($partido->pdg_equipo_1 > $partido->pdg_equipo_2 && $partido->goles_equipo_1 > $partido->goles_equipo_2) ||
+                //     ($partido->pdg_equipo_2 > $partido->pdg_equipo_1 && $partido->goles_equipo_2 > $partido->goles_equipo_1)
+                // ) {
+
+                //     $partido->puntos = 2;
+
+                // } elseif ($partido->pdg_equipo_2 == $partido->pdg_equipo_1 && $partido->goles_equipo_2 == $partido->goles_equipo_1) {
+
+                //     $partido->puntos = 2;
+
+                // } elseif ($partido->pdg_equipo_1 == $partido->goles_equipo_1 || $partido->pdg_equipo_2 == $partido->goles_equipo_2) {
+
+                //     $partido->puntos = 1;
+                // } else {
+                //     $partido->puntos = 0;
+                // }
+
+
             }
         }
 
