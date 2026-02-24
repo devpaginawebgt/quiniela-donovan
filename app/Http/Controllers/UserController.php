@@ -32,11 +32,13 @@ class UserController extends Controller
     
     public function getUser(Request $request)
     {
-        $user = $request->user();        
+        $user = $request->user();
+        
+        $user_rank = $this->userService->getUserRank($user);
 
-        $user = new UserRankingResource($user);
+        $user_rank = new UserRankingResource($user_rank);
 
-        return $this->successResponse($user);
+        return $this->successResponse($user_rank);
 
     }
 
