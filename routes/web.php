@@ -53,7 +53,7 @@ Route::middleware(['auth'])->as('web.')->group(function() {
 
     // Jornadas
 
-    Route::prefix('jornadas')->controller(JornadaController::class)->group(function() {
+    Route::controller(JornadaController::class)->prefix('jornadas')->group(function() {
         Route::get('', 'jornadasWeb')->name('jornadas');
 
         Route::post('/partidos-grupo', 'partidosGrupo');
@@ -70,13 +70,16 @@ Route::middleware(['auth'])->as('web.')->group(function() {
 
     Route::controller(ResultadoPartidoController::class)->group(function() {
         Route::get('/ver-quiniela/{jornada?}/{message?}', 'verQuiniela')->name('ver-quiniela');
-        Route::get('/ver-tabla-resultados', 'verTablaResultados')->name('ver-tabla-resultados');
-        
         Route::post('/guardar-predicciones-form', 'guardarPrediccionesForm')->name('guardar-predicciones-form');
 
-        Route::post('/guardar-predicciones/', 'guardarPredicciones');
-        Route::post('/obtener-predicciones/', 'obtenerPrediccionesGuardadas');
-        Route::get('/obtener-tabla-participantes/{user_id}', 'obtenerParticipantes');
+        // Route::get('/ver-tabla-resultados', 'verTablaResultados')->name('ver-tabla-resultados');
+        // Route::get('/obtener-tabla-participantes', 'obtenerParticipantes');
+        // Route::post('/guardar-predicciones/', 'guardarPredicciones');
+        // Route::post('/obtener-predicciones/', 'obtenerPrediccionesGuardadas');
+    });
+
+    Route::controller(UserController::class)->as('users')->group(function() {
+        Route::get('ranking', 'indexWeb')->name('.ranking');
     });
 
     // Premios

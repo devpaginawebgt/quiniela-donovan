@@ -36,17 +36,18 @@ class UserService {
     public function getUserLogin(ApiLoginRequest $request)
     {
         return User::where('numero_documento', $request->numero_documento)
-            ->select('id', 'email', 'password', 'nombres', 'apellidos', 'pais_id', 'puntos', 'status_user', 'created_at')
+            ->select('id', 'email', 'password', 'nombres', 'apellidos', 'pais_id', 'numero_documento', 'email', 'telefono', 'puntos', 'status_user', 'created_at')
             ->first();
     }
 
     public function getRanking($id_pais)
     {
-        $participantes = User::select('id', 'nombres', 'apellidos', 'pais_id', 'puntos', 'created_at')
+        $participantes = User::select('id', 'nombres', 'apellidos', 'pais_id', 'numero_documento', 'email', 'telefono', 'puntos', 'created_at')
             ->selectRaw('RANK() OVER (ORDER BY puntos DESC, nombres ASC) as posicion')
             ->has('predictions')
             ->where('status_user', 1)
             ->where('pais_id', $id_pais)
+            ->where('puntos', '>', 0)
             ->get();
 
         return $participantes;
@@ -59,8 +60,8 @@ class UserService {
             ->selectRaw('RANK() OVER (ORDER BY puntos DESC, nombres ASC) as posicion')
             ->has('predictions')
             ->where('status_user', 1)
-            ->where('pais_id', $user->pais_id);
-
+            ->where('pais_id', $user->pais_id)
+            ->where('puntos', '>', 0);
         
         $rank = DB::query()
             ->fromSub($rankingQuery, 'ranking')

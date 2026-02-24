@@ -21,18 +21,6 @@ const decreaseBookmar = (btn) => {
 
 window.decreaseBookmar = decreaseBookmar;
 
-
-const obtenerUsuariosParticipantes = async () => {
-
-    let datos = await axios.get(`/obtener-tabla-participantes/${user_id.value}`)
-      .then(data => data.data)
-      .catch(console.error);
-
-    return datos;
-}
-
-window.obtenerUsuariosParticipantes = obtenerUsuariosParticipantes;
-
 const guardarMarcadoresPartidos = async (user_id) => {
     let partidosAGuardar = [];
     let contenedoresPartidos = document.querySelectorAll(".partido-modulo-pronosticos");

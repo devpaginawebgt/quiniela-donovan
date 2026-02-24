@@ -286,27 +286,27 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     }
     
-    const tablaParticipantes = document.getElementById('ranking-table');
+    // const tablaParticipantes = document.getElementById('ranking-table');
 
-    if (tablaParticipantes) {
+    // if (tablaParticipantes) {
 
-        try {
+    //     try {
     
-            let participantes = await obtenerUsuariosParticipantes();
+    //         let participantes = await obtenerUsuariosParticipantes();
 
-            if (participantes && participantes.length) {
-                pintarParticipantes(participantes);   
-            }
+    //         if (participantes && participantes.length) {
+    //             pintarParticipantes(participantes);   
+    //         }
     
     
-        } catch (error) {
+    //     } catch (error) {
     
-            console.error(error);
+    //         console.error(error);
     
-        }
+    //     }
 
 
-    }
+    // }
 
 
     toggleLoader()
@@ -499,22 +499,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 // }
 
 
+// async function obtenerUsuariosParticipantes() {
 
-/**********PARTICIPANTES QUINIELA */
+//     return await axios.get(`/obtener-tabla-participantes`);
 
+// }
 
-
-const pintarParticipantes = (usuariosParticipantes) => {
+const pintarParticipantes = (usuarios) => {
 
     let tablaParticipantes = document.querySelector('#body-participantes-quiniela');
-
-    let rowParticipantes = [];
-
-    const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
-
-
-
-    usuariosParticipantes.forEach((element, index) => {
+    
+    const filas = usuarios.map((element, index) => {
+        
+        // const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 
         const position = index + 1;
 
@@ -589,14 +586,8 @@ const pintarParticipantes = (usuariosParticipantes) => {
 
         // </td>
 
-
-
-        rowParticipantes.push(row);
-
     });
 
-
-
-    tablaParticipantes.innerHTML = rowParticipantes.join(' ');
+    tablaParticipantes.innerHTML = filas.join(' ');
 
 }

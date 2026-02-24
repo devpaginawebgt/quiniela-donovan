@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Resources\User\UserRankingResource;
 use App\Http\Resources\User\UserResource;
 use App\Http\Services\UserService;
-use App\Models\User;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -70,6 +70,20 @@ class UserController extends Controller
 
     // Funciones para la web
 
+    public function indexWeb() 
+    {
+        $user = Auth::user();
+
+        $id_pais = (int) $user->pais_id;
+
+        $participantes = $this->userService->getRanking($id_pais);
+
+        return view('modulos.tabla-resultados', [
+            'participantes' => $participantes
+        ]);
+
+    }
+
     public function verParticipantes()
     {
 
@@ -79,5 +93,5 @@ class UserController extends Controller
             'participantes' => $participantes
         ]);
 
-    }
+    }    
 }

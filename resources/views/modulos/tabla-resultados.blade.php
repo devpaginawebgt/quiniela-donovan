@@ -84,13 +84,57 @@
                     </thead>
 
                     <tbody id="body-participantes-quiniela">
+                        @if(!empty($participantes))
 
-                        <tr>
-                            <td colspan="8" class="py-4 text-center">
-                                No hay participantes para mostrar
-                            </td>
-                        </tr>
+                            @foreach($participantes as $participante)
 
+                                @php
+                                    switch($participante->posicion) {
+                                        case 1:
+                                            $decoration = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21v-2h4v-3.1q-1.225-.275-2.187-1.037T7.4 12.95q-1.875-.225-3.137-1.637T3 8V7q0-.825.588-1.412T5 5h2V3h10v2h2q.825 0 1.413.588T21 7v1q0 1.9-1.263 3.313T16.6 12.95q-.45 1.15-1.412 1.913T13 15.9V19h4v2zm0-10.2V7H5v1q0 .95.55 1.713T7 10.8m10 0q.9-.325 1.45-1.088T19 8V7h-2z"/></svg>';
+                                            $positionStyle = 'color: #EFBF04';
+                                            break;
+                                        case 2:
+                                            $decoration = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21v-2h4v-3.1q-1.225-.275-2.187-1.037T7.4 12.95q-1.875-.225-3.137-1.637T3 8V7q0-.825.588-1.412T5 5h2V3h10v2h2q.825 0 1.413.588T21 7v1q0 1.9-1.263 3.313T16.6 12.95q-.45 1.15-1.412 1.913T13 15.9V19h4v2zm0-10.2V7H5v1q0 .95.55 1.713T7 10.8m10 0q.9-.325 1.45-1.088T19 8V7h-2z"/></svg>';
+                                            $positionStyle = 'color: #C4C4C4';
+                                            break;
+                                        case 3:
+                                            $decoration = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21v-2h4v-3.1q-1.225-.275-2.187-1.037T7.4 12.95q-1.875-.225-3.137-1.637T3 8V7q0-.825.588-1.412T5 5h2V3h10v2h2q.825 0 1.413.588T21 7v1q0 1.9-1.263 3.313T16.6 12.95q-.45 1.15-1.412 1.913T13 15.9V19h4v2zm0-10.2V7H5v1q0 .95.55 1.713T7 10.8m10 0q.9-.325 1.45-1.088T19 8V7h-2z"/></svg>';
+                                            $positionStyle = 'color: #CE8946';
+                                            break;
+                                        default:
+                                            $decoration = '';
+                                            $positionStyle = 'color: #FFFFFF';
+                                            break;
+                                    }
+                                @endphp
+
+                                <tr class="border-b border-zinc-400">
+
+                                    <th scope="row" class="py-4 px-6 font-bold text-lg whitespace-nowrap">
+                                        <span style="{{ $positionStyle }}" class="flex gap-2 items-center">
+                                            {{ $participante->posicion }}°. {!! $decoration !!}
+                                        </span>
+                                    </th>
+                                    <td class="py-4 px-6">{{ $participante->nombres }}</td>
+                                    <td class="py-4 px-6">{{ $participante->apellidos }}</td>
+                                    <td class="py-4 px-6">{{ $participante->numero_documento }}</td>
+                                    <td class="py-4 px-6">{{ $participante->email }}</td>
+                                    <td class="py-4 px-6">{{ $participante->telefono }}</td>
+                                    <td class="py-4 px-6">{{ $participante->puntos }}</td>
+                                </tr>
+                            
+                            @endforeach
+                        
+                        @else
+
+                            <tr>
+                                <td colspan="8" class="py-4 text-center">
+                                    No hay participantes para mostrar
+                                </td>
+                            </tr>
+
+                        @endif
                     </tbody>
 
                 </table>

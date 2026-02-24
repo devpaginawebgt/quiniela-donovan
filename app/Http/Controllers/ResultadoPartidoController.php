@@ -168,19 +168,6 @@ class ResultadoPartidoController extends Controller
 
     // Continua lógica de la web
 
-    public function verTablaResultados() 
-    {
-
-        $user_id = Auth::user()->id;
-
-        $this->partidoService->actualizarPuntosEquipos();
-
-        $this->prediccionService->actualizarPuntosParticipantes($user_id);
-
-        return view('modulos.tabla-resultados');
-
-    }
-
     public function verQuiniela($jornada = null, $message = '0OK')
     {
         $jornada = (int)$jornada;
@@ -337,45 +324,45 @@ class ResultadoPartidoController extends Controller
 
     }
 
-    public function obtenerParticipantes($user_id)
-    {
+    // public function obtenerParticipantes($user_id)
+    // {
 
-        $pais = DB::select(
-            "SELECT 
-                pais_id 
-            FROM 
-                users 
-            WHERE id = {$user_id}"
-        );
+    //     $pais = DB::select(
+    //         "SELECT 
+    //             pais_id 
+    //         FROM 
+    //             users 
+    //         WHERE id = {$user_id}"
+    //     );
 
-        $id_pais = $pais[0]->pais_id;
+    //     $id_pais = $pais[0]->pais_id;
         
-        $participantes = DB::select(
-            "SELECT 
-                u.id,
-                u.nombres,
-                u.apellidos,
-                u.puntos,
-                u.email,
-                u.telefono,
-                u.numero_documento,
-                c.estado
-            FROM 
-                users u
-            INNER JOIN 
-                codigos c on u.codigo_id = c.id 
-            WHERE 
-                c.estado != 0 
-            AND 
-                u.pais_id = {$id_pais} 
-            AND
-                u.puntos > 0
-            ORDER BY 
-                u.puntos DESC"
-        );
+    //     $participantes = DB::select(
+    //         "SELECT 
+    //             u.id,
+    //             u.nombres,
+    //             u.apellidos,
+    //             u.puntos,
+    //             u.email,
+    //             u.telefono,
+    //             u.numero_documento,
+    //             c.estado
+    //         FROM 
+    //             users u
+    //         INNER JOIN 
+    //             codigos c on u.codigo_id = c.id 
+    //         WHERE 
+    //             c.estado != 0 
+    //         AND 
+    //             u.pais_id = {$id_pais} 
+    //         AND
+    //             u.puntos > 0
+    //         ORDER BY 
+    //             u.puntos DESC"
+    //     );
         
-        return json_encode($participantes);
-    }
+    //     return json_encode($participantes);
+    // }
     
     public function actualizarPuntosParticipantesALL()
     {

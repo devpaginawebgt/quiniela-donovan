@@ -31,7 +31,7 @@
                 <x-nav-link :href="route('web.ver-quiniela')" :active="request()->routeIs('web.ver-quiniela')">
                     {{ __('Quiniela') }}
                 </x-nav-link>
-                <x-nav-link :href="route('web.ver-tabla-resultados')" :active="request()->routeIs('web.ver-tabla-resultados')">
+                <x-nav-link :href="route('web.users.ranking')" :active="request()->routeIs('web.users.ranking')">
                     {{ __('Ranking') }}
                 </x-nav-link>
                 <x-nav-link :href="route('web.ver-tabla-premios')" :active="request()->routeIs('web.ver-tabla-premios')">
@@ -102,7 +102,7 @@
             <x-responsive-nav-link :href="route('web.ver-quiniela')" :active="request()->routeIs('web.ver-quiniela')">
                 {{ __('Quiniela') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('web.ver-tabla-resultados')" :active="request()->routeIs('web.ver-tabla-resultados')">
+            <x-responsive-nav-link :href="route('web.users.ranking')" :active="request()->routeIs('web.users.ranking')">
                 {{ __('Tabla de resultados') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('web.ver-tabla-premios')" :active="request()->routeIs('web.ver-tabla-premios')">
