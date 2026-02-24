@@ -196,6 +196,39 @@
                 />
             </div>
 
+            <div class="col-span-2">
+                <x-label
+                    for="visitor"
+                    :value="__('Visitador')"
+                />
+
+                <select
+                    name="visitor_id"
+                    id="visitor"
+                    class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full h-10 text-sm"
+                    required
+                >
+                    <option value="">
+                        Seleccionar
+                    </option>
+                    @php
+                        $visitadores = [
+                            1 => 'Fernando José Hernández López',
+                            2 => 'María Alejandra Lutín'
+                        ];
+                    @endphp
+
+                    @foreach ($visitadores as $value => $nombre_visitador)
+                        @php
+                            $selected = old('visitor_id') == $value ? 'selected' : '';
+                        @endphp
+                        <option value="{{ $value }}" {{ $selected }}>
+                            {{ $nombre_visitador }}
+                        </option>    
+                    @endforeach
+                </select>
+            </div>
+
             <div class="col-span-2 flex flex-col items-start gap-4 mt-2">
                 {{-- <a
                     class="w-full bg-[--secondary-color] text-[--dark-color] font-semibold rounded-md text-sm px-4 py-2 hover:brightness-[1.10] focus:ring-4 focus:ring-[--light-color]  text-center"

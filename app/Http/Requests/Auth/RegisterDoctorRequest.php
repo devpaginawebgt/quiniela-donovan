@@ -32,6 +32,7 @@ class RegisterDoctorRequest extends FormRequest
             'pais_id'          => ['required', 'integer', 'exists:countries,id'],
             'region'           => ['required', 'string', 'min:2', 'max:100'],
             'capital'          => ['required', 'string', 'min:2', 'max:100'],
+            'visitor_id'       => ['required', 'integer', 'exists:visitors,id'],
         ];
     }
 
@@ -87,6 +88,11 @@ class RegisterDoctorRequest extends FormRequest
             'capital.string'   => 'El campo capital debe contener texto.',
             'capital.min'      => 'El campo capital debe tener al menos 2 caracteres.',
             'capital.max'      => 'El campo capital no debe superar los 100 caracteres.',
+
+            // CAPITAL
+            'visitor_id.required' => 'Por favor seleccione el visitador médico que inscribe.',
+            'visitor_id.integer'  => 'Selecciona un visitador médico del listado.',
+            'visitor_id.exists'   => 'No se encontró el visitador médico seleccionado.',
         ];
     }
 }

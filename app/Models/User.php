@@ -32,10 +32,12 @@ class User extends Authenticatable
         'pais_id',
         'puntos',
         'status_user',
-
         'user_type_id',
+
         'region',
         'capital',
+        'visitor_id',
+
         'company_id',
         'branch_id',
         
