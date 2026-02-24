@@ -120,7 +120,7 @@ const pintarEquiposGrupo = (equipos) => {
         return `
             <tr class="bg-[--complementary-primary-color] border-b border-zinc-400 text-[--light-color]">
                 <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap flex items-center justify-between w-full">
-                    <img src="${equipo.image}" alt="SELECCION" class="h-10 w-14 mx-4 rounded-md shadow-md">
+                    <img src="${equipo.image}" alt="SELECCION" class="h-10 w-14 object-cover mx-4 rounded-md shadow-md">
                     ${equipo.name}
                 </th>
                 <td class="py-4 px-6">${pj.value}</td>
@@ -154,7 +154,7 @@ const pintarPartidosGrupo = (jornada) => {
 
             <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
-                <img src="${partido.equipoUno.imagen}" alt="SELECCION" class="h-10 w-14 mx-4 rounded-md shadow-md">
+                <img src="${partido.equipoUno.imagen}" alt="SELECCION" class="h-10 w-14 object-cover mx-4 rounded-md shadow-md">
 
                 <p class="font-semibold">${partido.equipoUno.nombre}</p>
 
@@ -170,7 +170,7 @@ const pintarPartidosGrupo = (jornada) => {
 
             <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
-                <img src="${partido.equipoDos.imagen}" alt="SELECCION" class="h-10 w-14 mx-4 rounded-md shadow-md">
+                <img src="${partido.equipoDos.imagen}" alt="SELECCION" class="h-10 w-14 object-cover mx-4 rounded-md shadow-md">
 
                 <p class="font-semibold">${partido.equipoDos.nombre}</p>
 
@@ -198,7 +198,7 @@ function pintarPartidosJornadaGeneral(partidos) {
 
             <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
-                <img src="${partido.equipoUno.imagen}" alt="SELECCION" class="h-10 w-14 mx-4 rounded-md shadow-md">
+                <img src="${partido.equipoUno.imagen}" alt="SELECCION" class="h-10 w-14 object-cover mx-4 rounded-md shadow-md">
 
                 <p class="font-semibold">${partido.equipoUno.nombre}</p>
 
@@ -214,7 +214,7 @@ function pintarPartidosJornadaGeneral(partidos) {
 
             <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
-                <img src="${partido.equipoDos.imagen}" alt="SELECCION" class="h-10 w-14 mx-4 rounded-md shadow-md">
+                <img src="${partido.equipoDos.imagen}" alt="SELECCION" class="h-10 w-14 object-cover mx-4 rounded-md shadow-md">
 
                 <p class="font-semibold">${partido.equipoDos.nombre}</p>
 

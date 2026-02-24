@@ -52,7 +52,7 @@
                                                 <img
                                                     src="{{ $equipo->imagen }}"
                                                     alt="SELECCION"
-                                                    class="h-10 w-14 mx-4 rounded-md shadow-md"
+                                                    class="h-10 w-14 object-cover mx-4 rounded-md shadow-md"
                                                 >
                                                 {{ $equipo->nombre }}
 
@@ -113,7 +113,7 @@
 
                                         <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
-                                            <img src="{{ $equipos_partido->equipoUno->imagen }}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
+                                            <img src="{{ $equipos_partido->equipoUno->imagen }}" alt="SELECCION" class="h-10 w-14 object-cover mx-4 border rounded-md shadow-md">
 
                                             <p class="font-semibold">{{ $equipos_partido->equipoUno->nombre }}</p>
 
@@ -129,7 +129,7 @@
 
                                         <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
-                                            <img src="{{ $equipos_partido->equipoDos->imagen }}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
+                                            <img src="{{ $equipos_partido->equipoDos->imagen }}" alt="SELECCION" class="h-10 w-14 mx-4 object-cover border rounded-md shadow-md">
 
                                             <p class="font-semibold">{{ $equipos_partido->equipoDos->nombre }}</p>
 
@@ -174,7 +174,7 @@
 
                                         <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
-                                            <img src="{{ $equipos_partido->equipoUno->imagen }}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
+                                            <img src="{{ $equipos_partido->equipoUno->imagen }}" alt="SELECCION" class="h-10 w-14 object-cover mx-4 border rounded-md shadow-md">
 
                                             <p class="font-semibold">{{ $equipos_partido->equipoUno->nombre }}</p>
 
@@ -190,7 +190,7 @@
 
                                         <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
-                                            <img src="{{ $equipos_partido->equipoDos->imagen }}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
+                                            <img src="{{ $equipos_partido->equipoDos->imagen }}" alt="SELECCION" class="h-10 w-14 object-cover mx-4 border rounded-md shadow-md">
 
                                             <p class="font-semibold">{{ $equipos_partido->equipoDos->nombre }}</p>
 
@@ -234,7 +234,7 @@
 
                                         <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
-                                            <img src="{{ $equipos_partido->equipoUno->imagen }}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
+                                            <img src="{{ $equipos_partido->equipoUno->imagen }}" alt="SELECCION" class="h-10 w-14 object-cover mx-4 border rounded-md shadow-md">
 
                                             <p class="font-semibold">{{ $equipos_partido->equipoUno->nombre }}</p>
 
@@ -250,7 +250,7 @@
 
                                         <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
 
-                                            <img src="{{ $equipos_partido->equipoDos->imagen }}" alt="SELECCION" class="h-10 w-14 mx-4 border rounded-md shadow-md">
+                                            <img src="{{ $equipos_partido->equipoDos->imagen }}" alt="SELECCION" class="h-10 w-14 object-cover mx-4 border rounded-md shadow-md">
 
                                             <p class="font-semibold">{{ $equipos_partido->equipoDos->nombre }}</p>
 
