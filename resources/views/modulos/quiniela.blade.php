@@ -178,7 +178,7 @@
                                         </p>
                                     </div>
 
-                                    <div class="flex justify-between items-center {{ $partido->estado == 0 ? 'partido-modulo-pronosticos' : '' }}} partido-{{ $partido->partido_id }} border-y border-[--complementary-light-color] py-8 my-8">
+                                    <div class="flex justify-between items-center {{ $partido->estado == 0 ? 'partido-modulo-pronosticos' : '' }} partido-{{ $partido->id }} border-y border-[--complementary-light-color] py-8 my-8">
 
                                         <div class="flex flex-col items-center w-full max-w-60 gap-4">
 
