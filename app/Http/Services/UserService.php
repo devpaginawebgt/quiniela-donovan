@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\Http\Requests\Auth\ApiLoginRequest;
 use App\Models\Country;
+use App\Models\EquipoPartido;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -69,6 +70,27 @@ class UserService {
             ->value('posicion');
 
         $user->posicion = $rank;
+
+
+
+        return $user;
+    }
+
+    public function getUserPredictionsCount($user)
+    {
+        $partidos_existentes = EquipoPartido::whereHas('partido')->count();
+
+        $predicciones_realizadas = $user->predictions->count();
+
+        $predicciones_pendientes = $partidos_existentes - $predicciones_realizadas;
+
+        $partidos = [
+            'total_partidos' => $partidos_existentes,
+            'predicciones' => $predicciones_realizadas,
+            'predicciones_pendientes' => $predicciones_pendientes
+        ];
+
+        $user->partidos = (object) $partidos;
 
         return $user;
     }

@@ -42,13 +42,15 @@ class ApiAuthController extends Controller
 
         $token = $user->createToken('mobile-app')->plainTextToken;
         
-        $user_rank = $this->userService->getUserRank($user);
+        $user = $this->userService->getUserRank($user);
 
-        $user_rank = new UserRankingResource($user_rank);
+        $user = $this->userService->getUserPredictionsCount($user);
+
+        $user = new UserRankingResource($user);
 
         return $this->successResponse([
             'token' => $token,
-            'user' => $user_rank,
+            'user' => $user,
         ]);
     }
 

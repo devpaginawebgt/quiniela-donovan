@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\User\UserRankingResource;
 use App\Http\Resources\User\UserResource;
+use App\Http\Services\PartidoService;
 use App\Http\Services\UserService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
@@ -34,11 +35,27 @@ class UserController extends Controller
     {
         $user = $request->user();
         
-        $user_rank = $this->userService->getUserRank($user);
+        $user = $this->userService->getUserRank($user);
 
-        $user_rank = new UserRankingResource($user_rank);
+        $user = $this->userService->getUserPredictionsCount($user);
 
-        return $this->successResponse($user_rank);
+        $user = new UserRankingResource($user);
+
+        return $this->successResponse($user);
+
+    }
+
+    public function getUserRank(Request $request)
+    {
+        $user = $request->user();
+
+        $user = $this->userService->getUserRank($user);
+
+        $user = $this->userService->getUserPredictionsCount($user);
+
+        $user = new UserRankingResource($user);
+
+        return $this->successResponse($user);
 
     }
 
@@ -53,18 +70,6 @@ class UserController extends Controller
         $participantes = UserRankingResource::collection($participantes);
 
         return $this->successResponse($participantes);
-
-    }
-
-    public function getUserRank(Request $request)
-    {
-        $user = $request->user();
-
-        $user_rank = $this->userService->getUserRank($user);
-
-        $user_rank = new UserRankingResource($user_rank);
-
-        return $this->successResponse($user_rank);
 
     }
 
