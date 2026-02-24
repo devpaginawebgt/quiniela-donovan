@@ -127,8 +127,21 @@
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full h-10 px-4"
                     required
                 >
-                    <option value="1">Guatemala</option>
-                    <option value="2">Honduras</option>
+                    @php
+                        $paises = [
+                            1 => 'Guatemala',
+                            2 => 'Honduras'
+                        ];
+                    @endphp
+
+                    @foreach ($paises as $value => $nombre_pais)
+                        @php
+                            $selected = old('pais_id') == $value ? 'selected' : '';
+                        @endphp
+                        <option value="{{ $value }}" {{ $selected }}>
+                            {{ $nombre_pais }}
+                        </option>    
+                    @endforeach
                 </select>
             </div>
 
@@ -161,8 +174,21 @@
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full h-10 px-4"
                     required
                 >
-                    <option value="1">Cadena 1</option>
-                    <option value="2">Cadena 2</option>
+                    @php
+                        $cadenas = [
+                            1 => 'Cadena 1',
+                            2 => 'Cadena 2'
+                        ];
+                    @endphp
+
+                    @foreach ($cadenas as $value => $nombre_cadena)
+                        @php
+                            $selected = old('company_id') == $value ? 'selected' : '';
+                        @endphp
+                        <option value="{{ $value }}" {{ $selected }}>
+                            {{ $nombre_cadena }}
+                        </option>    
+                    @endforeach
                 </select>
             </div>
 
@@ -178,8 +204,21 @@
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full h-10 px-4"
                     required
                 >
-                    <option value="1">Sucursal 1</option>
-                    <option value="2">Sucursal 2</option>
+                    @php
+                        $sucursales = [
+                            1 => 'Cadena 1',
+                            2 => 'Cadena 2'
+                        ];
+                    @endphp
+
+                    @foreach ($sucursales as $value => $nombre_sucursal)
+                        @php
+                            $selected = old('branch_id') == $value ? 'selected' : '';
+                        @endphp
+                        <option value="{{ $value }}" {{ $selected }}>
+                            {{ $nombre_sucursal }}
+                        </option>    
+                    @endforeach
                 </select>
             </div>
 

@@ -127,8 +127,21 @@
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full h-10 px-4"
                     required
                 >
-                    <option value="1" {{$op = $paisCliente == 'GT' ? 'selected' : '' }}>Guatemala</option>
-                    <option value="2" {{$op = $paisCliente == 'HN' ? 'selected' : '' }}>Honduras</option>
+                    @php
+                        $paises = [
+                            1 => 'Guatemala',
+                            2 => 'Honduras'
+                        ];
+                    @endphp
+
+                    @foreach ($paises as $value => $nombre_pais)
+                        @php
+                            $selected = old('pais_id') == $value ? 'selected' : '';
+                        @endphp
+                        <option value="{{ $value }}" {{ $selected }}>
+                            {{ $nombre_pais }}
+                        </option>    
+                    @endforeach
                 </select>
             </div>
 
