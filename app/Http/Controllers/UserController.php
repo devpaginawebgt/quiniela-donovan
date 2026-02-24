@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\User\UserRankingResource;
+use App\Http\Resources\User\UserRankResource;
 use App\Http\Resources\User\UserResource;
-use App\Http\Services\PartidoService;
 use App\Http\Services\UserService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
@@ -39,7 +39,7 @@ class UserController extends Controller
 
         $user = $this->userService->getUserPredictionsCount($user);
 
-        $user = new UserRankingResource($user);
+        $user = new UserRankResource($user);
 
         return $this->successResponse($user);
 
@@ -53,7 +53,7 @@ class UserController extends Controller
 
         $user = $this->userService->getUserPredictionsCount($user);
 
-        $user = new UserRankingResource($user);
+        $user = new UserRankResource($user);
 
         return $this->successResponse($user);
 

@@ -5,7 +5,7 @@ namespace App\Http\Resources\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserRankingResource extends JsonResource
+class UserRankResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -44,6 +44,7 @@ class UserRankingResource extends JsonResource
             'puntos'        => $this->puntos,
             'posicion'      => $this->posicion,
             'color'         => $color,
+            'partidos'      => $this->partidos,
             'fechaRegistro' => $fecha_registro->format('Y-m-d H:i:s'),
         ];
     }

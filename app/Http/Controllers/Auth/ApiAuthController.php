@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ApiLoginRequest;
-use App\Http\Resources\User\UserRankingResource;
-use App\Http\Resources\User\UserResource;
+use App\Http\Resources\User\UserRankResource;
 use App\Http\Services\UserService;
 use App\Traits\ApiResponse;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -46,7 +44,7 @@ class ApiAuthController extends Controller
 
         $user = $this->userService->getUserPredictionsCount($user);
 
-        $user = new UserRankingResource($user);
+        $user = new UserRankResource($user);
 
         return $this->successResponse([
             'token' => $token,
