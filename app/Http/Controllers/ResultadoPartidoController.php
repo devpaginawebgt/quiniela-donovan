@@ -225,7 +225,7 @@ class ResultadoPartidoController extends Controller
                 
                 if($diff->format('%R') == "+"){
 
-                    if ($diferencia_minutos < 5) {
+                    if ($diferencia_minutos < 10) {
                         $count_error++;
                     } else {
                         DB::table('preccions')->updateOrInsert(
@@ -271,7 +271,7 @@ class ResultadoPartidoController extends Controller
                 $diff = $fecha_actual->diff($fecha_partido);
                 $diferencia_minutos = (($diff->days * 1440 + $diff->h * 60) + $diff->i);
 
-                if ( $diferencia_minutos < 15) {
+                if ( $diferencia_minutos < 10) {
                     $count_error++;
                 } else {
                     DB::table('preccions')->where('status', "=", 0)
