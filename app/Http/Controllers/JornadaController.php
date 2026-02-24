@@ -65,23 +65,45 @@ class JornadaController extends Controller
 
     }
 
-    public function partidosJornada($jornada)
+    public function partidosJornada(string $get_jornada)
     {
 
-        $partidosJornada = DB::select(
-            "SELECT 
-                * 
-            FROM 
-                equipo_partidos epar
-            INNER JOIN 
-                equipos e ON epar.equipo_1 = e.id OR epar.equipo_2 = e.id
-            INNER JOIN 
-                partidos par ON epar.partido_id = par.id
-            WHERE 
-                par.jornada_id = {$jornada}"
-        );
+        $get_jornada = (int)$get_jornada;
 
-        return json_encode($partidosJornada);
+        if ( empty($get_jornada) ) {
+
+            return $this->errorResponse('No se encontró la jornada', 422);
+
+        }
+
+        $jornada = $this->partidoService->getJornada($get_jornada);
+
+        if ( empty($jornada) ) {
+
+            return $this->errorResponse('No se encontró la jornada', 422);
+
+        }
+
+        $partidos = $this->partidoService->getPartidosJornada($get_jornada);
+
+        $partidos = PartidoResource::collection($partidos);
+
+        return $this->successResponse($partidos);
+
+        // $partidosJornada = DB::select(
+        //     "SELECT 
+        //         * 
+        //     FROM 
+        //         equipo_partidos epar
+        //     INNER JOIN 
+        //         equipos e ON epar.equipo_1 = e.id OR epar.equipo_2 = e.id
+        //     INNER JOIN 
+        //         partidos par ON epar.partido_id = par.id
+        //     WHERE 
+        //         par.jornada_id = {$jornada}"
+        // );
+
+        // return json_encode($partidosJornada);
 
     }
 }

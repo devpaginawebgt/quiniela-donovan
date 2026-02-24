@@ -1,3 +1,5 @@
+// Helpers
+
 function toggleLoader() {
     const spinnerLoad = document.querySelector(".spinner-load");
     
@@ -5,6 +7,8 @@ function toggleLoader() {
         spinnerLoad.classList.toggle('hidden');
     }
 }
+
+// Peticiones
 
 async function getEquiposGrupo(grupo) {
 
@@ -15,6 +19,12 @@ async function getEquiposGrupo(grupo) {
 async function getJornadasGrupo( grupo ) {
 
     return await axios.get(`/grupos/${grupo}/jornadas`);
+
+}
+
+async function getPartidosJornadaGeneral(jornada) {
+
+    return await axios.get(`/jornadas/partidos-jornada/${jornada}`);
 
 }
 
@@ -61,6 +71,38 @@ async function verEquiposGrupo(idGrupo) {
         console.error(err);
     }
 }
+
+async function verPartidosJornada(idJornada) {
+
+    try {
+        
+        const respuestaPartidos = await getPartidosJornadaGeneral(idJornada);
+
+        const partidos = respuestaPartidos.data.data;
+    
+        pintarPartidosJornadaGeneral(partidos);
+
+    } catch (err) {
+
+        alert('Ocurrió un error al obtener los partidos de la jornada.');
+        console.error(err);
+
+    }
+
+
+}
+
+const verPartidosJornadaQuiniela = async (jornada) => {
+
+    let formu = document.querySelector('#verPartidosQuinielaSelect');
+
+    formu.action += '/' + jornada;
+
+    formu.submit();
+
+}
+
+// Renderizado
 
 const pintarEquiposGrupo = (equipos) => {
 
@@ -142,15 +184,50 @@ const pintarPartidosGrupo = (jornada) => {
 
 }
 
-const verPartidosJornadaQuiniela = async (jornada) => {
+function pintarPartidosJornadaGeneral(partidos) {
 
-    let formu = document.querySelector('#verPartidosQuinielaSelect');
+    let espacioJornada = document.querySelector(`#partidos-jornada-general`);
 
-    formu.action += '/' + jornada;
+    const filas = partidos.map(partido => {
 
-    formu.submit();
+        const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const fechaPartido = new Date(partido.fechaPartido).toLocaleDateString('es-GT', opcionesFecha);
+        const horaPartido = new Date(partido.fechaPartido).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+        return `<li class="flex justify-around py-6 border-b border-gray-400 items-center">
+
+            <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
+
+                <img src="${partido.equipoUno.imagen}" alt="SELECCION" class="h-10 w-14 mx-4 rounded-md shadow-md">
+
+                <p class="font-semibold">${partido.equipoUno.nombre}</p>
+
+            </div>
+
+            <div class="w-full xl:w-1/3 my-4 mt-44 lg:my-0 absolute lg:relative">
+
+                <p class="text-center">${fechaPartido}</p>
+
+                <p class="text-center">${horaPartido}</p>
+
+            </div>
+
+            <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
+
+                <img src="${partido.equipoDos.imagen}" alt="SELECCION" class="h-10 w-14 mx-4 rounded-md shadow-md">
+
+                <p class="font-semibold">${partido.equipoDos.nombre}</p>
+
+            </div>
+
+        </li>`;
+
+    });    
+
+    espacioJornada.innerHTML = filas.join(' ');
 
 }
+
 
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -177,17 +254,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (inputCalendario) {
 
-        verPartidosJornada(inputCalendario);
+        const idJornadaCalendario = inputCalendario.value;
+        
+        verPartidosJornada(idJornadaCalendario);
 
-        // inputCalendario.addEventListener('change', function(e) {
+        inputCalendario.addEventListener('change', function(e) {
 
-        //     const idGrupo = inputGrupo.value;
+            const idJornadaCalendario = inputCalendario.value;
 
-        //     if (!idGrupo) return;
+            if (!idJornadaCalendario) return;
 
-        //     verEquiposGrupo(idGrupo);
+            verPartidosJornada(idJornadaCalendario);
 
-        // })
+        })
 
     }
 
@@ -204,16 +283,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             verPartidosJornadaQuiniela(idJornadaQuiniela);
 
         })
-
-        // inputCalendario.addEventListener('change', function(e) {
-
-        //     const idGrupo = inputGrupo.value;
-
-        //     if (!idGrupo) return;
-
-        //     verEquiposGrupo(idGrupo);
-
-        // })
 
     }
     
@@ -243,120 +312,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     toggleLoader()
 
 });
-
-
-/**************JORNADA SELECT */
-
-
-
-const getPartidosJornadaGeneral = async (jornada) => {
-
-    let datos = await axios.get(`/jornadas/partidos-jornada/${jornada}`)
-        .then(data => data.data)
-        .catch(console.error);
-
-    return datos;
-
-}
-
-
-
-const pintarPartidosJornadaGeneral = (equipos) => {
-
-    let espacioJornada = document.querySelector(`#partidos-jornada-general`);
-
-    let partidos = [];
-
-    let partidosAPintar = [];
-
-
-
-    for (let index = 0; index < equipos.length; index++) {
-
-        partidos.push(equipos.slice(index, index + 2));
-
-        index++;
-
-    }
-
-
-
-    partidos.forEach(element => {
-
-        if (element[0].partido_id == element[1].partido_id) {
-
-            console.log(element)
-
-            const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const fechaPartido = new Date(element[0].fecha_partido).toLocaleDateString('es-GT', opcionesFecha);
-            const horaPartido = new Date(element[0].fecha_partido).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-
-            let row = `<li class="flex justify-around py-6 border-b border-gray-400 items-center">
-
-            <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
-
-                <img src="${element[0].imagen}" alt="SELECCION" class="h-10 w-14 mx-4 rounded-md shadow-md">
-
-                <p class="font-semibold">${element[0].nombre}</p>
-
-            </div>
-
-            <div class="w-full xl:w-1/3 my-4 mt-44 lg:my-0 absolute lg:relative">
-
-                <p class="text-center">${fechaPartido}</p>
-
-                <p class="text-center">${horaPartido}</p>
-
-            </div>
-
-            <div class="w-1/2 flex-col lg:flex-row xl:w-1/4 flex items-center justify-between">
-
-                <img src="${element[1].imagen}" alt="SELECCION" class="h-10 w-14 mx-4 rounded-md shadow-md">
-
-                <p class="font-semibold">${element[1].nombre}</p>
-
-            </div>
-
-        </li>`;
-
-            partidosAPintar.push(row);
-
-        } else {
-
-            
-
-        }
-
-    });
-
-
-
-    espacioJornada.innerHTML = partidosAPintar.join(' ');
-
-}
-
-
-
-const verPartidosJornada = async (element) => {
-
-    const spinnerLoad = document.querySelector(".spinner-load");
-    
-    if (spinnerLoad) {
-        spinnerLoad.classList.toggle('hidden');
-    }
-
-    let equiposJornada = await getPartidosJornadaGeneral(element.value);
-
-    pintarPartidosJornadaGeneral(equiposJornada);
-
-    if (spinnerLoad) {
-        spinnerLoad.classList.toggle('hidden');
-    }
-
-}
-
-window.verPartidosJornada = verPartidosJornada;
-
 
 /**************QUINIELA SELECT */
 
@@ -511,37 +466,37 @@ window.verPartidosJornada = verPartidosJornada;
 
 
 
-const partidoJugado = (fecha_partido,estado) => {
+// const partidoJugado = (fecha_partido,estado) => {
 
-    let returnData = ``;
+//     let returnData = ``;
 
-    if(estado == 0){
+//     if(estado == 0){
 
-        const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+//         const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 
-        returnData = `<i class="resultIcon">
+//         returnData = `<i class="resultIcon">
 
                     
 
-        </i>
+//         </i>
 
-        <p class="text-lg text-center">Fecha de encuentro</p>
+//         <p class="text-lg text-center">Fecha de encuentro</p>
 
-        <p class="text-lg text-center font-semibold">${new Date(fecha_partido.replace(/-/g, "/")).toLocaleDateString('es-ES', opcionesFecha)}</p>
+//         <p class="text-lg text-center font-semibold">${new Date(fecha_partido.replace(/-/g, "/")).toLocaleDateString('es-ES', opcionesFecha)}</p>
 
-        <p class="text-md text-center font-semibold">${new Date(fecha_partido.replace(/-/g, "/")).toLocaleTimeString("es-GT", { hour12: true })}</p>`;
+//         <p class="text-md text-center font-semibold">${new Date(fecha_partido.replace(/-/g, "/")).toLocaleTimeString("es-GT", { hour12: true })}</p>`;
 
-    }else{
+//     }else{
 
-        returnData = `<div class="resultadoPartido flex justify-between items-center text-3xl font-bold"></div><div class="puntosGenerados font-semibold text-center"></div>`;
+//         returnData = `<div class="resultadoPartido flex justify-between items-center text-3xl font-bold"></div><div class="puntosGenerados font-semibold text-center"></div>`;
 
-    }
+//     }
 
 
 
-    return returnData;
+//     return returnData;
 
-}
+// }
 
 
 

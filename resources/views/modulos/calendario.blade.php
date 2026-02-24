@@ -16,7 +16,7 @@
                         <select
                             id="jornadas"
                             class="bg-[--complementary-primary-color] border border-[--complementary-light-color] text-[--light-color] font-semibold text-center cursor-pointer rounded-lg block p-2.5 w-full"
-                            onchange="verPartidosJornada(this)"
+                            {{-- onchange="verPartidosJornada(this)" --}}
                         >
                             @foreach($jornadas as $jornada)
 
