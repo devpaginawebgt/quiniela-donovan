@@ -47,8 +47,8 @@ class PrediccionResource extends JsonResource
             'equipoUno' => new EquipoPartidoResource($this->equipoUno),
             'equipoDos' => new EquipoPartidoResource($this->equipoDos),
 
-            'prediccionEquipoUno' => $this->prediccion_equipo_1,
-            'prediccionEquipoDos' => $this->prediccion_equipo_2,
+            'prediccionEquipoUno' => $this->prediccion?->goles_equipo_1,
+            'prediccionEquipoDos' => $this->prediccion?->goles_equipo_2,
         ];
     }
 }

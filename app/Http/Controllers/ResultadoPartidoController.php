@@ -83,7 +83,7 @@ class ResultadoPartidoController extends Controller
 
         // Obtener los partidos disponibles a predecir
 
-        $predicciones_usuario = $this->prediccionService->getPrediccionesById($id_partidos, $user_id);
+        $predicciones_usuario = $this->prediccionService->getPrediccionesById($id_partidos, $user_id);  
 
         $validacion_predicciones = $this->prediccionService->validatePrediccionesUsuario($predicciones_nuevas, $predicciones_usuario);
 

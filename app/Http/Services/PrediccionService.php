@@ -23,30 +23,23 @@ class PrediccionService {
             'equipo_partidos.equipo_1', 
             'equipo_partidos.equipo_2', 
             'equipo_partidos.partido_id',
-            'preccions.id AS preccion_id',
-            'preccions.goles_equipo_1 AS prediccion_equipo_1',
-            'preccions.goles_equipo_2 AS prediccion_equipo_2',
         ])
-            ->has('equipoUno')
-            ->has('equipoDos')
             ->whereHas('partido', function(Builder $query) use($id_jornada) {
-                $query
-                    ->where('jornada_id', $id_jornada)
+                $query ->where('jornada_id', $id_jornada)
                     ->whereNot('estado', 1);
             })
             ->with([
                 'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
                 'equipoUno:id,nombre,imagen,grupo',
-                'equipoDos:id,nombre,imagen,grupo'
+                'equipoDos:id,nombre,imagen,grupo',
+                'prediccion' => function ($query) use ($user_id) {
+                    $query->where('user_id', $user_id)
+                        ->select('id','partido_id','goles_equipo_1','goles_equipo_2');
+                }
             ])
-            ->leftJoin('preccions', function (JoinClause $join) use($user_id) {
-                $join->on('equipo_partidos.partido_id', '=', 'preccions.partido_id')
-                    ->where('preccions.user_id', $user_id);
-            })
             ->get();
 
         return $predicciones_usuario;
-
     }
 
     public function getPrediccionesById(array $id_partidos, int $user_id)
@@ -56,24 +49,19 @@ class PrediccionService {
             'equipo_partidos.equipo_1', 
             'equipo_partidos.equipo_2', 
             'equipo_partidos.partido_id',
-            'preccions.id AS preccion_id',
-            'preccions.goles_equipo_1 AS prediccion_equipo_1',
-            'preccions.goles_equipo_2 AS prediccion_equipo_2',
         ])
-            ->has('equipoUno')
-            ->has('equipoDos')
             ->whereHas('partido', function(Builder $query) use($id_partidos) {
                 $query->whereIn('id', $id_partidos);
             })
             ->with([
                 'partido:id,fase,jornada_id,fecha_partido,jugado,estado',
                 'equipoUno:id,nombre,imagen,grupo',
-                'equipoDos:id,nombre,imagen,grupo'
+                'equipoDos:id,nombre,imagen,grupo',
+                'prediccion' => function ($query) use ($user_id) {
+                    $query->where('user_id', $user_id)
+                        ->select('id','partido_id','goles_equipo_1','goles_equipo_2');
+                }
             ])
-            ->leftJoin('preccions', function (JoinClause $join) use($user_id) {
-                $join->on('equipo_partidos.partido_id', '=', 'preccions.partido_id')
-                    ->where('preccions.user_id', $user_id);
-            })
             ->get();
 
         return $predicciones_usuario;
@@ -179,7 +167,7 @@ class PrediccionService {
 
             // Si no existe la predicción, la creamos
 
-            if ( empty($prediccion_usuario->preccion_id) ) {
+            if ( empty($prediccion_usuario->prediccion) ) {
 
                 $prediccion_creada = Preccion::create([
                     'user_id' => $user_id,
@@ -190,18 +178,16 @@ class PrediccionService {
 
                 // Actualizamos la predicción del usuario
 
-                $prediccion_usuario->preccion_id = $prediccion_creada->id;
-                $prediccion_usuario->prediccion_equipo_1 = $prediccion_creada->goles_equipo_1;
-                $prediccion_usuario->prediccion_equipo_2 = $prediccion_creada->goles_equipo_2;
+                $prediccion_usuario->prediccion = $prediccion_creada;
                 $prediccion_usuario->message = 'Tu pronóstico ha sido guardado con éxito.';
 
                 return;
 
             }
 
-            // Si ya existe una prediccion de este usuario, buscamos el regisro
+            // Si ya existe una prediccion de este usuario, buscamos el registro            
 
-            $prediccion_db = Preccion::find($prediccion_usuario->preccion_id);
+            $prediccion_db = Preccion::find($prediccion_usuario->prediccion->id);
             $prediccion_db->goles_equipo_1 = $prediccion_nueva['prediccion_equipo_uno'];
             $prediccion_db->goles_equipo_2 = $prediccion_nueva['prediccion_equipo_dos'];
 
@@ -210,8 +196,7 @@ class PrediccionService {
             if ($prediccion_db->isDirty()) {
 
                 $prediccion_db->save();
-                $prediccion_usuario->prediccion_equipo_1 = $prediccion_db->goles_equipo_1;
-                $prediccion_usuario->prediccion_equipo_2 = $prediccion_db->goles_equipo_2;
+                $prediccion_usuario->prediccion = $prediccion_db;
                 $prediccion_usuario->message = 'Tu pronóstico ha sido actualizado con éxito.';
 
                 return;
@@ -281,11 +266,11 @@ class PrediccionService {
     public function getResultadoPrediccion($prediccion, $resultado)
     {
 
-        $pred_e_uno = $prediccion->goles_equipo_1;
-        $pred_e_dos = $prediccion->goles_equipo_2;
+        $pred_e_uno = $prediccion?->goles_equipo_1;
+        $pred_e_dos = $prediccion?->goles_equipo_2;
 
-        $res_e_uno = $resultado->goles_equipo_1;
-        $res_e_dos = $resultado->goles_equipo_2;
+        $res_e_uno = $resultado?->goles_equipo_1;
+        $res_e_dos = $resultado?->goles_equipo_2;
 
         // Acertó en goles
 
@@ -352,7 +337,7 @@ class PrediccionService {
 
         $registros->each(function($registro) {
 
-            if ( empty($registro->prediccion->id) || empty($registro->resultado->id) ) {
+            if ( empty($registro->prediccion) ) {
 
                 $registro->partido->puntos = 0;
 

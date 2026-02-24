@@ -27,8 +27,6 @@ class PartidoService {
     {
 
         $partidos = EquipoPartido::select('id', 'equipo_1', 'equipo_2', 'partido_id')
-            ->has('equipoUno')
-            ->has('equipoDos')
             ->whereHas('partido', function(Builder $query) use($jornada) {
                 $query->where('jornada_id', $jornada);
             })
