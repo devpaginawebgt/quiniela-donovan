@@ -17,7 +17,9 @@
         <div class="overflow-hidden shadow-sm sm:rounded-lg">
 
             <div class="lg:px-6 pb-6">
+
                 <h5 class="text-2xl text-center font-bold mt-4">Pronostica los próximos partidos</h5>
+                
                 <div class="w-44 mx-auto mb-4">
 
                     <form action="{{ route('web.ver-quiniela') }}" method="GET" id="verPartidosQuinielaSelect">
@@ -29,7 +31,7 @@
                         <select
                             id="quiniela"
                             class="bg-[--complementary-primary-color] border border-[--light-color] text-[--light-color] text-lg text-center font-bold hover:border-[--secondary-color] hover:cursor-pointer rounded-lg focus:ring-[--secondary-color] focus:border-[--secondary-color] block w-full p-2.5"
-                            onchange="verPartidosJornadaQuiniela(this)"
+                            {{-- onchange="verPartidosJornadaQuiniela(this)" --}}
                         >
 
                             @foreach($jornadas as $jornada)

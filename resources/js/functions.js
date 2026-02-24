@@ -142,6 +142,16 @@ const pintarPartidosGrupo = (jornada) => {
 
 }
 
+const verPartidosJornadaQuiniela = async (jornada) => {
+
+    let formu = document.querySelector('#verPartidosQuinielaSelect');
+
+    formu.action += '/' + jornada;
+
+    formu.submit();
+
+}
+
 
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -168,6 +178,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (inputCalendario) {
 
         verPartidosJornada(inputCalendario);
+
+        // inputCalendario.addEventListener('change', function(e) {
+
+        //     const idGrupo = inputGrupo.value;
+
+        //     if (!idGrupo) return;
+
+        //     verEquiposGrupo(idGrupo);
+
+        // })
+
+    }
+
+    const inputQuiniela = document.getElementById('quiniela');
+
+    if (inputQuiniela) {
+
+        inputQuiniela.addEventListener('change', function(e) {
+
+            const idJornadaQuiniela = inputQuiniela.value;
+
+            if (!idJornadaQuiniela) return;
+
+            verPartidosJornadaQuiniela(idJornadaQuiniela);
+
+        })
 
         // inputCalendario.addEventListener('change', function(e) {
 
@@ -472,42 +508,6 @@ window.verPartidosJornada = verPartidosJornada;
 //     espacioQuiniela.innerHTML = partidosAPintar;
 
 // }
-
-
-
-const verPartidosJornadaQuiniela = async (element, user_id) => {
-
-    
-
-    let formu = document.querySelector('#verPartidosQuinielaSelect');
-
-
-
-    formu.action += '/' + element.value
-
-
-
-    formu.submit();
-
-    
-
-    // document.querySelector(".spinner-load").classList.toggle('hidden');
-
-    // let equiposJornadaQuiniela = await getPartidosJornadaGeneral(element.value);
-
-    // pintarPartidosJornadaQuiniela(equiposJornadaQuiniela);
-
-
-
-    // let partidosAMostrar = await obtenerPrediccionesPartidos(user_id, element.value);
-
-    // pintarMarcadoresPartidos(partidosAMostrar);
-
-    // document.querySelector(".spinner-load").classList.toggle('hidden');
-
-}
-
-window.verPartidosJornadaQuiniela = verPartidosJornadaQuiniela;
 
 
 
