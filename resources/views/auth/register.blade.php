@@ -65,7 +65,7 @@
             <div>
                 <x-label
                     for="numero_documento"
-                    :value="__('Número de Documento')"
+                    :value="__('DPI')"
                 />
 
                 <x-input
