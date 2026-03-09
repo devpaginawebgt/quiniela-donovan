@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('lastname');
-            $table->unsignedBigInteger('country_id')->default(true);
+            $table->unsignedBigInteger('country_id');
             $table->boolean('is_active')->default(true);
 
             $table->foreign('country_id')
