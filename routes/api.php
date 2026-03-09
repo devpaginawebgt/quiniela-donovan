@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\ApiAuthController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\EstadioController;
 use App\Http\Controllers\GrupoController;
@@ -24,8 +25,18 @@ use Illuminate\Support\Facades\Route;
 
 // Auth
 
-Route::middleware('api.key')->controller(ApiAuthController::class)->group(function() {
-    Route::post('login', 'login');
+Route::middleware('api.key')->group(function() {
+
+    Route::controller(ApiAuthController::class)->group(function() {
+        Route::post('login', 'login');
+
+        Route::post('registro', 'register');
+    });
+
+    Route::controller(CountryController::class)->prefix('paises')->group(function() {
+        Route::get('', 'index');
+    });
+    
 });
 
 // Rutas protegidas
