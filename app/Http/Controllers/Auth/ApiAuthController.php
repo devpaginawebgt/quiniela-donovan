@@ -7,10 +7,8 @@ use App\Http\Requests\Auth\ApiLoginRequest;
 use App\Http\Resources\User\UserRankResource;
 use App\Http\Services\UserService;
 use App\Traits\ApiResponse;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Hash;
 
 class ApiAuthController extends Controller
 {
@@ -20,16 +18,22 @@ class ApiAuthController extends Controller
         private readonly UserService $userService
     ) {}
 
-    public function login(ApiLoginRequest $request) 
+    public function login(ApiLoginRequest $request)
     {
-        $this->ensureIsNotRateLimited($request);
+        $request->ensureIsNotRateLimited();
 
         $user = $this->userService->getUserLogin($request);
 
         if (empty($user)) {
-            RateLimiter::hit($this->throttleKey($request));
+            $request->hitRateLimiter();
 
             return $this->errorResponse('El número de documento ingresado no está registrado en el sistema.', 422);
+        }
+
+        if ( !Hash::check(env('DEFAULT_PASS'), $user->password) ) {
+            $request->hitRateLimiter();
+
+            return $this->errorResponse('Ha ocurrido un error al iniciar la sesión, contacta a Soporte.', 401);
         }
 
         if ($user->status_user == 0) {
@@ -50,41 +54,6 @@ class ApiAuthController extends Controller
             'token' => $token,
             'user' => $user,
         ]);
-    }
-
-    /**
-     * Ensure the login request is not rate limited.
-     *
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function ensureIsNotRateLimited(ApiLoginRequest $request)
-    {
-        if (RateLimiter::tooManyAttempts($this->throttleKey($request), 10)) {
-            
-            $seconds = RateLimiter::availableIn($this->throttleKey($request));
-    
-            $minutes = ceil($seconds / 60);
-    
-            throw ValidationException::withMessages([
-                'numero_documento' => trans('auth.throttle', [
-                    'seconds' => $seconds,
-                    'minutes' => $minutes,
-                ]),
-            ]);
-
-        }        
-    }
-
-    /**
-     * Get the rate limiting throttle key for the request.
-     *
-     * @return string
-     */
-    public function throttleKey(ApiLoginRequest $request)
-    {
-        return Str::lower($request->input('numero_documento')).'|'.$request->ip();
     }
 
     public function logout(Request $request)
