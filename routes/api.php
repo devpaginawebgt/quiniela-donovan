@@ -7,6 +7,7 @@ use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\EstadioController;
 use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\JornadaController;
+use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\PremioController;
 use App\Http\Controllers\ResultadoPartidoController;
 use App\Http\Controllers\UserController;
@@ -58,6 +59,14 @@ Route::middleware(['auth:sanctum'])->group(function() {
         Route::delete('logout', 'logout');
         Route::delete('logout-all', 'logoutAll');
     });
+
+    Route::controller(ModuleController::class)->prefix('modulos')->group(function() {
+        Route::get('{module_code}/banners', 'banners');
+    });
+
+        // Route::controller(BrandController::class)->prefix('marcas')->group(function() {
+        //     Route::get('', 'index');
+        // });
 
     // Equipos
 
