@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\ApiAuthController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\EquipoController;
@@ -64,9 +65,9 @@ Route::middleware(['auth:sanctum'])->group(function() {
         Route::get('{module_code}/banners', 'banners');
     });
 
-        // Route::controller(BrandController::class)->prefix('marcas')->group(function() {
-        //     Route::get('', 'index');
-        // });
+    Route::controller(BrandController::class)->prefix('marcas')->group(function() {
+        Route::get('', 'index');
+    });
 
     // Equipos
 

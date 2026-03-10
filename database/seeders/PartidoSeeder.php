@@ -34,6 +34,7 @@ class PartidoSeeder extends Seeder
                 'estadio_id' => 3,
                 'equipo_1' => 1, // México
                 'equipo_2' => 2, // Sudáfrica
+                'brand_id' => 1,
             ],
             [
                 'fase' => 'GRUPOS',
@@ -44,6 +45,7 @@ class PartidoSeeder extends Seeder
                 'estadio_id' => 4,
                 'equipo_1' => 3, // República de Corea
                 'equipo_2' => 4, // Dinamarca
+                'brand_id' => 2,
             ],
 
             /* ======================
@@ -109,6 +111,7 @@ class PartidoSeeder extends Seeder
                 'estadio_id' => 1, // Toronto Stadium
                 'equipo_1' => 5, // Canadá
                 'equipo_2' => 6, // Italia placeholder
+                'brand_id' => 3,
             ],
             [
                 'fase' => 'GRUPOS',
@@ -119,6 +122,7 @@ class PartidoSeeder extends Seeder
                 'estadio_id' => 15, // San Francisco Bay Area Stadium
                 'equipo_1' => 7, // Catar
                 'equipo_2' => 8, // Suiza
+                'brand_id' => 1,
             ],
 
             /* ======================
@@ -184,6 +188,7 @@ class PartidoSeeder extends Seeder
                 'estadio_id' => 13, // New York/New Jersey Stadium
                 'equipo_1' => 9,  // Brasil
                 'equipo_2' => 10, // Marruecos
+                'brand_id' => 2,
             ],
             [
                 'fase' => 'GRUPOS',
@@ -194,6 +199,7 @@ class PartidoSeeder extends Seeder
                 'estadio_id' => 7, // Boston Stadium
                 'equipo_1' => 11, // Haití
                 'equipo_2' => 12, // Escocia
+                'brand_id' => 3,
             ],
 
             /* ======================
