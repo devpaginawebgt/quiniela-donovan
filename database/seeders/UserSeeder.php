@@ -35,6 +35,7 @@ class UserSeeder extends Seeder
                 'capital'          => null,
                 'visitor_id'       => null,
 
+                'accepted_terms_version' => '0.1.0',
                 'password'         =>  Hash::make(env('DEFAULT_PASS')),
                 'created_at'       =>  (Carbon::now())->toDateTimeString(),
             ],
@@ -57,6 +58,7 @@ class UserSeeder extends Seeder
                 'capital'          => null,
                 'visitor_id'       => null,
 
+                'accepted_terms_version' => '0.1.0',
                 'password'         =>  Hash::make(env('DEFAULT_PASS')),
                 'created_at'       =>  (Carbon::now())->toDateTimeString(),
             ],
@@ -79,6 +81,7 @@ class UserSeeder extends Seeder
                 'capital'          => 'Ciudad capital',
                 'visitor_id'       => 1,
 
+                'accepted_terms_version' => '0.1.0',
                 'password'         =>  Hash::make(env('DEFAULT_PASS')),
                 'created_at'       =>  (Carbon::now())->toDateTimeString(),
             ],
@@ -101,6 +104,7 @@ class UserSeeder extends Seeder
                 'capital'          => 'Ciudad capital',
                 'visitor_id'       => 2,
 
+                'accepted_terms_version' => '0.1.0',
                 'password'         =>  Hash::make(env('DEFAULT_PASS')),
                 'created_at'       =>  (Carbon::now())->toDateTimeString(),
             ],
@@ -123,6 +127,7 @@ class UserSeeder extends Seeder
                 'capital'          => 'Ciudad capital',
                 'visitor_id'       => 59,
 
+                'accepted_terms_version' => '0.1.0',
                 'password'         =>  Hash::make(env('DEFAULT_PASS')),
                 'created_at'       =>  (Carbon::now())->toDateTimeString(),
             ],

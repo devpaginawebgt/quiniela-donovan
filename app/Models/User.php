@@ -41,7 +41,9 @@ class User extends Authenticatable
 
         'company_id',
         'branch',
-        
+
+        'accepted_terms_version',
+
         'password',
         'email_verified_at',
     ];

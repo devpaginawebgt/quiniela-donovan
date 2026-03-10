@@ -81,6 +81,8 @@ class ApiRegisterRequest extends FormRequest
                 'min:3',
                 'max:255',
             ],
+
+            'accepted_terms_version' => ['required', 'string', 'max:20'],
         ];
     }
 
@@ -196,6 +198,11 @@ class ApiRegisterRequest extends FormRequest
             'branch.string'            => 'El campo sucursal debe ser un texto válido.',
             'branch.min'               => 'El campo sucursal debe tener al menos 3 caracteres.',
             'branch.max'               => 'El campo sucursal no puede tener más de 255 caracteres.',
+
+            // ACCEPTED TERMS VERSION
+            'accepted_terms_version.required' => 'Debe aceptar los términos y condiciones.',
+            'accepted_terms_version.string'   => 'La versión de términos aceptados debe ser un texto válido.',
+            'accepted_terms_version.max'      => 'La versión de términos aceptados no puede tener más de 20 caracteres.',
         ];
     }
 }
