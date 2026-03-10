@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Partido;
 
+use App\Http\Resources\Brand\BrandResource;
 use App\Http\Resources\Equipo\EquipoPartidoResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -48,6 +49,7 @@ class PartidoResource extends JsonResource
 
             'equipoUno' => new EquipoPartidoResource($this->equipoUno),
             'equipoDos' => new EquipoPartidoResource($this->equipoDos),
+            'marca'     => !empty($this->partido->brand) ? new BrandResource($this->partido->brand) : null,
         ];
     }
 }
