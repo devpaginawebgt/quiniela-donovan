@@ -1,6 +1,6 @@
 @props(['activeTab' => 'proximos'])
 
-<header class="bg-complementary-primary sticky top-0 z-20">
+<header class="bg-complementary-primary border-b border-secondary sticky top-0 z-50">
     {{-- Logo --}}
     <div class="flex items-center justify-center px-4 py-3">
         <img
