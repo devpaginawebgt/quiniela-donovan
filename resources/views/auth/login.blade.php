@@ -21,14 +21,15 @@
             <div
                 class="
                     min-h-screen flex flex-col justify-end items-center
-                    lg:items-start lg:justify-stretch lg:p-0
+                    lg:items-end lg:justify-stretch lg:p-0
                 "
             >
                 {{-- Drawer / Card panel --}}
                 <div
                     class="
                         w-full rounded-t-3xl bg-complementary-primary/90 p-8
-                        lg:max-w-lg lg:h-screen lg:rounded-r-3xl lg:flex lg:flex-col lg:justify-center lg:px-12 lg:py-16
+                        lg:max-w-lg lg:h-screen lg:rounded-l-3xl lg:flex lg:flex-col lg:justify-center lg:px-12 lg:py-16
+                        xl:max-w-xl
                     "
                 >
                     {{-- Logo --}}
