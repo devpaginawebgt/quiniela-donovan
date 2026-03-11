@@ -11,38 +11,42 @@
 
         @vite(['resources/css/app.css', 'resources/css/styles.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-light antialiased">
+    <body class="font-sans text-light antialiased bg-complementary-primary">
         {{-- Full screen background --}}
-        <div
-            class="min-h-screen w-full bg-auth bg-dark"
-            style="background-image: url({{ asset('images/decoracion/bg-main-web.png') }});"
-        >
-            {{-- Mobile: centered card / Large: left drawer --}}
+        <div class="relative min-h-screen w-full">
+            {{-- Background: main-bg hasta lg, bg-main-web desde lg --}}
+            <div class="absolute inset-0 bg-cover bg-center lg:hidden"
+                 style="background-image: url({{ asset('images/decoracion/main-bg.png') }});"></div>
+            <div class="absolute inset-0 bg-cover bg-center hidden lg:block"
+                 style="background-image: url({{ asset('images/decoracion/bg-main-web.png') }});"></div>
+            {{-- Overlay oscuro --}}
+            <div class="absolute inset-0 bg-black/50"></div>
+
+            {{-- Mobile: bottom drawer / lg+: centered modal --}}
             <div
                 class="
-                    min-h-screen flex flex-col justify-end items-center
-                    lg:items-end lg:justify-stretch lg:p-0
+                    relative z-10 min-h-screen flex flex-col justify-end items-center
+                    lg:justify-center lg:items-center lg:p-6
                 "
             >
-                {{-- Drawer / Card panel --}}
+                {{-- Drawer / Modal panel --}}
                 <div
                     class="
                         w-full rounded-t-3xl bg-complementary-primary/90 p-8
-                        lg:max-w-lg lg:h-screen lg:rounded-l-3xl lg:flex lg:flex-col lg:justify-center lg:px-12 lg:py-16
-                        xl:max-w-xl
+                        lg:max-w-lg lg:rounded-3xl lg:shadow-2xl lg:w-full
                     "
                 >
                     {{-- Logo --}}
-                    <div class="mb-8 lg:mb-12">
+                    <div class="mb-8">
                         <img
                             src="/images/logos/logo-white.png"
-                            class="max-w-62.5 lg:max-w-82"
+                            class="w-full max-w-92 mx-auto"
                             alt="{{ config('app.name', 'Quiniela') }}"
                         >
                     </div>
 
                     {{-- Title --}}
-                    <h1 class="text-3xl font-bold text-light mb-8">Iniciar Sesión</h1>
+                    <h1 class="text-3xl text-center font-bold text-light mb-8">Iniciar Sesión</h1>
 
                     {{-- Session Status --}}
                     <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -54,7 +58,7 @@
                     <form
                         method="POST"
                         action="{{ route('login') }}"
-                        class="formulario-auth"
+                        class="formulario-auth w-full max-w-108 lg:max-w-108 mx-auto"
                     >
                         @csrf
 
@@ -99,6 +103,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </body>
 </html>
