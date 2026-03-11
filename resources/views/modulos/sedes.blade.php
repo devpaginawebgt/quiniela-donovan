@@ -1,9 +1,5 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl leading-tight">
-            {{ __('Mundial 2026 México | Estados Unidos | Canadá') }}
-        </h2>
-    </x-slot>
+    <x-inicio-header :activeTab="'estadios'" />
 
     <div class="max-w-screen-2xl my-6 mx-auto sm:px-6 lg:px-8" id="selecciones-container">
         <div class="overflow-hidden shadow-sm sm:rounded-lg">

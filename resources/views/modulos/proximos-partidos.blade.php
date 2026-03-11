@@ -31,7 +31,7 @@
                         </div>
 
                         <ul id="partidos-jornada-general" class="bg-complementary-primary p-4 rounded-xl">
-                            
+
                         </ul>
                     </div>
                 </div>

@@ -63,7 +63,7 @@ class JornadaController extends Controller
     {
         $jornadas = $this->partidoService->getJornadas();
 
-        return view('modulos.calendario', [ 'jornadas' => $jornadas ]);
+        return view('modulos.proximos-partidos', [ 'jornadas' => $jornadas ]);
     }
 
     public function jornadasWeb() {
