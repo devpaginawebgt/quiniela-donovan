@@ -15,7 +15,7 @@
         {{-- Full screen background --}}
         <div
             class="min-h-screen w-full bg-auth bg-dark"
-            style="background-image: url({{ asset('images/fondo-azul.png') }});"
+            style="background-image: url({{ asset('images/decoracion/bg-main-web.png') }});"
         >
             {{-- Mobile: centered card / Large: left drawer --}}
             <div

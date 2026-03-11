@@ -57,6 +57,15 @@ class JornadaController extends Controller
 
     }
 
+    // Funciones de la web
+
+    public function proximosPartidosWeb()
+    {
+        $jornadas = $this->partidoService->getJornadas();
+
+        return view('modulos.calendario', [ 'jornadas' => $jornadas ]);
+    }
+
     public function jornadasWeb() {
 
         $jornadas = $this->partidoService->getJornadas();
