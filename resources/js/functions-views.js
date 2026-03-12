@@ -5,6 +5,9 @@ import './views/grupos.js';
 import './views/calendario.js';
 import './views/proximos-partidos.js';
 import './views/mis-predicciones.js';
+import { initMarcadorButtons } from './components/marcador.js';
+
+initMarcadorButtons();
 
 const toggleDetalles = (btn) => {
     const panel = btn.nextElementSibling;
@@ -33,19 +36,6 @@ const slideToggle = (id) => {
 
 window.slideToggle = slideToggle;
 
-const increaseBookmar = (btn) => {
-    let marcador = btn.parentElement.querySelector('.marcador-equipo');
-    marcador.value++;
-}
-
-window.increaseBookmar = increaseBookmar;
-
-const decreaseBookmar = (btn) => {
-    let marcador = btn.parentElement.querySelector('.marcador-equipo');
-    (marcador.value > 0 ? marcador.value-- : marcador = marcador);
-}
-
-window.decreaseBookmar = decreaseBookmar;
 
 const guardarMarcadoresPartidos = async (user_id) => {
     let partidosAGuardar = [];

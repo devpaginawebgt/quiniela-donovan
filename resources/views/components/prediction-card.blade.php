@@ -129,7 +129,7 @@
 
                     <div class="flex items-center gap-2 lg:gap-4">
 
-                        <button type="button" onclick="decreaseBookmar(this)">
+                        <button type="button" class="btn-marcador-decrease">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 lg:w-6 lg:h-6" viewBox="0 0 32 32"><path fill="currentColor" d="M28 16c0-6.627-5.373-12-12-12S4 9.373 4 16s5.373 12 12 12s12-5.373 12-12m2 0c0 7.732-6.268 14-14 14S2 23.732 2 16S8.268 2 16 2s14 6.268 14 14m-20-1a1 1 0 1 0 0 2h12a1 1 0 1 0 0-2z"/></svg>
                         </button>
 
@@ -141,7 +141,7 @@
                             class="marcador-equipo-1 marcador-equipo border border-light text-light bg-complementary-primary/50 text-center rounded-lg hide-input-arrows w-10 h-9 lg:w-12 lg:h-12 text-base lg:text-xl font-bold"
                         >
 
-                        <button type="button" onclick="increaseBookmar(this)">
+                        <button type="button" class="btn-marcador-increase">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 lg:w-6 lg:h-6" viewBox="0 0 32 32"><path fill="currentColor" d="M15 10a1 1 0 1 1 2 0v5h5a1 1 0 1 1 0 2h-5v5a1 1 0 1 1-2 0v-5h-5a1 1 0 1 1 0-2h5zm15 6c0 7.732-6.268 14-14 14S2 23.732 2 16S8.268 2 16 2s14 6.268 14 14m-2 0c0-6.627-5.373-12-12-12S4 9.373 4 16s5.373 12 12 12s12-5.373 12-12"/></svg>
                         </button>
 
@@ -152,7 +152,7 @@
                     {{-- Equipo 2 input --}}
                     <div class="flex items-center gap-2 lg:gap-4">
 
-                        <button type="button" onclick="decreaseBookmar(this)">
+                        <button type="button" class="btn-marcador-decrease">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 lg:w-6 lg:h-6" viewBox="0 0 32 32"><path fill="currentColor" d="M28 16c0-6.627-5.373-12-12-12S4 9.373 4 16s5.373 12 12 12s12-5.373 12-12m2 0c0 7.732-6.268 14-14 14S2 23.732 2 16S8.268 2 16 2s14 6.268 14 14m-20-1a1 1 0 1 0 0 2h12a1 1 0 1 0 0-2z"/></svg>
                         </button>
 
@@ -164,7 +164,7 @@
                             class="marcador-equipo-2 marcador-equipo border border-light text-light bg-complementary-primary/50 text-center rounded-lg hide-input-arrows w-10 h-9 lg:w-12 lg:h-12 text-base lg:text-xl font-bold"
                         >
 
-                        <button type="button" onclick="increaseBookmar(this)">
+                        <button type="button" class="btn-marcador-increase">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 lg:w-6 lg:h-6" viewBox="0 0 32 32"><path fill="currentColor" d="M15 10a1 1 0 1 1 2 0v5h5a1 1 0 1 1 0 2h-5v5a1 1 0 1 1-2 0v-5h-5a1 1 0 1 1 0-2h5zm15 6c0 7.732-6.268 14-14 14S2 23.732 2 16S8.268 2 16 2s14 6.268 14 14m-2 0c0-6.627-5.373-12-12-12S4 9.373 4 16s5.373 12 12 12s12-5.373 12-12"/></svg>
                         </button>
 
