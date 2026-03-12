@@ -1,5 +1,6 @@
 
 import './views/estadios.js';
+import './views/equipos.js';
 import './views/grupos.js';
 import './views/calendario.js';
 import './views/proximos-partidos.js';

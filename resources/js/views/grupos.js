@@ -3,10 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Accordion (click anywhere on the card) ---
 
     const initAccordion = (container = document) => {
-        container.querySelectorAll('.team-card').forEach(card => {
+        container.querySelectorAll('.team-group-card').forEach(card => {
             card.addEventListener('click', () => {
-                const panel   = card.querySelector('.team-card-panel');
-                const chevron = card.querySelector('.team-card-chevron');
+                const panel   = card.querySelector('.team-group-card-panel');
+                const chevron = card.querySelector('.team-group-card-chevron');
                 const isOpen  = card.getAttribute('aria-expanded') === 'true';
 
                 if (isOpen) {
@@ -24,9 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initAccordion();
 
-    // --- Build team card HTML (for AJAX re-render) ---
+    // --- Build team group card HTML (for AJAX re-render) ---
 
-    const buildTeamCard = (equipo) => {
+    const buildTeamGroupCard = (equipo) => {
         const statLabels = ['PJ', 'PG', 'PE', 'PP', 'GF', 'GC'];
         const statsRows = statLabels.map(label => {
             const val = equipo.stats.find(s => s.name === label)?.value ?? 0;
@@ -38,18 +38,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('');
 
         return `
-            <div class="team-card bg-complementary-primary border border-secondary rounded-3xl overflow-hidden cursor-pointer" data-nombre="${equipo.name}" aria-expanded="false">
+            <div class="team-group-card bg-complementary-primary border border-secondary rounded-3xl overflow-hidden cursor-pointer" data-nombre="${equipo.name}" aria-expanded="false">
                 <div class="flex items-center gap-4 p-4 pb-3">
                     <img src="${equipo.image}" alt="${equipo.name}" class="h-16 w-24 object-cover rounded-2xl shrink-0 shadow-md">
                     <span class="flex-1 font-bold text-right leading-tight text-white">${equipo.name}</span>
                 </div>
                 <div class="flex items-center justify-between px-4 pb-3">
                     <span class="font-semibold text-white text-sm">Estadísticas</span>
-                    <svg class="team-card-chevron w-4 h-4 text-gray-400 shrink-0 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                    <svg class="team-group-card-chevron w-4 h-4 text-gray-400 shrink-0 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                     </svg>
                 </div>
-                <div class="team-card-panel max-h-0 overflow-hidden transition-[max-height] duration-300 ease-in-out">
+                <div class="team-group-card-panel max-h-0 overflow-hidden transition-[max-height] duration-300 ease-in-out">
                     <div class="px-4 pb-4">
                         <div class="border-t border-white/10 pt-3">
                             <div class="flex flex-col">
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const res    = await window.axios.get(`/grupos/${grupoId}/equipos`);
                 const equipos = res.data.data.equipos;
 
-                listaEquipos.innerHTML = equipos.map(buildTeamCard).join('');
+                listaEquipos.innerHTML = equipos.map(buildTeamGroupCard).join('');
                 initAccordion(listaEquipos);
 
                 const searchInput = document.getElementById('buscar-equipos');
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Search filter ---
 
     const filterTeams = (term) => {
-        document.querySelectorAll('.team-card').forEach(card => {
+        document.querySelectorAll('.team-group-card').forEach(card => {
             card.style.display = card.dataset.nombre.toLowerCase().includes(term) ? '' : 'none';
         });
     };

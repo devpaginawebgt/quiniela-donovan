@@ -46,16 +46,16 @@ Route::middleware(['auth'])->as('web.')->group(function() {
             Route::get('grupos', 'gruposWeb')->name('grupos');
         });
 
+        Route::controller(EquipoController::class)->group(function() {
+            Route::get('equipos', 'equiposWeb')->name('equipos');
+        });
+
         Route::get('', function () {
             return redirect()->route('web.inicio.proximos-partidos');
         });
     });
 
     // Selecciones
-
-    Route::controller(EquipoController::class)->prefix('selecciones')->as('selecciones.')->group(function() {
-        Route::get('', 'indexWeb')->name('index');
-    });
 
     // Grupos
 

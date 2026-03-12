@@ -74,7 +74,7 @@
                 {{-- Team cards grid --}}
                 <div id="equipos-grupo-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto items-start">
                     @foreach($equipos_grupo as $equipo)
-                        <x-team-card :equipo="$equipo" />
+                        <x-team-group-card :equipo="$equipo" />
                     @endforeach
                 </div>
 

@@ -104,7 +104,7 @@
             </li>
 
             <li role="presentation">
-                <a href="{{ route('web.selecciones.index') }}"
+                <a href="{{ route('web.inicio.equipos') }}"
                    role="tab"
                    aria-selected="{{ $activeTab === 'equipos' ? 'true' : 'false' }}"
                    @if($activeTab === 'equipos') aria-current="page" @endif

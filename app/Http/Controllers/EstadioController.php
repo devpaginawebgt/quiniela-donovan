@@ -32,13 +32,13 @@ class EstadioController extends Controller
 
     public function estadiosWeb()
     {
-        $user = Auth::user();
-
         // Banners
 
         $banners = $this->moduleService->getBanners(10);        
 
         // User Info
+
+        $user = Auth::user();
         
         $user = $this->userService->getUserRank($user);
 
