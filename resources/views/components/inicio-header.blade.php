@@ -15,7 +15,7 @@
         <ul class="flex md:justify-center gap-2 whitespace-nowrap text-sm font-medium" role="tablist">
 
             <li role="presentation">
-                <a href="{{ route('web.inicio') }}"
+                <a href="{{ route('web.inicio.proximos-partidos') }}"
                    role="tab"
                    aria-selected="{{ $activeTab === 'proximos' ? 'true' : 'false' }}"
                    @if($activeTab === 'proximos') aria-current="page" @endif

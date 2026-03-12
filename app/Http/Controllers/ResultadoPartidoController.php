@@ -299,7 +299,7 @@ class ResultadoPartidoController extends Controller
             $flash_msg  = 'Hubo un problema al guardar tus datos, inténtalo más tarde.';
         }
 
-        return redirect()->route('web.inicio', ['jornada' => $request->jornada])
+        return redirect()->route('web.inicio.proximos-partidos', ['jornada' => $request->jornada])
             ->with($flash_type, $flash_msg);
     }
 

@@ -25,22 +25,18 @@ use App\Http\Controllers\UserController;
 
 Route::middleware(['auth'])->as('web.')->group(function() {
 
-    // Redirección por defecto
-    
-    Route::get('/', function () {
-        return redirect()->route('web.inicio');
-    });
-
     // Inicio
 
-    Route::prefix('inicio')->group(function() {
-        Route::controller(ResultadoPartidoController::class)->group(function() {
-            Route::get('proximos-partidos', 'proximosPartidosWeb')->name('inicio');
-        });
-    });
+    Route::prefix('inicio')->as('inicio.')->group(function() {
 
-    Route::controller(HomeController::class)->group(function() {
-        Route::get('inicio', 'index');
+        Route::controller(ResultadoPartidoController::class)->group(function() {
+            Route::get('proximos-partidos', 'proximosPartidosWeb')->name('proximos-partidos');
+            Route::get('mis-predicciones', 'misPrediccionesWeb')->name('mis-predicciones');
+        });
+
+        Route::get('', function () {
+            return redirect()->route('web.inicio.proximos-partidos');
+        });
     });
 
     // Selecciones
@@ -107,6 +103,10 @@ Route::middleware(['auth'])->as('web.')->group(function() {
 
         Route::get('/actualizar-puntos-usuarios', 'actualizarPuntosParticipantesALL');
 
+    });
+
+    Route::get('/', function () {
+        return redirect()->route('web.inicio.proximos-partidos');
     });
 
 });
