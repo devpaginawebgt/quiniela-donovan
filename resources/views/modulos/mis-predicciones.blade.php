@@ -52,7 +52,7 @@
 
                 @if(isset($resultados) && $resultados->isNotEmpty())
 
-                    <ul id="partidos-jornada-general" class="grid grid-cols-1 md:grid-cols-2 2xl:gap-12 max-w-6xl mx-auto gap-4 lg:gap-8 items-start">
+                    <ul id="partidos-jornada-general" class="grid grid-cols-1 md:grid-cols-2 2xl:gap-12 max-w-6xl mx-auto gap-4 lg:gap-8 items-start min-h-80">
                         @foreach($resultados as $registro)
                             <x-result-card :registro="$registro" />
                         @endforeach
