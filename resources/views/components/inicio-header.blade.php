@@ -32,7 +32,7 @@
             </li>
 
             <li role="presentation">
-                <a href="{{ route('web.ver-quiniela') }}"
+                <a href="{{ route('web.inicio.mis-predicciones') }}"
                    role="tab"
                    aria-selected="{{ $activeTab === 'pronosticos' ? 'true' : 'false' }}"
                    @if($activeTab === 'pronosticos') aria-current="page" @endif

@@ -147,7 +147,7 @@ class ResultadoPartidoController extends Controller
 
         $resultados = $this->prediccionService->getResultados($id_jornada, $user_id);
 
-         $resultados = ResultadoResource::collection($resultados);
+        $resultados = ResultadoResource::collection($resultados);
 
         return $this->successResponse($resultados);
 
@@ -241,6 +241,43 @@ class ResultadoPartidoController extends Controller
             'user'            => $user,
             'jornada_activa'  => $jornada_filtrada,
             'partidosJornada' => $partidosJornada,
+        ]);
+    }
+
+    public function misPrediccionesWeb(Request $request)
+    {
+        $user = Auth::user();
+
+        $this->actualizacionDataGeneral($user->id);
+
+        // Banners
+
+        $banners = $this->moduleService->getBanners(8);        
+
+        // User Info
+        
+        $user = $this->userService->getUserRank($user);
+
+        $user = $this->userService->getUserPredictionsCount($user);
+
+        // Jornadas
+
+        $jornadas = $this->partidoService->getJornadas();
+
+        $jornada_activa = $jornadas->firstWhere('is_current', true);
+
+        $jornada_filtrada = (int)$request->get('jornada') ?: $jornada_activa->id;
+
+        // Partidos con predicciones del usuario
+
+        $resultados = $this->prediccionService->getResultados($jornada_filtrada, $user->id);
+
+        return view('modulos.mis-predicciones', [
+            'jornadas'        => $jornadas,
+            'banners'         => $banners,
+            'user'            => $user,
+            'jornada_activa'  => $jornada_filtrada,
+            'resultados'      => $resultados,
         ]);
     }
     
