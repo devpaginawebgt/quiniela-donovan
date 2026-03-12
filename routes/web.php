@@ -34,7 +34,7 @@ Route::middleware(['auth'])->as('web.')->group(function() {
     // Inicio
 
     Route::prefix('inicio')->group(function() {
-        Route::controller(JornadaController::class)->group(function() {
+        Route::controller(ResultadoPartidoController::class)->group(function() {
             Route::get('proximos-partidos', 'proximosPartidosWeb')->name('inicio');
         });
     });
