@@ -1,25 +1,27 @@
 <x-app-layout>
     <x-inicio-header :activeTab="''" />
 
-    <div class="max-w-screen-2xl my-6 mx-auto sm:px-6 lg:px-8 px-2">
+    <div class="max-w-screen-2xl mx-auto mb-6 px-4 lg:px-8 pt-8">
 
         {{-- Título --}}
-        <h1 class="text-3xl text-center font-bold mt-4 mb-2">Ranking de Participantes</h1>
+        <h1 class="text-2xl lg:text-3xl text-center font-bold mb-4">Ranking de Participantes</h1>
 
         {{-- Subtítulo podio --}}
-        <h2 id="podio-subtitle" class="text-xl text-center font-semibold mb-6 hidden">Primeros 3 Lugares</h2>
+        <h2 id="podio-subtitle" class="text-lg lg:text-xl text-center font-semibold mb-6 hidden">Primeros 3 Lugares</h2>
 
         {{-- Podio --}}
-        <div id="podio" class="items-end justify-center gap-3 mb-8 px-4" style="display: none;">
+        <div id="podio" class="items-end justify-center gap-3 mb-8" style="display: none;">
 
             {{-- 2° lugar (izquierda) --}}
             <div class="w-full max-w-40">
                 <div id="podio-2" style="display: none;" class="flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-[#C4C4C4] mb-1" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21v-2h4v-3.1q-1.225-.275-2.187-1.037T7.4 12.95q-1.875-.225-3.137-1.637T3 8V7q0-.825.588-1.412T5 5h2V3h10v2h2q.825 0 1.413.588T21 7v1q0 1.9-1.263 3.313T16.6 12.95q-.45 1.15-1.412 1.913T13 15.9V19h4v2zm0-10.2V7H5v1q0 .95.55 1.713T7 10.8m10 0q.9-.325 1.45-1.088T19 8V7h-2z"/></svg>
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-[#C4C4C4]" viewBox="0 0 640 640"><path fill="currentColor" d="M208.3 64h224c26.5 0 48.1 21.8 47.1 48.2c-.2 5.3-.4 10.6-.7 15.8h49.6c26.1 0 49.1 21.6 47.1 49.8c-7.5 103.7-60.5 160.7-118 190.5c-15.8 8.2-31.9 14.3-47.2 18.8c-20.2 28.6-41.2 43.7-57.9 51.8V512h64c17.7 0 32 14.3 32 32s-14.3 32-32 32h-192c-17.7 0-32-14.3-32-32s14.3-32 32-32h64v-73.1c-16-7.7-35.9-22-55.3-48.3c-18.4-4.8-38.4-12.1-57.9-23.1C121 337.2 72.2 280.1 65.2 177.6c-1.9-28.1 21-49.7 47.1-49.7h49.6c-.3-5.2-.5-10.4-.7-15.8c-1-26.5 20.6-48.2 47.1-48.2zm-42.8 112h-52.4c6.2 84.7 45.1 127.1 85.2 149.6c-14.4-37.3-26.3-86-32.8-149.6M444 320.8c40.5-23.8 77.1-66.1 83.3-144.8H475c-6.2 60.9-17.4 108.2-31 144.8"/></svg>
+                    </span>
     
-                    <p id="podio-2-name" class="text-sm font-semibold text-center leading-tight"></p>
+                    <p id="podio-2-name" class="text-sm xl:text-base font-semibold text-center leading-tight my-1"></p>
     
-                    <div class="border-t border-x border-secondary rounded-t-xl p-4 pt-8 w-full text-center lg:min-h-52" style="background: linear-gradient(var(--color-complementary-primary), 88%, transparent);">
+                    <div class="border-t border-x border-secondary rounded-t-xl p-2 sm:p-4 pt-8 w-full text-center h-40 lg:h-52" style="background: linear-gradient(var(--color-complementary-primary), 88%, transparent);">
                         <p class="text-2xl font-bold">2°</p>
                         <p id="podio-2-points" class="text-sm"></p>
                     </div>
@@ -29,11 +31,13 @@
             {{-- 1° lugar (centro, más alto) --}}
             <div class="w-full max-w-40">
                 <div id="podio-1" style="display: none;" class="flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 text-[#EFBF04] mb-1" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21v-2h4v-3.1q-1.225-.275-2.187-1.037T7.4 12.95q-1.875-.225-3.137-1.637T3 8V7q0-.825.588-1.412T5 5h2V3h10v2h2q.825 0 1.413.588T21 7v1q0 1.9-1.263 3.313T16.6 12.95q-.45 1.15-1.412 1.913T13 15.9V19h4v2zm0-10.2V7H5v1q0 .95.55 1.713T7 10.8m10 0q.9-.325 1.45-1.088T19 8V7h-2z"/></svg>
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-18 h-18 text-[#EFBF04]" viewBox="0 0 640 640"><path fill="currentColor" d="M208.3 64h224c26.5 0 48.1 21.8 47.1 48.2c-.2 5.3-.4 10.6-.7 15.8h49.6c26.1 0 49.1 21.6 47.1 49.8c-7.5 103.7-60.5 160.7-118 190.5c-15.8 8.2-31.9 14.3-47.2 18.8c-20.2 28.6-41.2 43.7-57.9 51.8V512h64c17.7 0 32 14.3 32 32s-14.3 32-32 32h-192c-17.7 0-32-14.3-32-32s14.3-32 32-32h64v-73.1c-16-7.7-35.9-22-55.3-48.3c-18.4-4.8-38.4-12.1-57.9-23.1C121 337.2 72.2 280.1 65.2 177.6c-1.9-28.1 21-49.7 47.1-49.7h49.6c-.3-5.2-.5-10.4-.7-15.8c-1-26.5 20.6-48.2 47.1-48.2zm-42.8 112h-52.4c6.2 84.7 45.1 127.1 85.2 149.6c-14.4-37.3-26.3-86-32.8-149.6M444 320.8c40.5-23.8 77.1-66.1 83.3-144.8H475c-6.2 60.9-17.4 108.2-31 144.8"/></svg>
+                    </span>
     
-                    <p id="podio-1-name" class="text-sm font-semibold text-center leading-tight"></p>
+                    <p id="podio-1-name" class="text-sm xl:text-base font-semibold text-center leading-tight my-1"></p>
     
-                    <div class="border-t border-x border-secondary rounded-t-xl p-4 pt-8 w-full text-center lg:min-h-72" style="background: linear-gradient(var(--color-complementary-primary), 93%, transparent);">
+                    <div class="border-t border-x border-secondary rounded-t-xl p-2 sm:p-4 pt-8 w-full text-center h-56 lg:h-72" style="background: linear-gradient(var(--color-complementary-primary), 93%, transparent);">
                         <p class="text-3xl font-bold">1°</p>
                         <p id="podio-1-points" class="text-sm font-semibold"></p>
                         @if (isset($first_place_brand) && !empty($first_place_brand))
@@ -49,11 +53,13 @@
             {{-- 3° lugar (derecha) --}}
             <div class="w-full max-w-40">
                 <div id="podio-3" style="display: none;" class="flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-[#CE8946] mb-1" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21v-2h4v-3.1q-1.225-.275-2.187-1.037T7.4 12.95q-1.875-.225-3.137-1.637T3 8V7q0-.825.588-1.412T5 5h2V3h10v2h2q.825 0 1.413.588T21 7v1q0 1.9-1.263 3.313T16.6 12.95q-.45 1.15-1.412 1.913T13 15.9V19h4v2zm0-10.2V7H5v1q0 .95.55 1.713T7 10.8m10 0q.9-.325 1.45-1.088T19 8V7h-2z"/></svg>
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-[#CE8946]" viewBox="0 0 640 640"><path fill="currentColor" d="M208.3 64h224c26.5 0 48.1 21.8 47.1 48.2c-.2 5.3-.4 10.6-.7 15.8h49.6c26.1 0 49.1 21.6 47.1 49.8c-7.5 103.7-60.5 160.7-118 190.5c-15.8 8.2-31.9 14.3-47.2 18.8c-20.2 28.6-41.2 43.7-57.9 51.8V512h64c17.7 0 32 14.3 32 32s-14.3 32-32 32h-192c-17.7 0-32-14.3-32-32s14.3-32 32-32h64v-73.1c-16-7.7-35.9-22-55.3-48.3c-18.4-4.8-38.4-12.1-57.9-23.1C121 337.2 72.2 280.1 65.2 177.6c-1.9-28.1 21-49.7 47.1-49.7h49.6c-.3-5.2-.5-10.4-.7-15.8c-1-26.5 20.6-48.2 47.1-48.2zm-42.8 112h-52.4c6.2 84.7 45.1 127.1 85.2 149.6c-14.4-37.3-26.3-86-32.8-149.6M444 320.8c40.5-23.8 77.1-66.1 83.3-144.8H475c-6.2 60.9-17.4 108.2-31 144.8"/></svg>
+                    </span>
     
-                    <p id="podio-3-name" class="text-sm font-semibold text-center leading-tight"></p>
+                    <p id="podio-3-name" class="text-sm xl:text-base font-semibold text-center leading-tight my-1"></p>
     
-                    <div class="border-t border-x border-secondary rounded-t-xl p-4 pt-8 w-full text-center min-h-32" style="background: linear-gradient(var(--color-complementary-primary), 85%, transparent);">
+                    <div class="border-t border-x border-secondary rounded-t-xl p-2 sm:p-4 pt-8 w-full text-center h-28 lg:h-32" style="background: linear-gradient(var(--color-complementary-primary), 85%, transparent);">
                         <p class="text-2xl font-bold">3°</p>
                         <p id="podio-3-points" class="text-sm"></p>
                     </div>
@@ -62,27 +68,11 @@
 
         </div>
 
-        {{-- Patrocinadores (SSR) --}}
-        @if($brands->count())
-            <h6 class="text-xl text-center font-semibold mt-6 mb-4">Nuestros Patrocinadores</h6>
-            <div class="overflow-x-auto pb-4 mb-6">
-                <div class="flex md:justify-center gap-4 flex-nowrap px-2">
-                    @foreach($brands as $brand)
-                        <div class="min-w-40 bg-green-700 rounded-xl p-4 flex items-center justify-center shrink-0">
-                            <img
-                                src="{{ asset($brand->image) }}"
-                                alt="{{ $brand->name }}"
-                                class="w-full max-w-35 object-contain"
-                            >
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        @endif
+        <x-brands-slider :brands="$brands" />
 
         {{-- Lista de ranking (cargada via Axios) --}}
         
-        <h2 class="text-xl text-center font-semibold mb-6">Clasificación General</h2>
+        <h2 class="text-lg lg:text-xl text-center font-semibold mt-8 mb-6">Clasificación General</h2>
 
         <div id="ranking-list" class="flex flex-col md:items-center gap-2"></div>
 
@@ -95,7 +85,7 @@
         </div>
 
         {{-- Empty state --}}
-        <p id="ranking-empty" class="text-center text-complementary-light py-8 hidden">
+        <p id="ranking-empty" class="text-center text-complementary-light py-4 hidden">
             No hay participantes para mostrar
         </p>
 
@@ -188,8 +178,12 @@
 
                     if (page === 1) {
                         renderPodio(data);
-                        // Render all items in the list (including top 3)
-                        renderList(data);
+                        var rest = data.filter(function (p) { return p.posicion > 3; });
+                        if (rest.length > 0) {
+                            renderList(rest);
+                        } else if (!hasMore) {
+                            emptyState.classList.remove('hidden');
+                        }
                     } else {
                         renderList(data);
                     }

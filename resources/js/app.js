@@ -1,8 +1,14 @@
 import './bootstrap';
-
-import Alpine from 'alpinejs';
 import 'flowbite';
 
-window.Alpine = Alpine;
+import Swiper from 'swiper';
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
-Alpine.start();
+Swiper.use([Autoplay, Pagination]);
+window.Swiper = Swiper;
+
+// import Alpine from 'alpinejs';
+// window.Alpine = Alpine;
+// Alpine.start();

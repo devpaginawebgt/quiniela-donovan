@@ -5,6 +5,14 @@
 @source "../../public/js/*.js";
 @source "../../node_modules/flowbite/dist/flowbite.js";
 
+[class*="brands-swiper-"][class*="-pagination"] .swiper-pagination-bullet {
+    background: var(--color-complementary-light);
+    opacity: 1;
+}
+[class*="brands-swiper-"][class*="-pagination"] .swiper-pagination-bullet-active {
+    background: var(--color-secondary);
+}
+
 @theme {
     --font-sans: 'Arial', ui-sans-serif, system-ui, sans-serif;
     --color-primary: #2b336b;
