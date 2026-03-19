@@ -8,12 +8,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterDoctorRequest;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Services\CountryService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 class RegisteredUserController extends Controller
 {
+    public function __construct(
+        private readonly CountryService $countryService,
+    ) {}
+
     /**
      * Display the registration view.
      *
@@ -21,13 +26,10 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
-    }
+        $countries = $this->countryService->getCountries();
 
-    public function createDoctor()
-    {
-        return view('auth.register-doctor');
-    }
+        return view('modulos.register', compact('countries'));
+    }    
 
     /**
      * Handle an incoming registration request.
@@ -41,27 +43,7 @@ class RegisteredUserController extends Controller
     {
         $data = $request->validated();
 
-        $data['user_type_id'] = 1;
-
-        $pass = env('DEFAULT_PASS');
-        
-        $data['password'] = Hash::make($pass);
-
-        $user = User::create($data);
-
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
-        
-    }
-
-    public function storeDoctor(RegisterDoctorRequest $request)
-    {
-        $data = $request->validated();
-
-        $data['user_type_id'] = 2;
+        $data['puntos'] = 0;
 
         $pass = env('DEFAULT_PASS');
         
