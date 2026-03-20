@@ -12,30 +12,8 @@
         @vite(['resources/css/app.css', 'resources/css/styles.css', 'resources/js/app.js', 'resources/js/register.js'])
     </head>
     <body class="font-sans text-light antialiased bg-complementary-primary">
-        {{-- Full screen background --}}
-        <div class="relative min-h-screen w-full">
-            {{-- Background: main-bg hasta lg, bg-main-web desde lg --}}
-            <div class="absolute inset-0 bg-cover bg-center lg:hidden"
-                 style="background-image: url({{ asset('images/decoracion/main-bg.png') }});"></div>
-            <div class="absolute inset-0 bg-cover bg-center hidden lg:block"
-                 style="background-image: url({{ asset('images/decoracion/bg-main-web.png') }});"></div>
-            {{-- Overlay oscuro --}}
-            <div class="absolute inset-0 bg-black/50"></div>
-
-            {{-- Mobile: bottom drawer / lg+: centered modal --}}
-            <div
-                class="
-                    relative z-10 min-h-screen flex flex-col justify-end items-center
-                    lg:justify-center lg:items-center lg:p-6
-                "
-            >
-                {{-- Drawer / Modal panel --}}
-                <div
-                    class="
-                        w-full rounded-t-3xl bg-complementary-primary/90 p-8
-                        lg:max-w-2xl lg:rounded-3xl lg:shadow-2xl lg:w-full
-                    "
-                >
+        <div class="min-h-screen w-full flex flex-col justify-center items-center p-6">
+            <div class="w-full max-w-2xl">
                     {{-- Logo --}}
                     <div class="mb-6">
                         <img
@@ -126,7 +104,6 @@
                             Iniciar Sesión
                         </a>
                     </div>
-                </div>
             </div>
         </div>
 

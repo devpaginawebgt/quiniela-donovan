@@ -1,7 +1,7 @@
 <form
     method="POST"
     action="{{ route('register') }}"
-    class="formulario-auth grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-xl mx-auto"
+    class="formulario-auth grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl mx-auto"
 >
     @csrf
 
