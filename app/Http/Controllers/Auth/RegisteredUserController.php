@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterDoctorRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Services\CountryService;
+use App\Http\Services\TermsService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
@@ -17,6 +18,7 @@ class RegisteredUserController extends Controller
 {
     public function __construct(
         private readonly CountryService $countryService,
+        private readonly TermsService $termsService
     ) {}
 
     /**
@@ -26,9 +28,11 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
+        $terms = $this->termsService->getTerms();
+
         $countries = $this->countryService->getCountries();
 
-        return view('modulos.register', compact('countries'));
+        return view('modulos.register', compact('countries', 'terms'));
     }    
 
     /**
