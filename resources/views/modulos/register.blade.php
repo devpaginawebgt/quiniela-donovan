@@ -31,15 +31,8 @@
                         Uso exclusivo para profesionales de la salud y dependientes de farmacia. Se reserva el derecho de uso de la aplicación.
                     </p>
 
-                    {{-- Validation Errors --}}
-                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-                    @if (isset($message_error))
-                        <div class="bg-red-300 px-4 py-2 text-red-900 rounded-xl text-center mb-4" id="message-view">
-                            <h3 class="text-2xl font-bold">Error al registrarse</h3>
-                            <p>{{ $message_error }}</p>
-                        </div>
-                    @endif
+                    {{-- Toast Errors --}}
+                    <x-toast-errors :errors="$errors" :message-error="$message_error ?? null" />
 
                     {{-- Tabs pills --}}
                     <div class="mb-6 max-w-xl mx-auto">
