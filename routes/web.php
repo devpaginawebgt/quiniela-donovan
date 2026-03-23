@@ -32,6 +32,7 @@ Route::middleware(['auth'])->as('web.')->group(function() {
         Route::controller(ResultadoPartidoController::class)->group(function() {
             Route::get('proximos-partidos', 'proximosPartidosWeb')->name('proximos-partidos');
             Route::get('mis-predicciones', 'misPrediccionesWeb')->name('mis-predicciones');
+            Route::post('predicciones', 'savePrediccionesWeb')->name('save-predicciones');
         });
 
         Route::controller(JornadaController::class)->group(function() {
@@ -76,9 +77,8 @@ Route::middleware(['auth'])->as('web.')->group(function() {
     // Partidos y resultados
 
     Route::controller(ResultadoPartidoController::class)->group(function() {
-        Route::get('/ver-quiniela/{jornada?}/{message?}', 'verQuiniela')->name('ver-quiniela');
         Route::post('/guardar-predicciones-form', 'guardarPrediccionesForm')->name('guardar-predicciones-form');
-
+        // Route::get('/ver-quiniela/{jornada?}/{message?}', 'verQuiniela')->name('ver-quiniela');
         // Route::get('/ver-tabla-resultados', 'verTablaResultados')->name('ver-tabla-resultados');
         // Route::get('/obtener-tabla-participantes', 'obtenerParticipantes');
         // Route::post('/guardar-predicciones/', 'guardarPredicciones');

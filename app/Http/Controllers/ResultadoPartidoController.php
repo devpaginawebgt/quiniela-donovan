@@ -79,7 +79,7 @@ class ResultadoPartidoController extends Controller
 
         // Validar predicciones
 
-        $predicciones_nuevas = collect($request->predicciones);
+        $predicciones_nuevas = collect($request->validated()['predicciones']);
 
         $id_partidos = $predicciones_nuevas->map(function($prediccion) {
             return $prediccion['id_partido'];
@@ -104,7 +104,13 @@ class ResultadoPartidoController extends Controller
 
         }
 
-        $predicciones_guardadas = $this->prediccionService->savePredicciones($predicciones_nuevas, $predicciones_permitidas, $user_id);
+        $ids_permitidos = $predicciones_permitidas->pluck('partido_id')->toArray();
+
+        $predicciones_a_guardar = $predicciones_nuevas->filter(function ($prediccion) use ($ids_permitidos) {
+            return in_array($prediccion['id_partido'], $ids_permitidos);
+        });
+
+        $predicciones_guardadas = $this->prediccionService->savePredicciones($predicciones_a_guardar, $predicciones_permitidas, $user_id);
 
         $predicciones_guardadas = PrediccionSolicitudResource::collection($predicciones_guardadas);
 
@@ -171,41 +177,6 @@ class ResultadoPartidoController extends Controller
     }
 
     // Continua lógica de la web
-
-    public function verQuiniela($jornada = null, $message = '0OK')
-    {
-        $jornada = (int)$jornada;
-
-        // Actualizar información general
-
-        $user_id = Auth::user()->id;
-
-        $this->actualizacionDataGeneral($user_id);
-
-        // Obtenemos la información de la jornada a obtener
-
-        $jornadas = $this->partidoService->getJornadas();
-
-        $jornada_activa = $jornadas->firstWhere(function($jornada) {
-            return $jornada->is_current === true;
-        });
-
-        $jornada_filtrada = empty($jornada) ? $jornada_activa->id : $jornada;
-
-        // Obtener información de las predicciones realizadas por el usuario
-        
-        $partidosJornada = $this->prediccionService->getResultadosWeb($jornada_filtrada, $user_id);
-
-        return view('modulos.quiniela', [
-            'jornadas' => $jornadas,
-            'partidosJornada' => $partidosJornada, 
-            'jornada_activa' => $jornada_filtrada,
-            'message' => $message ?? '', 
-        ]);
-
-    }
-
-    // Funciones de la web
 
     public function proximosPartidosWeb(Request $request)
     {
@@ -280,133 +251,221 @@ class ResultadoPartidoController extends Controller
             'resultados'      => $resultados,
         ]);
     }
+
+    public function savePrediccionesWeb(PrediccionRequest $request)
+    {
+        // Actualizar información general
+
+        $user = Auth::user();
+
+        $user_id = $user->id;
+
+        $this->actualizacionDataGeneral($user_id);
+
+        // Validar predicciones
+
+        $predicciones_nuevas = collect($request->validated()['predicciones']);
+
+        $id_partidos = $predicciones_nuevas->map(function($prediccion) {
+            return $prediccion['id_partido'];
+        })->toArray();
+
+        // Obtener los partidos disponibles a predecir
+
+        $predicciones_usuario = $this->prediccionService->getPrediccionesById($id_partidos, $user_id);  
+
+        $validacion_predicciones = $this->prediccionService->validatePrediccionesUsuario($predicciones_nuevas, $predicciones_usuario);
+
+        $predicciones_rechazadas = PrediccionSolicitudResource::collection($validacion_predicciones['rechazadas']);
+
+        $predicciones_permitidas = $validacion_predicciones['permitidas'];
+
+        if ( $predicciones_permitidas->isEmpty() ) {
+
+            return $this->successResponse([
+                'prediccionesRechazadas' => $predicciones_rechazadas,
+                'prediccionesProcesadas' => []
+            ]);
+
+        }
+
+        $ids_permitidos = $predicciones_permitidas->pluck('partido_id')->toArray();
+
+        $predicciones_a_guardar = $predicciones_nuevas->filter(function ($prediccion) use ($ids_permitidos) {
+            return in_array($prediccion['id_partido'], $ids_permitidos);
+        });
+
+        $predicciones_guardadas = $this->prediccionService->savePredicciones($predicciones_a_guardar, $predicciones_permitidas, $user_id);
+
+        $predicciones_guardadas = PrediccionSolicitudResource::collection($predicciones_guardadas);
+
+        return $this->successResponse([
+            'prediccionesRechazadas' => $predicciones_rechazadas,
+            'prediccionesProcesadas' => $predicciones_guardadas
+        ]);
+
+    }
+
+
+    // public function verQuiniela($jornada = null, $message = '0OK')
+    // {
+    //     $jornada = (int)$jornada;
+
+    //     // Actualizar información general
+
+    //     $user_id = Auth::user()->id;
+
+    //     $this->actualizacionDataGeneral($user_id);
+
+    //     // Obtenemos la información de la jornada a obtener
+
+    //     $jornadas = $this->partidoService->getJornadas();
+
+    //     $jornada_activa = $jornadas->firstWhere(function($jornada) {
+    //         return $jornada->is_current === true;
+    //     });
+
+    //     $jornada_filtrada = empty($jornada) ? $jornada_activa->id : $jornada;
+
+    //     // Obtener información de las predicciones realizadas por el usuario
+        
+    //     $partidosJornada = $this->prediccionService->getResultadosWeb($jornada_filtrada, $user_id);
+
+    //     return view('modulos.quiniela', [
+    //         'jornadas' => $jornadas,
+    //         'partidosJornada' => $partidosJornada, 
+    //         'jornada_activa' => $jornada_filtrada,
+    //         'message' => $message ?? '', 
+    //     ]);
+
+    // }
     
-    public function guardarPrediccionesForm(Request $request)
-    {
-        try {
+    // public function guardarPrediccionesForm(Request $request)
+    // {
+    //     try {
 
-            $count_error = 0;
-            $message = "";
-            $fecha_actual = new DateTime('now');
+    //         $count_error = 0;
+    //         $message = "";
+    //         $fecha_actual = new DateTime('now');
 
-            foreach ($request->partidos as $partido_id) {
+    //         foreach ($request->partidos as $partido_id) {
 
-                $prediccion_equipo_1 = $request['prediccion_equipo1_' . $partido_id];
-                $prediccion_equipo_2 = $request['prediccion_equipo2_' . $partido_id];
+    //             $prediccion_equipo_1 = $request['prediccion_equipo1_' . $partido_id];
+    //             $prediccion_equipo_2 = $request['prediccion_equipo2_' . $partido_id];
 
-                if ($prediccion_equipo_1 === null || $prediccion_equipo_2 === null) {
-                    continue;
-                }
+    //             if ($prediccion_equipo_1 === null || $prediccion_equipo_2 === null) {
+    //                 continue;
+    //             }
 
-                $fecha_db = DB::select("select fecha_partido,estado FROM partidos WHERE id=" . $partido_id);
-                $fecha_partido = new DateTime($fecha_db[0]->fecha_partido);
-                $diff = $fecha_actual->diff($fecha_partido);
-                $diferencia_minutos = (($diff->days * 1440 + $diff->h * 60) + $diff->i);
+    //             $fecha_db = DB::select("select fecha_partido,estado FROM partidos WHERE id=" . $partido_id);
+    //             $fecha_partido = new DateTime($fecha_db[0]->fecha_partido);
+    //             $diff = $fecha_actual->diff($fecha_partido);
+    //             $diferencia_minutos = (($diff->days * 1440 + $diff->h * 60) + $diff->i);
                 
-                if($diff->format('%R') == "+"){
+    //             if($diff->format('%R') == "+"){
 
-                    if ($diferencia_minutos < 10) {
-                        $count_error++;
-                    } else {
-                        DB::table('preccions')->updateOrInsert(
-                            [
-                                'user_id' => Auth::user()->id,
-                                'partido_id' => $partido_id
-                            ],
-                            [
-                                'goles_equipo_1' => $request['prediccion_equipo1_' . $partido_id],
-                                'goles_equipo_2' => $request['prediccion_equipo2_' . $partido_id]
-                            ]
-                        );
-                    }
-                }else{
-                    $count_error++;
-                }
-            }
+    //                 if ($diferencia_minutos < 10) {
+    //                     $count_error++;
+    //                 } else {
+    //                     DB::table('preccions')->updateOrInsert(
+    //                         [
+    //                             'user_id' => Auth::user()->id,
+    //                             'partido_id' => $partido_id
+    //                         ],
+    //                         [
+    //                             'goles_equipo_1' => $request['prediccion_equipo1_' . $partido_id],
+    //                             'goles_equipo_2' => $request['prediccion_equipo2_' . $partido_id]
+    //                         ]
+    //                     );
+    //                 }
+    //             }else{
+    //                 $count_error++;
+    //             }
+    //         }
 
-            if ($count_error == 0) {
-                $flash_type = 'success';
-                $flash_msg  = 'Se guardaron tus predicciones correctamente.';
-            } else {
-                $flash_type = 'warning';
-                $flash_msg  = 'Algunos pronósticos no se guardaron porque el partido ya está por iniciar.';
-            }
-        } catch (\Throwable $th) {
-            $flash_type = 'error';
-            $flash_msg  = 'Hubo un problema al guardar tus datos, inténtalo más tarde.';
-        }
+    //         if ($count_error == 0) {
+    //             $flash_type = 'success';
+    //             $flash_msg  = 'Se guardaron tus predicciones correctamente.';
+    //         } else {
+    //             $flash_type = 'warning';
+    //             $flash_msg  = 'Algunos pronósticos no se guardaron porque el partido ya está por iniciar.';
+    //         }
+    //     } catch (\Throwable $th) {
+    //         $flash_type = 'error';
+    //         $flash_msg  = 'Hubo un problema al guardar tus datos, inténtalo más tarde.';
+    //     }
 
-        return redirect()->route('web.inicio.proximos-partidos', ['jornada' => $request->jornada])
-            ->with($flash_type, $flash_msg);
-    }
+    //     return redirect()->route('web.inicio.proximos-partidos', ['jornada' => $request->jornada])
+    //         ->with($flash_type, $flash_msg);
+    // }
 
-    // Lógica de API
+    // // Lógica de API
 
-    public function guardarPredicciones(Request $request)
-    {
-        try {
-            $count_error=0;
-            $message = "";
-            $fecha_actual = new DateTime('now');
+    // public function guardarPredicciones(Request $request)
+    // {
+    //     try {
+    //         $count_error=0;
+    //         $message = "";
+    //         $fecha_actual = new DateTime('now');
 
-            foreach ($request->partidos as $partido) {
-                $fecha_db = DB::select("select fecha_partido FROM partidos WHERE id=" . $partido['partido_id']);
-                $fecha_partido = new DateTime($fecha_db[0]->fecha_partido);
-                $diff = $fecha_actual->diff($fecha_partido);
-                $diferencia_minutos = (($diff->days * 1440 + $diff->h * 60) + $diff->i);
+    //         foreach ($request->partidos as $partido) {
+    //             $fecha_db = DB::select("select fecha_partido FROM partidos WHERE id=" . $partido['partido_id']);
+    //             $fecha_partido = new DateTime($fecha_db[0]->fecha_partido);
+    //             $diff = $fecha_actual->diff($fecha_partido);
+    //             $diferencia_minutos = (($diff->days * 1440 + $diff->h * 60) + $diff->i);
 
-                if ( $diferencia_minutos < 10) {
-                    $count_error++;
-                } else {
-                    DB::table('preccions')->where('status', "=", 0)
-                        ->updateOrInsert(
-                            [
-                                'user_id' => $request->user_id,
-                                'partido_id' => $partido['partido_id']
-                            ],
-                            [
-                                'goles_equipo_1' => $partido['marcador_equipo_1'],
-                                'goles_equipo_2' => $partido['marcador_equipo_2']
-                            ]
-                        );
-                }
-            }
+    //             if ( $diferencia_minutos < 10) {
+    //                 $count_error++;
+    //             } else {
+    //                 DB::table('preccions')->where('status', "=", 0)
+    //                     ->updateOrInsert(
+    //                         [
+    //                             'user_id' => $request->user_id,
+    //                             'partido_id' => $partido['partido_id']
+    //                         ],
+    //                         [
+    //                             'goles_equipo_1' => $partido['marcador_equipo_1'],
+    //                             'goles_equipo_2' => $partido['marcador_equipo_2']
+    //                         ]
+    //                     );
+    //             }
+    //         }
 
-            if($count_error == 0){
-                $message = "1OK";
-            }else{
-                $message = "2OK";
-            }
-        } catch (\Throwable $th) {
-            $message = $th;
-        }
+    //         if($count_error == 0){
+    //             $message = "1OK";
+    //         }else{
+    //             $message = "2OK";
+    //         }
+    //     } catch (\Throwable $th) {
+    //         $message = $th;
+    //     }
 
-        return json_encode($message);
-    }
+    //     return json_encode($message);
+    // }
 
-    public function obtenerPrediccionesGuardadas(Request $request)
-    {
+    // public function obtenerPrediccionesGuardadas(Request $request)
+    // {
 
-        $prediccionesPartidos = DB::select(
-            "SELECT 
-                p.goles_equipo_1,
-                p.goles_equipo_2,
-                p.partido_id,
-                par.jornada,
-                par.estado
-            FROM 
-                preccions p
-            INNER JOIN 
-                partidos par on p.partido_id = par.id 
-            WHERE 
-                par.jornada = $request->jornada 
-            AND 
-                p.user_id = $request->user_id"
-        );
+    //     $prediccionesPartidos = DB::select(
+    //         "SELECT 
+    //             p.goles_equipo_1,
+    //             p.goles_equipo_2,
+    //             p.partido_id,
+    //             par.jornada,
+    //             par.estado
+    //         FROM 
+    //             preccions p
+    //         INNER JOIN 
+    //             partidos par on p.partido_id = par.id 
+    //         WHERE 
+    //             par.jornada = $request->jornada 
+    //         AND 
+    //             p.user_id = $request->user_id"
+    //     );
 
-        return $prediccionesPartidos;
+    //     return $prediccionesPartidos;
 
-    }
+    // }
 
     // public function obtenerParticipantes($user_id)
     // {

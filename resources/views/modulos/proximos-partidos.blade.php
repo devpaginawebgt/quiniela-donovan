@@ -1,4 +1,9 @@
 <x-app-layout>
+    <div id="toast-container"
+         class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-3 w-full max-w-sm px-4 hidden"
+         aria-live="polite">
+    </div>
+
     <x-inicio-header :activeTab="'proximos'" />
 
     {{-- Banner Carousel --}}
@@ -82,7 +87,12 @@
                 </div>
                 @endif
 
-                <form action="{{ route('web.guardar-predicciones-form') }}" method="POST">
+                <form
+                    id="formPredicionesWeb"
+                    action="{{ route('web.inicio.save-predicciones') }}"
+                    method="POST"
+                    data-url-predicciones="{{ route('web.inicio.save-predicciones') }}"
+                >
 
                     @csrf
 
