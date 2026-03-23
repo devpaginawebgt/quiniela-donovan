@@ -99,11 +99,11 @@ Route::middleware(['auth'])->as('web.')->group(function() {
 
     // Rutas para super-admin
 
-    Route::controller(ResultadoPartidoController::class)->group(function() {
+    // Route::controller(ResultadoPartidoController::class)->group(function() {
 
-        Route::get('/actualizar-puntos-usuarios', 'actualizarPuntosParticipantesALL');
+    //     Route::get('/actualizar-puntos-usuarios', 'actualizarPuntosParticipantesALL');
 
-    });
+    // });
 
     Route::get('/', function () {
         return redirect()->route('web.inicio.proximos-partidos');
@@ -111,15 +111,15 @@ Route::middleware(['auth'])->as('web.')->group(function() {
 
 });
 
-Route::middleware(['guest'])->group(function() {
+// Route::middleware(['guest'])->group(function() {
 
-    // Participantes inscritos
+//     // Participantes inscritos
 
-    Route::controller(UserController::class)->group(function() {
-        Route::get('/participantes', 'verParticipantes')->name('ver-participantes');
-    });
+//     Route::controller(UserController::class)->group(function() {
+//         Route::get('/participantes', 'verParticipantes')->name('ver-participantes');
+//     });
 
-});
+// });
 
 // Los metodos post se cambiaron a put porque el servidor donde se alojara la aplicacion no permite post
 

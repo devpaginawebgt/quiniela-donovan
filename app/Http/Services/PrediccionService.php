@@ -7,6 +7,7 @@ use App\Models\Equipo;
 use App\Models\EquipoPartido;
 use App\Models\Preccion;
 use App\Models\ResultadoPartido;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -366,102 +367,6 @@ class PrediccionService {
 
     }
 
-    // public function prediccionesParticipante($jornada, $user_id)
-    // {
-    
-    //     $partidosJornada = DB::select(
-    //         "SELECT 
-    //             par.id as partido_id,
-    //             par.jornada_id,
-    //             par.estado,
-    //             par.fecha_partido,
-    //             ep.equipo_1,
-    //             ep.equipo_2
-    //         FROM 
-    //             partidos par
-    //         INNER JOIN 
-    //             equipo_partidos ep ON par.id = ep.partido_id
-    //         WHERE 
-    //             par.jornada_id = $jornada 
-    //         ORDER BY 
-    //             par.fecha_partido ASC"
-    //     );
-
-
-    //     foreach ($partidosJornada as $partido) {
-
-    //         $equipo_1 = Equipo::find($partido->equipo_1);
-    //         $equipo_2 = Equipo::find($partido->equipo_2);
-
-    //         $partido->nombre_equipo_1 = $equipo_1->nombre;
-    //         $partido->imagen_equipo_1 = $equipo_1->imagen;
-
-    //         $partido->nombre_equipo_2 = $equipo_2->nombre;
-    //         $partido->imagen_equipo_2 = $equipo_2->imagen;
-
-    //         // Información de predicción
-
-    //         $prediccion = Preccion::where('partido_id', $partido->partido_id)
-    //             ->where('user_id', $user_id)
-    //             ->first();
-
-    //         $partido->pdg_equipo_1 = $prediccion->goles_equipo_1 ?? '';
-    //         $partido->pdg_equipo_2 = $prediccion->goles_equipo_2 ?? '';
-
-    //         // Información de resultado
-
-    //         $resultado = ResultadoPartido::where('partido_id', $partido->partido_id)
-    //             ->first();
-
-    //         $partido->goles_equipo_1 = $resultado->goles_equipo_1 ?? '';
-    //         $partido->goles_equipo_2 = $resultado->goles_equipo_2 ?? '';
-            
-    //         $partido->fecha_partido = Carbon::create($partido->fecha_partido);
-
-    //         if ($partido->estado == 1 && isset($prediccion)) {
-
-    //             if ($partido->pdg_equipo_1 == $partido->goles_equipo_1 && $partido->pdg_equipo_2 == $partido->goles_equipo_2) {
-
-    //                 $partido->puntos = 5;
-
-    //             } elseif (($partido->pdg_equipo_1 > $partido->pdg_equipo_2 && $partido->goles_equipo_1 > $partido->goles_equipo_2) &&
-
-    //                 ($partido->pdg_equipo_1 == $partido->goles_equipo_1 || $partido->pdg_equipo_2 == $partido->goles_equipo_2)
-
-    //             ) {
-
-    //                 $partido->puntos = 4;
-
-    //             } elseif (($partido->pdg_equipo_2 > $partido->pdg_equipo_1 && $partido->goles_equipo_2 > $partido->goles_equipo_1) &&
-    //                 ($partido->pdg_equipo_1 == $partido->goles_equipo_1 || $partido->pdg_equipo_2 == $partido->goles_equipo_2)
-    //             ) {
-
-    //                 $partido->puntos = 4;
-
-    //             } elseif (($partido->pdg_equipo_1 > $partido->pdg_equipo_2 && $partido->goles_equipo_1 > $partido->goles_equipo_2) ||
-    //                 ($partido->pdg_equipo_2 > $partido->pdg_equipo_1 && $partido->goles_equipo_2 > $partido->goles_equipo_1)
-    //             ) {
-
-    //                 $partido->puntos = 2;
-
-    //             } elseif ($partido->pdg_equipo_2 == $partido->pdg_equipo_1 && $partido->goles_equipo_2 == $partido->goles_equipo_1) {
-
-    //                 $partido->puntos = 2;
-
-    //             } elseif ($partido->pdg_equipo_1 == $partido->goles_equipo_1 || $partido->pdg_equipo_2 == $partido->goles_equipo_2) {
-
-    //                 $partido->puntos = 1;
-    //             } else {
-    //                 $partido->puntos = 0;
-    //             }
-
-
-    //         }
-    //     }
-
-    //     return $partidosJornada;
-    // }
-
     public function actualizarPuntosParticipante($user_id)
     {
         $predicciones = Preccion::where('user_id', $user_id)
@@ -486,5 +391,27 @@ class PrediccionService {
         }
 
         $usuario->save();
+    }
+
+    public function actualizarPuntosGlobal()
+    {
+        $predicciones = Preccion::where('status', 0)
+            ->whereHas('resultado')
+            ->with('resultado', 'user')
+            ->get()
+            ->groupBy('user_id');
+
+        foreach ($predicciones as $userId => $prediccionesUsuario) {
+            $usuario = $prediccionesUsuario->first()->user;
+
+            foreach ($prediccionesUsuario as $prediccion) {
+                $puntos = $this->getResultadoPrediccion($prediccion, $prediccion->resultado);
+                $usuario->puntos += $puntos;
+                $prediccion->status = 1;
+                $prediccion->save();
+            }
+
+            $usuario->save();
+        }
     }
 }

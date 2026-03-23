@@ -507,21 +507,21 @@ class ResultadoPartidoController extends Controller
     //     return json_encode($participantes);
     // }
     
-    public function actualizarPuntosParticipantesALL()
-    {
+    // public function actualizarPuntosParticipantesALL()
+    // {
         
-        $users = DB::select(
-            "SELECT 
-                id 
-            FROM 
-                users"
-        );
+    //     $users = DB::select(
+    //         "SELECT 
+    //             id 
+    //         FROM 
+    //             users"
+    //     );
         
-        foreach ($users as $user) {
-            $this->prediccionService->actualizarPuntosParticipante($user->id);
-        }
+    //     foreach ($users as $user) {
+    //         $this->prediccionService->actualizarPuntosParticipante($user->id);
+    //     }
 
-        return "10OK";
-    }
+    //     return "10OK";
+    // }
         
 }
