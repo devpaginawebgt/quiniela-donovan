@@ -124,4 +124,8 @@ Route::middleware(['auth'])->as('web.')->group(function() {
 // Los metodos post se cambiaron a put porque el servidor donde se alojara la aplicacion no permite post
 
 
+// Embed (público, sin auth — para Flutter WebView)
+
+Route::get('/embed/bracket', fn() => view('embed.bracket'))->name('embed.bracket');
+
 require __DIR__.'/auth.php';
