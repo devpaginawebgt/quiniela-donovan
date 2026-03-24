@@ -74,27 +74,29 @@
         
         <h2 class="text-lg lg:text-xl text-center font-semibold mt-8 mb-6">Clasificación General</h2>
 
-        <div id="ranking-list" class="flex flex-col md:items-center gap-2"></div>
+        <div class="max-h-[60vh] max-w-148 mx-auto overflow-y-auto rounded-xl">
+            <div id="ranking-list" class="flex flex-col md:items-center gap-2"></div>
 
-        {{-- Loader --}}
-        <div id="ranking-loader" class="flex justify-center py-8">
-            <svg class="animate-spin h-8 w-8 text-secondary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
-            </svg>
-        </div>
+            {{-- Loader --}}
+            <div id="ranking-loader" class="flex justify-center py-8">
+                <svg class="animate-spin h-8 w-8 text-secondary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+            </div>
 
-        {{-- Empty state --}}
-        <p id="ranking-empty" class="text-center text-complementary-light py-4 hidden">
-            No hay participantes para mostrar
-        </p>
+            {{-- Empty state --}}
+            <p id="ranking-empty" class="text-center text-complementary-light py-4 hidden">
+                No hay participantes para mostrar
+            </p>
 
-        {{-- Load more --}}
-        <div class="flex justify-center mt-4 mb-6">
-            <button id="btn-cargar-mas"
-                class="hidden bg-secondary text-dark font-semibold px-6 py-2.5 rounded-full hover:bg-secondary/80 transition-colors">
-                Cargar más
-            </button>
+            {{-- Load more --}}
+            <div class="flex justify-center mt-4 mb-6">
+                <button id="btn-cargar-mas"
+                    class="hidden bg-secondary text-dark font-semibold px-6 py-2.5 rounded-full hover:bg-secondary/80 transition-colors">
+                    Cargar más
+                </button>
+            </div>
         </div>
 
     </div>

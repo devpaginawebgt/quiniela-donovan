@@ -33,6 +33,20 @@ class UserService {
             ->first();
     }
 
+    public function getRanking($id_pais)
+    {
+        $participantes = User::select('id', 'nombres', 'apellidos', 'pais_id', 'numero_documento', 'email', 'telefono', 'puntos', 'created_at')
+            ->selectRaw('RANK() OVER (ORDER BY puntos DESC, nombres ASC) as posicion')
+            ->has('predictions')
+            ->where('status_user', 1)
+            ->where('pais_id', $id_pais)
+            ->where('puntos', '>', 0)
+            ->get();
+
+        return $participantes;
+
+    }
+
     /**
      * Obtiene el ranking de participantes activos con predicciones, paginado.
      *
@@ -41,7 +55,7 @@ class UserService {
      * @param  array  $columns   Columnas adicionales a seleccionar.
      * @return \Illuminate\Contracts\Pagination\Paginator
      */
-    public function getRanking($id_pais, $perPage = 100)
+    public function getRankingWeb($id_pais, $perPage = 100)
     {
         return User::select('id', 'nombres', 'apellidos', 'puntos', 'pais_id', 'numero_documento', 'email', 'telefono', 'created_at')
             ->selectRaw('RANK() OVER (ORDER BY puntos DESC, nombres ASC) as posicion')

@@ -67,24 +67,40 @@ class UserController extends Controller
     public function getRanking(Request $request)
     {
         $user = $request->user();
+
         $id_pais = (int) $user->pais_id;
-        $perPage = (int) $request->query('perPage', 100);
 
-        $result = $this->userService->getRanking($id_pais, $perPage);
+        $users = $this->userService->getRanking($id_pais);
 
-        $items = collect($result->items());
+        $users = $this->userService->setUserBrands($users, $id_pais);
 
-        if ($result->currentPage() === 1) {
-            $items = $this->userService->setUserBrands($items, $id_pais);
-        }
+        $participantes = UserRankingResource::collection($users);
 
-        return $this->successResponse([
-            'has_more' => $result->hasMorePages(),
-            'current_page' => $result->currentPage(),
-            'next_page' => $result->hasMorePages() ? $result->currentPage() + 1 : null,
-            'users' => UserRankingResource::collection($items),
-        ]);
+        return $this->successResponse($participantes);
+
     }
+
+    // public function getRanking(Request $request)
+    // {
+    //     $user = $request->user();
+    //     $id_pais = (int) $user->pais_id;
+    //     $perPage = (int) $request->query('perPage', 100);
+
+    //     $result = $this->userService->getRanking($id_pais, $perPage);
+
+    //     $items = collect($result->items());
+
+    //     if ($result->currentPage() === 1) {
+    //         $items = $this->userService->setUserBrands($items, $id_pais);
+    //     }
+
+    //     return $this->successResponse([
+    //         'has_more' => $result->hasMorePages(),
+    //         'current_page' => $result->currentPage(),
+    //         'next_page' => $result->hasMorePages() ? $result->currentPage() + 1 : null,
+    //         'users' => UserRankingResource::collection($items),
+    //     ]);
+    // }
 
     // Funciones para la web
 
@@ -114,7 +130,7 @@ class UserController extends Controller
         $id_pais = (int) $user->pais_id;
         $perPage = (int) $request->query('perPage', 100);
 
-        $result = $this->userService->getRanking($id_pais, $perPage);
+        $result = $this->userService->getRankingWeb($id_pais, $perPage);
 
         return $this->successResponse([
             'has_more' => $result->hasMorePages(),
