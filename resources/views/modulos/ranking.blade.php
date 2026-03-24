@@ -168,8 +168,8 @@
                     params: { page: page }
                 })
                 .then(function (response) {
-                    const data = response.data.data;
-                    const hasMore = response.data.has_more;
+                    const data = response.data.data.users;
+                    const hasMore = response.data.data.has_more;
 
                     if (data.length === 0 && page === 1) {
                         emptyState.classList.remove('hidden');

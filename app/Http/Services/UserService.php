@@ -47,29 +47,22 @@ class UserService {
 
     }
 
-    public function getRankingWeb($id_pais, $page = 1, $perPage = 100)
+    /**
+     * Obtiene el ranking web de participantes activos con predicciones, paginado.
+     *
+     * @param  int  $id_pais  ID del país para filtrar participantes.
+     * @param  int  $perPage  Cantidad de registros por página.
+     * @return \Illuminate\Contracts\Pagination\Paginator
+     */
+    public function getRankingWeb($id_pais, $perPage = 100)
     {
-        $query = User::select('id', 'nombres', 'apellidos', 'puntos')
+        return User::select('id', 'nombres', 'apellidos', 'puntos')
             ->selectRaw('RANK() OVER (ORDER BY puntos DESC, nombres ASC) as posicion')
             ->has('predictions')
             ->where('status_user', 1)
             ->where('pais_id', $id_pais)
-            ->where('puntos', '>', 0);
-
-        $items = $query->skip(($page - 1) * $perPage)
-            ->take($perPage + 1)
-            ->get();
-
-        $hasMore = $items->count() > $perPage;
-
-        if ($hasMore) {
-            $items = $items->slice(0, $perPage)->values();
-        }
-
-        return [
-            'data' => $items,
-            'has_more' => $hasMore,
-        ];
+            ->where('puntos', '>', 0)
+            ->simplePaginate($perPage);
     }
 
     public function getUserRank($user)

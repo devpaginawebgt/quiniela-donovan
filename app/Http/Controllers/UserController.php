@@ -99,15 +99,21 @@ class UserController extends Controller
         return view('modulos.ranking', compact('brands', 'first_place_brand'));
     }
 
+    /**
+     * Devuelve los datos paginados del ranking vía JSON.
+     */
     public function getRankingData(Request $request)
     {
         $user = Auth::user();
         $id_pais = (int) $user->pais_id;
-        $page = (int) $request->query('page', 1);
+        $perPage = (int) $request->query('perPage', 100);
 
-        $result = $this->userService->getRankingWeb($id_pais, $page);
+        $result = $this->userService->getRankingWeb($id_pais, $perPage);
 
-        return response()->json($result);
+        return $this->successResponse([
+            'users' => $result->items(),
+            'has_more' => $result->hasMorePages(),
+        ]);
     }
 
     public function perfil()
