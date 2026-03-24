@@ -51,6 +51,14 @@
 - **Módulos/páginas**: `resources/views/modulos/`
 - **Auth**: `resources/views/auth/`
 
+## Frontend — Iconos
+
+- **Usar iconos de Iconify** vía `@iconify/tailwind4` (plugin ya configurado en `app.css`).
+  - Sintaxis: `<span class="icon-[set--nombre] w-5 h-5"></span>`
+  - Sets instalados: `material-symbols`, `fa-solid`, `fa-regular`
+- **NO usar SVGs inline ni Font Awesome standalone**. Siempre preferir Iconify.
+- Si se necesitan más iconos, instalar el set correspondiente de Iconify como devDependency: `npm install -D @iconify-json/<set-name>`
+
 ## Imágenes y Assets
 
 - Logos: `public/images/logos/`

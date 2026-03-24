@@ -65,9 +65,7 @@
                         <div class="mb-6">
                             <div class="relative">
                                 <div class="absolute inset-y-0 inset-s-0 flex items-center ps-3.5 pointer-events-none">
-                                    <svg class="w-5 h-5 text-base" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-                                    </svg>
+                                    <span class="icon-[material-symbols--mail-rounded] w-5 h-5 text-base"></span>
                                 </div>
                                 <input
                                     id="documento"
@@ -87,9 +85,7 @@
                             type="submit"
                             class="w-full bg-secondary text-dark font-bold rounded-full text-lg px-6 py-3.5 hover:brightness-110 focus:ring-4 focus:ring-secondary/50 flex items-center justify-center gap-2"
                         >
-                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
-                            </svg>
+                            <span class="icon-[fa-solid--right-to-bracket] w-5 h-5"></span>
                             Iniciar Sesión
                         </button>
                     </form>

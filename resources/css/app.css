@@ -2,6 +2,7 @@
 @import "./styles.css" layer(base);
 @plugin "flowbite/plugin";
 @plugin "@tailwindcss/typography";
+@plugin "@iconify/tailwind4";
 @source "../views/**/*.blade.php";
 @source "../../public/js/*.js";
 @source "../../node_modules/flowbite/dist/flowbite.js";
