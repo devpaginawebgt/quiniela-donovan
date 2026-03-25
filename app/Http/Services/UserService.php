@@ -8,6 +8,7 @@ use App\Models\BrandPosition;
 use App\Models\Country;
 use App\Models\EquipoPartido;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
 class UserService {
@@ -37,7 +38,11 @@ class UserService {
     {
         $participantes = User::select('id', 'nombres', 'apellidos', 'pais_id', 'numero_documento', 'email', 'telefono', 'puntos', 'created_at')
             ->selectRaw('RANK() OVER (ORDER BY puntos DESC, nombres ASC) as posicion')
-            ->has('predictions')
+            ->where(function (Builder $query) {
+                return $query
+                    ->has('predictions')
+                    ->orHas('quizzes');
+            })
             ->where('status_user', 1)
             ->where('pais_id', $id_pais)
             ->where('puntos', '>', 0)
@@ -59,7 +64,11 @@ class UserService {
     {
         return User::select('id', 'nombres', 'apellidos', 'puntos', 'pais_id', 'numero_documento', 'email', 'telefono', 'created_at')
             ->selectRaw('RANK() OVER (ORDER BY puntos DESC, nombres ASC) as posicion')
-            ->has('predictions')
+            ->where(function (Builder $query) {
+                return $query
+                    ->has('predictions')
+                    ->orHas('quizzes');
+            })
             ->where('status_user', 1)
             ->where('pais_id', $id_pais)
             ->where('puntos', '>', 0)
@@ -70,7 +79,11 @@ class UserService {
     {
         $rankingQuery = User::select('id', 'nombres', 'apellidos', 'pais_id', 'puntos', 'created_at')
             ->selectRaw('RANK() OVER (ORDER BY puntos DESC, nombres ASC) as posicion')
-            ->has('predictions')
+            ->where(function (Builder $query) {
+                return $query
+                    ->has('predictions')
+                    ->orHas('quizzes');
+            })
             ->where('status_user', 1)
             ->where('pais_id', $user->pais_id)
             ->where('puntos', '>', 0);
@@ -121,6 +134,18 @@ class UserService {
         }
 
         return $users;
+    }
+
+    public function updateGlobalPoints()
+    {
+        User::where('puntos_trivias', '>', 0)
+            ->orWhere('puntos_predicciones', '>', 0)
+            ->chunkById(500, function ($users) {
+                foreach ($users as $user) {
+                    $user->puntos = $user->puntos_predicciones + $user->puntos_trivias;
+                    $user->save();
+                }
+            });
     }
 
 }

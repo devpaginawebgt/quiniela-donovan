@@ -14,17 +14,19 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'nombres'            => $this->faker->firstName(),
-            'apellidos'          => $this->faker->lastName() . ' ' . $this->faker->lastName(),
-            'numero_documento'   => $this->faker->unique()->numerify('#############'),
-            'telefono'           => $this->faker->numerify('########'),
-            'email'              => $this->faker->unique()->safeEmail(),
-            'direccion'          => $this->faker->city(),
-            'pais_id'            => 1,
-            'user_type_id'       => 1,
-            'puntos'             => $this->faker->numberBetween(0, 500),
-            'status_user'        => 1,
-            'password'           => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'nombres'                => $this->faker->firstName(),
+            'apellidos'              => $this->faker->lastName() . ' ' . $this->faker->lastName(),
+            'numero_documento'       => $this->faker->unique()->numerify('#############'),
+            'telefono'               => $this->faker->numerify('########'),
+            'email'                  => $this->faker->unique()->safeEmail(),
+            'direccion'              => $this->faker->city(),
+            'pais_id'                => 1,
+            'user_type_id'           => 1,
+            'puntos_trivias'         => 0,
+            'puntos_predicciones'    => 0,
+            'puntos'                 => 0,
+            'status_user'            => 1,
+            'password'               => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'accepted_terms_version' => '0.1.0',
         ];
     }

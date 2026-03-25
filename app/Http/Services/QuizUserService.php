@@ -60,7 +60,7 @@ class QuizUserService {
         return ['error' => false, 'message' => ''];
     }
 
-    public function createAttempt(Quiz $quiz, array $answers, int $attemptNumber): bool
+    public function createAttempt(Quiz $quiz, array $answers, int $attemptNumber): QuizUSer
     {
         $user = request()->user();
 
@@ -99,10 +99,33 @@ class QuizUserService {
             $totalPoints += $pointsReceived;
         }
 
-        return $quizUser->update([
-            'points' => $totalPoints,
+        $quizUser->update([
             'response_points' => $totalPoints,
         ]);
+
+        $this->updateUserQuizPoints();
+
+        return $quizUser;
+
+    }
+
+    public function updateUserQuizPoints()
+    {
+        $user = request()->user();
+
+        $quizzes = $user->quizzes()
+            ->orderBy('response_points', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->unique('quiz_id');
+
+        $puntos_trivias = $quizzes->sum('response_points');
+
+        $user->puntos_trivias = $puntos_trivias;
+
+        $user->puntos = $puntos_trivias + ($user->puntos_predicciones ?? 0);
+
+        $user->save();
     }
 
 }

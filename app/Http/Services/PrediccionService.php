@@ -2,16 +2,10 @@
 
 namespace App\Http\Services;
 
-use App\Http\Resources\Partido\PartidoResource;
-use App\Models\Equipo;
 use App\Models\EquipoPartido;
 use App\Models\Preccion;
-use App\Models\ResultadoPartido;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Query\JoinClause;
 
 class PrediccionService {
 
@@ -384,11 +378,17 @@ class PrediccionService {
         foreach ($predicciones as $prediccion) {
             $puntos = $this->getResultadoPrediccion($prediccion, $prediccion->resultado);
 
-            $usuario->puntos += $puntos;
+            $usuario->puntos_predicciones += $puntos;
 
             $prediccion->status = 1;
             $prediccion->save();
         }
+
+        $puntos_trivias = $usuario->puntos_trivias ?? 0 ;
+
+        $puntos_predicciones = $usuario->puntos_predicciones ?? 0;
+
+        $usuario->puntos = $puntos_trivias + $puntos_predicciones;
 
         $usuario->save();
     }
@@ -406,7 +406,7 @@ class PrediccionService {
 
             foreach ($prediccionesUsuario as $prediccion) {
                 $puntos = $this->getResultadoPrediccion($prediccion, $prediccion->resultado);
-                $usuario->puntos += $puntos;
+                $usuario->puntos_predicciones += $puntos;
                 $prediccion->status = 1;
                 $prediccion->save();
             }
@@ -437,7 +437,7 @@ class PrediccionService {
                         $prediccionIds[] = $prediccion->id;
                     }
 
-                    $usuario->increment('puntos', $puntosTotal);
+                    $usuario->increment('puntos_predicciones', $puntosTotal);
                 }
 
                 Preccion::whereIn('id', $prediccionIds)->update(['status' => 1]);

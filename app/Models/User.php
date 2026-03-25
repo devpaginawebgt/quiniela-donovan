@@ -31,9 +31,12 @@ class User extends Authenticatable
         'direccion',
         'colegiado',
         'pais_id',
-        'puntos',
         'status_user',
         'user_type_id',
+
+        'puntos_trivias',
+        'puntos_predicciones',
+        'puntos',
 
         'region',
         'capital',
