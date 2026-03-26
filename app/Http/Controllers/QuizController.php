@@ -100,13 +100,9 @@ class QuizController extends Controller
         
         $all_correct = $last_attempt && $last_attempt->responses->every(fn ($r) => $r->is_correct);
 
-        $quiz->retry = $current_attempts < $quiz->attempts && !$all_correct;
+        $last_attempt->retry = $current_attempts < $quiz->attempts && !$all_correct;
 
-        $quiz->attempt = $current_attempts + 1;
-
-        $quiz->last_attempt = $last_attempt;
-
-        $quiz = new QuizResource($quiz);
+        $quiz = new QuizLAResource($last_attempt);
 
         return $this->successResponse($quiz);
     }

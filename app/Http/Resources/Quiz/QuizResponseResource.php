@@ -11,6 +11,9 @@ class QuizResponseResource extends JsonResource
     {
         return [
             'id'               => $this->id,
+            'is_correct'       => $this->is_correct,
+            'points_received'  => $this->points_received,
+            
             'question'         => !empty($this->question) 
                                     ? new QuizResponseQuestionResource($this->question) 
                                     : null,
@@ -20,8 +23,6 @@ class QuizResponseResource extends JsonResource
             'selected_option'  => !empty($this->option) 
                                     ? new QuizOptionResource($this->option) 
                                     : null,
-            'is_correct'       => $this->is_correct,
-            'points_received'  => $this->points_received,
         ];
     }
 }
